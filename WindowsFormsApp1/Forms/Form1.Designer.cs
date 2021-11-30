@@ -84,6 +84,7 @@
             this.toolStripSeparator7 = new System.Windows.Forms.ToolStripSeparator();
             this.aboutToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.bindingSource1 = new System.Windows.Forms.BindingSource(this.components);
+            this.toolStripButton9 = new System.Windows.Forms.ToolStripButton();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
             this.splitContainer1.Panel1.SuspendLayout();
             this.splitContainer1.Panel2.SuspendLayout();
@@ -293,7 +294,8 @@
             this.toolStripButton3,
             this.toolStripButton6,
             this.toolStripButton5,
-            this.toolStripButton7});
+            this.toolStripButton7,
+            this.toolStripButton9});
             this.toolStrip1.Name = "toolStrip1";
             this.toolStrip1.Stretch = true;
             // 
@@ -554,6 +556,15 @@
             this.aboutToolStripMenuItem.Name = "aboutToolStripMenuItem";
             resources.ApplyResources(this.aboutToolStripMenuItem, "aboutToolStripMenuItem");
             // 
+            // toolStripButton9
+            // 
+            this.toolStripButton9.BackgroundImage = global::WindowsFormsApp1.Properties.Resources.link;
+            this.toolStripButton9.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
+            this.toolStripButton9.Image = global::WindowsFormsApp1.Properties.Resources.clock_n;
+            resources.ApplyResources(this.toolStripButton9, "toolStripButton9");
+            this.toolStripButton9.Name = "toolStripButton9";
+            this.toolStripButton9.Click += new System.EventHandler(this.ToolStripButton9_Click);
+            // 
             // Form1
             // 
             resources.ApplyResources(this, "$this");
@@ -637,6 +648,7 @@
         private System.Windows.Forms.ToolStripButton toolStripButton7;
         private System.Windows.Forms.Button Compile;
         private System.Windows.Forms.ToolStripButton toolStripButton8;
+        private System.Windows.Forms.ToolStripButton toolStripButton9;
     }
 }
 

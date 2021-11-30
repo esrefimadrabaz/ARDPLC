@@ -46,6 +46,10 @@ namespace WindowsFormsApp1
             {
                 Type = "O";
             }
+            else if (Convert.ToString(comboBox2.SelectedItem) == "M")
+            {
+                Type = "M";
+            }
         }
     }
 }

@@ -37,6 +37,7 @@
             this.numericUpDown2 = new System.Windows.Forms.NumericUpDown();
             this.domainUpDown1 = new System.Windows.Forms.DomainUpDown();
             this.comboBox1 = new System.Windows.Forms.ComboBox();
+            this.comboBox2 = new System.Windows.Forms.ComboBox();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown2)).BeginInit();
             this.SuspendLayout();
@@ -65,7 +66,7 @@
             // 
             // numericUpDown1
             // 
-            this.numericUpDown1.Location = new System.Drawing.Point(177, 41);
+            this.numericUpDown1.Location = new System.Drawing.Point(187, 41);
             this.numericUpDown1.Maximum = new decimal(new int[] {
             3,
             0,
@@ -80,7 +81,7 @@
             // textBox2
             // 
             this.textBox2.BackColor = System.Drawing.SystemColors.ControlLight;
-            this.textBox2.Location = new System.Drawing.Point(14, 101);
+            this.textBox2.Location = new System.Drawing.Point(4, 101);
             this.textBox2.Name = "textBox2";
             this.textBox2.ReadOnly = true;
             this.textBox2.Size = new System.Drawing.Size(135, 20);
@@ -91,7 +92,7 @@
             // textBox3
             // 
             this.textBox3.BackColor = System.Drawing.SystemColors.ControlLight;
-            this.textBox3.Location = new System.Drawing.Point(12, 164);
+            this.textBox3.Location = new System.Drawing.Point(4, 164);
             this.textBox3.Name = "textBox3";
             this.textBox3.ReadOnly = true;
             this.textBox3.Size = new System.Drawing.Size(135, 20);
@@ -101,7 +102,7 @@
             // 
             // numericUpDown2
             // 
-            this.numericUpDown2.Location = new System.Drawing.Point(178, 101);
+            this.numericUpDown2.Location = new System.Drawing.Point(187, 101);
             this.numericUpDown2.Maximum = new decimal(new int[] {
             2000000000,
             0,
@@ -128,7 +129,7 @@
             // 
             this.domainUpDown1.Items.Add("mS");
             this.domainUpDown1.Items.Add("S");
-            this.domainUpDown1.Location = new System.Drawing.Point(178, 164);
+            this.domainUpDown1.Location = new System.Drawing.Point(187, 164);
             this.domainUpDown1.Name = "domainUpDown1";
             this.domainUpDown1.ReadOnly = true;
             this.domainUpDown1.Size = new System.Drawing.Size(74, 20);
@@ -145,17 +146,32 @@
             this.comboBox1.Items.AddRange(new object[] {
             "TON",
             "TOFF"});
-            this.comboBox1.Location = new System.Drawing.Point(14, 41);
+            this.comboBox1.Location = new System.Drawing.Point(4, 41);
             this.comboBox1.Name = "comboBox1";
             this.comboBox1.Size = new System.Drawing.Size(135, 21);
             this.comboBox1.TabIndex = 8;
             this.comboBox1.SelectedIndexChanged += new System.EventHandler(this.ComboBox1_SelectedIndexChanged);
+            // 
+            // comboBox2
+            // 
+            this.comboBox2.DisplayMember = "string";
+            this.comboBox2.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.comboBox2.FormattingEnabled = true;
+            this.comboBox2.Items.AddRange(new object[] {
+            "K",
+            "D"});
+            this.comboBox2.Location = new System.Drawing.Point(140, 101);
+            this.comboBox2.Name = "comboBox2";
+            this.comboBox2.Size = new System.Drawing.Size(46, 21);
+            this.comboBox2.TabIndex = 9;
+            this.comboBox2.SelectedIndexChanged += new System.EventHandler(this.ComboBox2_SelectedIndexChanged);
             // 
             // Clock
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(265, 285);
+            this.Controls.Add(this.comboBox2);
             this.Controls.Add(this.comboBox1);
             this.Controls.Add(this.domainUpDown1);
             this.Controls.Add(this.numericUpDown2);
@@ -187,5 +203,6 @@
         private System.Windows.Forms.NumericUpDown numericUpDown2;
         private System.Windows.Forms.DomainUpDown domainUpDown1;
         private System.Windows.Forms.ComboBox comboBox1;
+        private System.Windows.Forms.ComboBox comboBox2;
     }
 }

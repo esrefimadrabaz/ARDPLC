@@ -18,6 +18,9 @@ namespace WindowsFormsApp1
             writer.WriteLine("#define deneme.h");
             writer.WriteLine("#include wire.h");
             writer.WriteLine("bool dugum = true;");
+            writer.WriteLine("bool prl;");
+            writer.WriteLine("bool next;");
+            writer.WriteLine("int K;");
             //writer.Close();
             foreach (string pins in Form1.Used_Pins)
             {
@@ -28,6 +31,14 @@ namespace WindowsFormsApp1
                 else if (pins[0] == 'O')
                 {
                     writer.WriteLine("const int O{0} = {0};", pins[1]);
+                }
+                else if (pins[0] == 'M')
+                {
+                    writer.WriteLine("bool {0};", pins);
+                }
+                else if (pins[0] == 'D')
+                {
+                    writer.WriteLine("int {0};", pins);
                 }
                 else if (pins.Substring(0,3) == "TON")
                 {
@@ -69,23 +80,42 @@ namespace WindowsFormsApp1
 
             writer.WriteLine("NC({0});", Pin);
         }
+        public static void Ard_NC_M(string Pin)
+        {
+
+            writer.WriteLine("NC_M({0});", Pin);
+        }
         public static void Ard_NO(string Pin)
         {
 
             writer.WriteLine("NO({0});", Pin);
+        }
+        public static void Ard_NO_M(string Pin)
+        {
+
+            writer.WriteLine("NO_M({0});", Pin);
         }
         public static void Ard_Coil(string Pin)
         {
 
             writer.WriteLine("Coil({0});", Pin);
         }
-        public static void Ard_CON(int interval, string timer)
+        public static void Ard_Coil_M(string Pin)
+        {
+
+            writer.WriteLine("Coil_M({0});", Pin);
+        }
+        public static void Ard_CON(string interval, string timer)
         {
             writer.WriteLine("cON({0}, {1});", interval, timer);
         }
-        public static void Ard_COFF(int interval, string timer)
+        public static void Ard_COFF(string interval, string timer)
         {
             writer.WriteLine("cOFF({0}, {1});", interval, timer);
+        }
+        public static void Ard_MOV(string From, string To)
+        {
+            writer.WriteLine("{0} = {1};", To, From);
         }
         public static void Ard_NetStart()
         {

@@ -20,7 +20,6 @@ namespace WindowsFormsApp1
         string buton;
         private bool buton_checked = false;
         private List<Button> network_1;
-        private string button_names;
         private Button yaratilan;
         private Button previous;
         private Button secili;
@@ -29,7 +28,7 @@ namespace WindowsFormsApp1
         int x = 10;
         int y = 150;
         int x_loc = 0;
-        public static Dictionary<string, List<Button>> all_list;
+        public static SortedDictionary<string, List<Button>> all_list;
         public static List<string> Pre_Used_Pins;
         public static List<string> Used_Pins;
 
@@ -40,7 +39,7 @@ namespace WindowsFormsApp1
             Used_Pins = new List<string>();
             Pre_Used_Pins = new List<string>();
             network_1 = new List<Button> { button1, button2, button3, button4, button5, button6, button7, button8, button9 };
-            all_list = new Dictionary<string, List<Button>>();
+            all_list = new SortedDictionary<string, List<Button>>();
             all_list.Add("Network_1", new List<Button>());
             foreach (Button btn in network_1)
             {
@@ -48,7 +47,6 @@ namespace WindowsFormsApp1
 
                 all_list["Network_1"].Add(btn);
             }
-
 
         }
 
@@ -67,13 +65,57 @@ namespace WindowsFormsApp1
         {
 
         }
+        private void ToolStripButton4_Click(object sender, EventArgs e) // network button
+                {
+                    y = all_list[all_list.Keys.Last()][0].Location.Y + 150;
+                    //y = network_1[0].Location.Y + 150;
+                    network_count += 1;
+                    network_1.Clear();
+                    x_loc = 0;
+            
+                    for (int i = 0; i<=8; i++)
+                    {
+                        if (i == 0) { Buton_yarat(0 + x_loc, y, Properties.Resources.net, 132, 44, false); yaratilan.AccessibleDescription = "11"; }
+                        else { Buton_yarat(0 + x_loc, y, Properties.Resources.link, 132, 44, false); yaratilan.AccessibleDescription = "10"; }
+                        network_1.Add(yaratilan);
+                        x_loc += 132;
+                    }
+            
+                    //button_names = button_names.Substring(1);
+                    all_list.Add("Network_" + network_count.ToString(), new List<Button>());
+                    foreach (Button btn in network_1)
+                        all_list["Network_" + network_count.ToString()].Add(btn);
 
+
+
+                }
+        private void ToolStripButton3_Click(object sender, EventArgs e) // link button
+                {
+                    if (buton_checked)
+                    {
+                        sec = "LINK";
+                        textBox1.Text = sec;
+                        if(secili.AccessibleDescription == "11") { DeleteNetwork(secili); }
+                        deletefromUsed(secili.AccessibleName);
+                        if (secili.AccessibleName == "down")
+                        {
+                            DeleteParallel(secili);
+                        }
+                        else
+                        {
+                            secili.BackgroundImage = toolStripButton3.BackgroundImage;
+                            secili.AccessibleDescription = "10";
+                            secili.AccessibleName = null;
+                        }
+                    }
+                }
         private void ToolStripButton1_Click_1(object sender, EventArgs e) // no button
         {
             sec = "NO";
             textBox1.Text = sec;
             if (buton_checked)
             {
+                deletefromUsed(secili.AccessibleName);
                 using (noMenu menuu = new noMenu())
                 if (menuu.ShowDialog() == DialogResult.OK)
                     {
@@ -85,13 +127,13 @@ namespace WindowsFormsApp1
 
             }
         }
-
         private void ToolStripButton2_Click_1(object sender, EventArgs e) // nc button
         {
             sec = "NC";
             textBox1.Text = sec;
             if (buton_checked)
             {
+                deletefromUsed(secili.AccessibleName);
                 using (ncMenu menuu = new ncMenu())
                     if (menuu.ShowDialog() == DialogResult.OK)
                     {
@@ -102,6 +144,117 @@ namespace WindowsFormsApp1
                     }
             }
         }
+        private void ToolStripButton6_Click(object sender, EventArgs e) //down button
+                {
+                    if (buton_checked)
+                    {
+                        var Data = (ButtonInfo)secili.Tag;
+                
+                        if (buton_checked && (secili.AccessibleName != "down") && (!Data.Has_prl))
+                        {
+                            //creating down button
+                            int new_x = secili.Location.X - (132 / 7 * 2);
+                            int new_y = secili.Location.Y + 23;
+                            Buton_yarat(new_x, new_y, Properties.Resources.down_n, 56, 43, true);
+                            yaratilan.AccessibleDescription = "99";
+                            yaratilan.Tag = new ButtonInfo() { prl_to = secili };
+                            prl_to = secili;
+
+                            //creating link to down
+                            new_x = yaratilan.Location.X + 39;
+                            new_y = yaratilan.Location.Y + 20;
+                            Buton_yarat(new_x, new_y, Properties.Resources.link, 132, 44, true);
+                            yaratilan.AccessibleDescription = "10";
+
+                            var data = (ButtonInfo)secili.Tag;
+                            string network = data.Network;
+                            prl_to.Tag = new ButtonInfo() { Network = network, Has_prl = true, prl_to = yaratilan };
+                            //end
+
+                            //creating up to link
+                            new_x = yaratilan.Location.X + 114;
+                            new_y = yaratilan.Location.Y - 20;
+                            Buton_yarat(new_x, new_y, Properties.Resources.up, 56, 43, true);
+                            yaratilan.AccessibleDescription = "98";
+                            yaratilan.Tag = new ButtonInfo() { prl_to = secili };
+
+                            //end
+
+                        }
+                    }
+                }
+        private void ToolStripButton7_Click(object sender, EventArgs e) // clock button
+                {
+                    if (buton_checked)
+                    {
+                        secili.BackgroundImage = Properties.Resources.clock_n;
+                        deletefromUsed(secili.AccessibleName);
+                        using (Clock clock = new Clock())
+                        {
+                            if (clock.ShowDialog() == DialogResult.OK)
+                            {
+                                if (clock.Type.Substring(0, 3) == "TON") //timeron
+                                {
+                                    secili.AccessibleName = "TON" + clock.Timer;
+                                    addtoUsed(secili.AccessibleName);
+                                    if (clock.Interval_Def == "K") { secili.Text = "TON=" + clock.Interval; }
+                                    else {secili.Text = "TON=" + clock.Interval_Def + clock.Interval; }
+
+                                    secili.AccessibleDescription = "2";
+                                }
+                                else if (clock.Type.Substring(0, 4) == "TOFF") //timeroff
+                                {
+                                    secili.AccessibleName = "TOFF" + clock.Timer;
+                                    addtoUsed(secili.AccessibleName);
+                                    if (clock.Interval_Def == "K") { secili.Text = "TOFF=" + clock.Interval; }
+                                    else { secili.Text = "TOFF=" + clock.Interval_Def + clock.Interval; }
+                                    secili.AccessibleDescription = "3";
+                                }
+                            }
+                            else { secili.BackgroundImage = Properties.Resources.link; }
+                        }
+                    }
+                }
+        private void ToolStripButton8_Click(object sender, EventArgs e)  // coil button
+                {
+                    sec = "COIL";
+                    textBox1.Text = sec;
+                    if (buton_checked )
+                    {
+                        var Data = (ButtonInfo)secili.Tag;
+                        Button coil_btn = all_list[Data.Network][Data.Network.Length - 1];
+                        if (coil_btn == secili)
+                        {
+                            using (coilMenu menuu = new coilMenu())
+                                if (menuu.ShowDialog() == DialogResult.OK)
+                                {
+                                    secili.AccessibleName = menuu.Type + Convert.ToString(menuu.Pin);
+                                    addtoUsed(secili.AccessibleName);
+                                    secili.BackgroundImage = toolStripButton8.BackgroundImage;
+                                    secili.AccessibleDescription = "4";
+                                }
+                        }
+                    }
+                }
+        private void ToolStripButton9_Click(object sender, EventArgs e) // MOV button
+                {
+                    if (buton_checked)
+                    {
+                        secili.BackgroundImage = Properties.Resources.clock_n;
+                        deletefromUsed(secili.AccessibleName);
+                        using (MovMenu Mov = new MovMenu())
+                        {
+                            if (Mov.ShowDialog() == DialogResult.OK)
+                            {
+                                secili.AccessibleName = Mov.Type_From + Mov.Val_From + "=" + Mov.Type_To + Mov.Val_To;
+                                addtoUsed(Mov.Type_To + Mov.Val_To);
+                                secili.AccessibleDescription = "5";
+                                secili.Text = "MOV," + Mov.Type_From + Mov.Val_From + "," + Mov.Type_To + Mov.Val_To;
+                            }
+                            else { secili.BackgroundImage = Properties.Resources.link; }
+                        }
+                    }
+                }
 
 
         private void Button2_Click(object sender, EventArgs e)
@@ -136,101 +289,6 @@ namespace WindowsFormsApp1
                 }
         }
 
-        private void ToolStripButton4_Click(object sender, EventArgs e) // network button
-        {
-            y = network_1[0].Location.Y + 150;
-            network_count += 1;
-            network_1.Clear();
-            x_loc = 0;
-            
-            for (int i = 0; i<=8; i++)
-            {
-                if (i == 0) { Buton_yarat(0 + x_loc, y, Properties.Resources.net, 132, 44, false); yaratilan.AccessibleDescription = "11"; }
-                else { Buton_yarat(0 + x_loc, y, Properties.Resources.link, 132, 44, false); yaratilan.AccessibleDescription = "10"; }
-                network_1.Add(yaratilan);
-                x_loc += 132;
-            }
-            
-            //button_names = button_names.Substring(1);
-            all_list.Add("Network_" + network_count.ToString(), new List<Button>());
-            foreach (Button btn in network_1)
-                all_list["Network_" + network_count.ToString()].Add(btn);
-
-
-
-        }
-
-
-        private void ToolStripButton3_Click(object sender, EventArgs e) // link button
-        {
-            if (buton_checked)
-            {
-                sec = "LINK";
-                textBox1.Text = sec;
-
-                deletefromUsed(secili.AccessibleName);
-                if (secili.AccessibleName == "down")
-                {
-                    DeleteParallel(secili);
-                }
-                else
-                {
-                    secili.BackgroundImage = toolStripButton3.BackgroundImage;
-                    secili.AccessibleDescription = "10";
-                    secili.AccessibleName = null;
-                }
-            }
-        }
-
-        private void Button12_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void Button11_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void ToolStripButton6_Click(object sender, EventArgs e) //down button
-        {
-            if (buton_checked)
-            {
-                var Data = (ButtonInfo)secili.Tag;
-                
-                if (buton_checked && (secili.AccessibleName != "down") && (!Data.Has_prl))
-                {
-                    //creating down button
-                    int new_x = secili.Location.X - (132 / 7 * 2);
-                    int new_y = secili.Location.Y + 23;
-                    Buton_yarat(new_x, new_y, Properties.Resources.down_n, 56, 43, true);
-                    yaratilan.AccessibleDescription = "99";
-                    yaratilan.Tag = new ButtonInfo() { prl_to = secili };
-                    prl_to = secili;
-
-                    //creating link to down
-                    new_x = yaratilan.Location.X + 39;
-                    new_y = yaratilan.Location.Y + 20;
-                    Buton_yarat(new_x, new_y, Properties.Resources.link, 132, 44, true);
-                    yaratilan.AccessibleDescription = "10";
-
-                    var data = (ButtonInfo)secili.Tag;
-                    string network = data.Network;
-                    prl_to.Tag = new ButtonInfo() { Network = network, Has_prl = true, prl_to = yaratilan };
-                    //end
-
-                    //creating up to link
-                    new_x = yaratilan.Location.X + 114;
-                    new_y = yaratilan.Location.Y - 20;
-                    Buton_yarat(new_x, new_y, Properties.Resources.up, 56, 43, true);
-                    yaratilan.AccessibleDescription = "98";
-                    yaratilan.Tag = new ButtonInfo() { prl_to = secili };
-
-                    //end
-
-                }
-            }
-        }
 
         private void Button2_MouseEnter(object sender, EventArgs e) 
         {
@@ -287,35 +345,6 @@ namespace WindowsFormsApp1
             { name.SendToBack(); }
         }
 
-        private void ToolStripButton7_Click(object sender, EventArgs e) // clock button
-        {
-            if (buton_checked)
-            {
-                secili.BackgroundImage = Properties.Resources.clock_n;
-
-                using (Clock clock = new Clock())
-                {
-                    if (clock.ShowDialog() == DialogResult.OK)
-                    {
-                        if (clock.Type.Substring(0, 3) == "TON") //timeron
-                        {
-                            secili.AccessibleName = "TON" + clock.Timer;
-                            addtoUsed(secili.AccessibleName);
-                            secili.Text = "TON=" + clock.Interval;
-                            secili.AccessibleDescription = "2";
-                        }
-                        else if (clock.Type.Substring(0, 4) == "TOFF") //timeroff
-                        {
-                            secili.AccessibleName = "TOFF" + clock.Timer;
-                            addtoUsed(secili.AccessibleName);
-                            secili.Text = "TOFF=" + clock.Interval;
-                            secili.AccessibleDescription = "3";
-                        }
-                    }
-                    else { secili.BackgroundImage = Properties.Resources.link; }
-                }
-            }
-        }
 
         private void Button13_Click(object sender, EventArgs e)  //compile button
         {
@@ -323,31 +352,14 @@ namespace WindowsFormsApp1
             if (secili != null)
             {
                 Listings.Compile();
+                foreach(string x in all_list.Keys)
+                {
+                    Debug.WriteLine(x);
+                }
             }
             Debug.WriteLine("---------------------");
         }
 
-        private void ToolStripButton8_Click(object sender, EventArgs e)  // coil button
-        {
-            sec = "COIL";
-            textBox1.Text = sec;
-            if (buton_checked )
-            {
-                var Data = (ButtonInfo)secili.Tag;
-                Button coil_btn = all_list[Data.Network][Data.Network.Length - 1];
-                if (coil_btn == secili)
-                {
-                    using (coilMenu menuu = new coilMenu())
-                        if (menuu.ShowDialog() == DialogResult.OK)
-                        {
-                            secili.AccessibleName = "O" + Convert.ToString(menuu.Pin);
-                            addtoUsed(secili.AccessibleName);
-                            secili.BackgroundImage = toolStripButton8.BackgroundImage;
-                            secili.AccessibleDescription = "4";
-                        }
-                }
-            }
-        }
 
         private void addtoUsed(string foo)
         {
@@ -412,24 +424,55 @@ namespace WindowsFormsApp1
                 
                 var which = (ButtonInfo)secili.Tag;
                 fooToFix = which.prl_to;
-
-                var Data = (ButtonInfo)fooToFix.Tag;
-                Data.Has_prl = false;
-                Data.prl_to = null;
-                fooToFix.Tag = Data;
-
+                if (fooToFix != null)
+                {
+                    var Data = (ButtonInfo)fooToFix.Tag;
+                    Data.Has_prl = false;
+                    Data.prl_to = null;
+                    fooToFix.Tag = Data;
+                }
             }
         }
 
-        private void Form1_KeyDown (object sender, KeyEventArgs e) //shortcuts
+        private void DeleteNetwork(Button foo)
         {
-                if (e.KeyCode == Keys.O) { ToolStripButton1_Click_1(sender, e); } // normally open
-                else if (e.KeyCode == Keys.C) { ToolStripButton2_Click_1(sender, e); } // normally close
-                else if (e.KeyCode == Keys.T) { ToolStripButton7_Click(sender, e); } // clock on
-                else if (e.KeyCode == Keys.N) { ToolStripButton4_Click(sender, e); } // network
-                else if (e.KeyCode == Keys.Y) { ToolStripButton8_Click(sender, e); } // coil
-                else if (e.KeyCode == Keys.Delete) { ToolStripButton3_Click(sender, e); } // link
-                else if (e.KeyCode == Keys.D) { ToolStripButton6_Click(sender, e); } // down
+            var FirstData = (ButtonInfo)foo.Tag;
+            List<Button> Net_Buttons = all_list[FirstData.Network];
+            foreach (Button x in Net_Buttons)
+            {
+                var Data_1 = (ButtonInfo)x.Tag;
+                if (Data_1.Has_prl)
+                {
+                    string Button_Name = Data_1.prl_to.Name;                   
+                    Button_Name = Button_Name.Substring(0, 6) + Convert.ToString((Convert.ToInt32(Button_Name.Substring(6)) - 1));
+                    Control prl_bt = this.Controls.Find(Button_Name, true).First() as Button;
+                    DeleteParallel(prl_bt as Button);
+                }
+            }
+            foreach (Control x in Net_Buttons)
+            {
+                Button x_bt = x as Button;
+                deletefromUsed(x_bt.AccessibleName);
+
+                x.Dispose();
+                this.Controls.Remove(x);
+            }
+            all_list.Remove(FirstData.Network);
+            all_list = all_list;
         }
+        
+
+        
+        private void Form1_KeyDown (object sender, KeyEventArgs e) //shortcuts
+                {
+                        if (e.KeyCode == Keys.O) { ToolStripButton1_Click_1(sender, e); } // normally open
+                        else if (e.KeyCode == Keys.C) { ToolStripButton2_Click_1(sender, e); } // normally close
+                        else if (e.KeyCode == Keys.T) { ToolStripButton7_Click(sender, e); } // clock on
+                        else if (e.KeyCode == Keys.N) { ToolStripButton4_Click(sender, e); } // network
+                        else if (e.KeyCode == Keys.Y) { ToolStripButton8_Click(sender, e); } // coil
+                        else if (e.KeyCode == Keys.Delete) { ToolStripButton3_Click(sender, e); } // link
+                        else if (e.KeyCode == Keys.D) { ToolStripButton6_Click(sender, e); } // down
+                        else if (e.KeyCode == Keys.M) { ToolStripButton9_Click(sender, e); } // mov
+                }
     }
 }

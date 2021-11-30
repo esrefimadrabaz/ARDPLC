@@ -13,15 +13,29 @@ namespace WindowsFormsApp1
     public partial class coilMenu : Form
     {
         public int Pin { get; set; }
+        public string Type { get; set; }
         public coilMenu()
         {
             InitializeComponent();
             Pin = 0;
+            Type = "O";
         }
 
         private void NumericUpDown1_ValueChanged(object sender, EventArgs e)
         {
             Pin = Convert.ToInt32(numericUpDown1.Value);
+        }
+
+        private void ComboBox2_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (Convert.ToString(comboBox2.SelectedItem) == "Pin")
+            {
+                Type = "O";
+            }
+            else if (Convert.ToString(comboBox2.SelectedItem) == "M")
+            {
+                Type = "M";
+            }
         }
     }
 }

@@ -12,3 +12,4 @@ C:\Users\Oguz\Desktop\pl\WindowsFormsApp1\WindowsFormsApp1\obj\Debug\WindowsForm
 C:\Users\Oguz\Desktop\pl\WindowsFormsApp1\WindowsFormsApp1\obj\Debug\WindowsFormsApp1.ncMenu.resources
 C:\Users\Oguz\Desktop\pl\WindowsFormsApp1\WindowsFormsApp1\obj\Debug\WindowsFormsApp1.noMenu.resources
 C:\Users\Oguz\Desktop\pl\WindowsFormsApp1\WindowsFormsApp1\obj\Debug\WindowsFormsApp1.coilMenu.resources
+C:\Users\Oguz\Desktop\pl\WindowsFormsApp1\WindowsFormsApp1\obj\Debug\WindowsFormsApp1.MovMenu.resources
