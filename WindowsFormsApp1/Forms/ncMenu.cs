@@ -49,6 +49,10 @@ namespace WindowsFormsApp1
             {
                 Type = "M";
             }
+            else if (comboBox2.SelectedIndex == 3)
+            {
+                Type = "CNTR";
+            }
         }
     }
 }

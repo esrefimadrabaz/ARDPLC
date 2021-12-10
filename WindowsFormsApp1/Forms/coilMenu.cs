@@ -19,6 +19,7 @@ namespace WindowsFormsApp1
             InitializeComponent();
             Pin = 0;
             Type = "O";
+            comboBox2.SelectedIndex = 0;
         }
 
         private void NumericUpDown1_ValueChanged(object sender, EventArgs e)

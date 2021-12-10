@@ -54,7 +54,7 @@
             // 
             this.numericUpDown1.Location = new System.Drawing.Point(178, 63);
             this.numericUpDown1.Maximum = new decimal(new int[] {
-            3,
+            9,
             0,
             0,
             0});
@@ -119,7 +119,8 @@
             this.comboBox2.Items.AddRange(new object[] {
             "Input",
             "Output",
-            "M"});
+            "M",
+            "Counter"});
             this.comboBox2.Location = new System.Drawing.Point(178, 21);
             this.comboBox2.Name = "comboBox2";
             this.comboBox2.Size = new System.Drawing.Size(75, 21);

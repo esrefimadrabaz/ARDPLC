@@ -15,8 +15,8 @@ namespace WindowsFormsApp1
         public static void Ard_Init()
         {
             writer = new StreamWriter(path);
-            writer.WriteLine("#define deneme.h");
-            writer.WriteLine("#include wire.h");
+            writer.WriteLine("#include \"deneme.h\"");
+            writer.WriteLine("#include <wire.h>");
             writer.WriteLine("bool dugum = true;");
             writer.WriteLine("bool prl;");
             writer.WriteLine("bool next;");
@@ -48,6 +48,12 @@ namespace WindowsFormsApp1
                 {
                     writer.WriteLine("int TOFF{0};", pins.Substring(4));
                 }
+                else if(pins.Substring(0,4) == "CNTR")
+                {
+                    writer.WriteLine("int CNTR{0};", pins.Substring(4));
+                    writer.WriteLine("bool CNTR{0}L;", pins.Substring(4));
+                    writer.WriteLine("bool CNTR{0}D;", pins.Substring(4));
+                }
             }
             writer.WriteLine("//End Of Declaration ----------------");
             writer.WriteLine("void setup() {");
@@ -56,11 +62,11 @@ namespace WindowsFormsApp1
             {
                 if (pins[0] == 'I')
                 {
-                    writer.WriteLine("pinMode(I{0}, INPUT;)", pins[1]);
+                    writer.WriteLine("pinMode(I{0}, INPUT);", pins[1]);
                 }
                 else if (pins[0] == 'O')
                 {
-                    writer.WriteLine("pinMode(O{0}, OUTPUT;)", pins[1]);
+                    writer.WriteLine("pinMode(O{0}, OUTPUT);", pins[1]);
                 }
             }
             writer.WriteLine("}");
@@ -116,6 +122,34 @@ namespace WindowsFormsApp1
         public static void Ard_MOV(string From, string To)
         {
             writer.WriteLine("{0} = {1};", To, From);
+        }
+        public static void Ard_CNTUP(string preset, string CNTR, string CNTLAST, string DONE)
+        {
+            writer.WriteLine("CNTU({0},{1},{2},{3});", preset, CNTR, CNTLAST, DONE);
+        }
+        public static void Ard_CNTD(string preset, string CNTR, string CNTLAST, string DONE)
+        {
+            writer.WriteLine("CNTD({0},{1},{2},{3});", preset, CNTR, CNTLAST, DONE);
+        }
+        public static void Ard_Set(string pin)
+        {
+            writer.WriteLine("Set({0});", pin);
+        }
+        public static void Ard_Set_M(string pin)
+        {
+            writer.WriteLine("Set_M({0});", pin);
+        }
+        public static void Ard_Reset(string pin)
+        {
+            writer.WriteLine("Reset({0});", pin);
+        }
+        public static void Ard_Reset_O(string pin)
+        {
+            writer.WriteLine("Reset_O({0});", pin);
+        }
+        public static void Ard_Reset_M(string pin)
+        {
+            writer.WriteLine("Reset_M({0});", pin);
         }
         public static void Ard_NetStart()
         {

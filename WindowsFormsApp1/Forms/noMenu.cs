@@ -50,6 +50,10 @@ namespace WindowsFormsApp1
             {
                 Type = "M";
             }
+            else if (Convert.ToString(comboBox2.SelectedItem) == "Counter")
+            {
+                Type = "CNTR";
+            }
         }
     }
 }

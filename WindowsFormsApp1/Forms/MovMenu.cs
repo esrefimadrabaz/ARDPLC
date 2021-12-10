@@ -34,13 +34,14 @@ namespace WindowsFormsApp1
         {
             if (Convert.ToString(comboBox1.SelectedItem) == "K") { numericUpDown2.Maximum = 2000000000; numericUpDown2.Minimum = -2000000000; }
             else if (Convert.ToString(comboBox1.SelectedItem) == "D") { numericUpDown2.Maximum = 100; numericUpDown2.Minimum = 0; }
+            else if (Convert.ToString(comboBox1.SelectedItem) == "CNTR") { numericUpDown2.Maximum = 100; numericUpDown2.Minimum = 0; }
             Type_From = Convert.ToString(comboBox1.SelectedItem);
         }
 
         private void ComboBox2_SelectedIndexChanged(object sender, EventArgs e)
         {
             if (Convert.ToString(comboBox2.SelectedItem) == "D") { numericUpDown1.Maximum = 100; numericUpDown2.Minimum = 0; }
-            Type_From = Convert.ToString(comboBox2.SelectedItem);
+            Type_To = Convert.ToString(comboBox2.SelectedItem);
         }
 
         private void NumericUpDown2_ValueChanged(object sender, EventArgs e)

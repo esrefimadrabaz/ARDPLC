@@ -11,7 +11,8 @@ using System.IO;
 namespace WindowsFormsApp1
 {
     /* Contact & Coil Codes 
-     0 = NO     1 = NC      2 = CLOCK_ON       3 = CLOCK_OFF        4 = COIL    5 = MOV      10 = LINK       11 = NETWORK_START      99 = down       98 = up
+     0 = NO     1 = NC      2 = CLOCK_ON       3 = CLOCK_OFF        4 = COIL    5 = MOV     6 = COUNTER_UP      7 = COUNTER_DOWN        8 = SET     9 = RESET    
+     10 = LINK       11 = NETWORK_START      99 = down       98 = up
     */
 
     class Listings
@@ -19,7 +20,7 @@ namespace WindowsFormsApp1
         public static void Compile()
         {
             Streams.Ard_Init();
-            foreach (string nets in Form1.all_list.Keys)
+            foreach (int nets in Form1.all_list.Keys)
             {
                 Streams.Ard_NetStart();
                 Debug.WriteLine(nets);
@@ -55,6 +56,7 @@ namespace WindowsFormsApp1
                         Streams.writer.WriteLine("");
                         Streams.writer.WriteLine("if(dugum) {prl = true;}");
                         if (btn.AccessibleName[0] == 'M') {Streams.Ard_NO_M(btn.AccessibleName);}
+                        else if (btn.AccessibleName[0] == 'C') { Streams.Ard_NO_M(btn.AccessibleName + "D"); }
                         else {Streams.Ard_NO(btn.AccessibleName); }
                         Streams.writer.WriteLine("if (prl)  {dugum=true;}");
                         Sort(Data.prl_to);
@@ -65,6 +67,7 @@ namespace WindowsFormsApp1
                     else
                     {
                         if (btn.AccessibleName[0] == 'M') { Streams.Ard_NO_M(btn.AccessibleName); }
+                        else if (btn.AccessibleName[0] == 'C') { Streams.Ard_NO_M(btn.AccessibleName + "D"); }
                         else { Streams.Ard_NO(btn.AccessibleName); }
                     }
                     break;
@@ -74,6 +77,7 @@ namespace WindowsFormsApp1
                         Streams.writer.WriteLine("");
                         Streams.writer.WriteLine("if(dugum) {prl = true;}");
                         if (btn.AccessibleName[0] == 'M') { Streams.Ard_NC_M(btn.AccessibleName); }
+                        else if (btn.AccessibleName[0] == 'C') { Streams.Ard_NC_M(btn.AccessibleName + "D"); }
                         else { Streams.Ard_NC(btn.AccessibleName); }
                         Streams.writer.WriteLine("if (prl)  {dugum=true;}");
                         Sort(Data.prl_to);
@@ -83,6 +87,7 @@ namespace WindowsFormsApp1
                     else
                     {
                         if (btn.AccessibleName[0] == 'M') { Streams.Ard_NC_M(btn.AccessibleName); }
+                        else if (btn.AccessibleName[0] == 'C') { Streams.Ard_NC_M(btn.AccessibleName + "D"); }
                         else { Streams.Ard_NC(btn.AccessibleName); }
                     }
                     break;
@@ -157,6 +162,76 @@ namespace WindowsFormsApp1
                         string[] vals = btn.AccessibleName.Split('=');
                         if (vals[0][0] == 'K') { Streams.Ard_MOV(vals[0].Substring(1), vals[1]); }
                         else { Streams.Ard_MOV(vals[0], vals[1]); }
+                    }
+                    break;
+                case "6": // CNTR_U
+                    if (Data.Has_prl)
+                    {
+                        Streams.writer.WriteLine("");
+                        Streams.writer.WriteLine("if(dugum) {prl = true;}");
+                        Streams.Ard_CNTUP(btn.Text.Split('=')[1], btn.AccessibleName, btn.AccessibleName+"L", btn.AccessibleName + "D");
+                        Streams.writer.WriteLine("if (prl)  {dugum=true;}");
+                        Sort(Data.prl_to);
+                        Streams.writer.WriteLine("if (next) { dugum = true; }");
+                        Streams.writer.WriteLine("prl,next = false;");
+                    }
+                    else
+                    {
+                        Streams.Ard_CNTUP(btn.Text.Split('=')[1], btn.AccessibleName, btn.AccessibleName + "L", btn.AccessibleName + "D");
+                    }
+                    break;
+                case "7": //CNTR_D
+                    if (Data.Has_prl)
+                    {
+                        Streams.writer.WriteLine("");
+                        Streams.writer.WriteLine("if(dugum) {prl = true;}");
+                        Streams.Ard_CNTD(btn.Text.Split('=')[1], btn.AccessibleName, btn.AccessibleName + "L", btn.AccessibleName + "D");
+                        Streams.writer.WriteLine("if (prl)  {dugum=true;}");
+                        Sort(Data.prl_to);
+                        Streams.writer.WriteLine("if (next) { dugum = true; }");
+                        Streams.writer.WriteLine("prl,next = false;");
+                    }
+                    else
+                    {
+                        Streams.Ard_CNTD(btn.Text.Split('=')[1], btn.AccessibleName, btn.AccessibleName + "L", btn.AccessibleName + "D");
+                    }
+                    break;
+                case "8": //SET
+                    if (Data.Has_prl)
+                    {
+                        Streams.writer.WriteLine("");
+                        Streams.writer.WriteLine("if(dugum) {prl = true;}");
+                        if (btn.AccessibleName[0] == 'M') { Streams.Ard_Set_M(btn.AccessibleName); }
+                        else { Streams.Ard_Set(btn.AccessibleName); }
+                        Streams.writer.WriteLine("if (prl)  {dugum=true;}");
+                        Sort(Data.prl_to);
+                        Streams.writer.WriteLine("if (next) { dugum = true; }");
+                        Streams.writer.WriteLine("prl,next = false;");
+                    }
+                    else
+                    {
+                        if (btn.AccessibleName[0] == 'M') { Streams.Ard_Set_M(btn.AccessibleName); }
+                        else { Streams.Ard_Set(btn.AccessibleName); }
+                    }
+                    break;
+                case "9": //RESET
+                    if (Data.Has_prl)
+                    {
+                        Streams.writer.WriteLine("");
+                        Streams.writer.WriteLine("if(dugum) {prl = true;}");
+                        if (btn.AccessibleName[0] == 'M') { Streams.Ard_Reset_M(btn.AccessibleName); }
+                        else if (btn.AccessibleName[0] == 'O') { Streams.Ard_Reset(btn.AccessibleName); }
+                        else { Streams.Ard_Reset_O(btn.AccessibleName); }
+                        Streams.writer.WriteLine("if (prl)  {dugum=true;}");
+                        Sort(Data.prl_to);
+                        Streams.writer.WriteLine("if (next) { dugum = true; }");
+                        Streams.writer.WriteLine("prl,next = false;");
+                    }
+                    else
+                    {
+                        if (btn.AccessibleName[0] == 'M') { Streams.Ard_Reset_M(btn.AccessibleName); }
+                        else if (btn.AccessibleName[0] == 'O') { Streams.Ard_Reset(btn.AccessibleName); }
+                        else { Streams.Ard_Reset_O(btn.AccessibleName); }
                     }
                     break;
                 case "10": // Link

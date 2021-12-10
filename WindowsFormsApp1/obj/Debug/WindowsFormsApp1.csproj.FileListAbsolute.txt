@@ -13,3 +13,16 @@ C:\Users\Oguz\Desktop\pl\WindowsFormsApp1\WindowsFormsApp1\obj\Debug\WindowsForm
 C:\Users\Oguz\Desktop\pl\WindowsFormsApp1\WindowsFormsApp1\obj\Debug\WindowsFormsApp1.noMenu.resources
 C:\Users\Oguz\Desktop\pl\WindowsFormsApp1\WindowsFormsApp1\obj\Debug\WindowsFormsApp1.coilMenu.resources
 C:\Users\Oguz\Desktop\pl\WindowsFormsApp1\WindowsFormsApp1\obj\Debug\WindowsFormsApp1.MovMenu.resources
+C:\Users\Oguz\Desktop\pl\WindowsFormsApp1\WindowsFormsApp1\obj\Debug\WindowsFormsApp1.CounterMenu.resources
+C:\Users\Oguz\Desktop\pl\WindowsFormsApp1\WindowsFormsApp1\obj\Debug\WindowsFormsApp1.SetMenu.resources
+C:\Users\Oguz\Desktop\pl\WindowsFormsApp1\WindowsFormsApp1\obj\Debug\WindowsFormsApp1.ResetMenu.resources
+C:\Users\Oguz\Desktop\pl\WindowsFormsApp1\WindowsFormsApp1\bin\Debug\Microsoft.WindowsAPICodePack.dll
+C:\Users\Oguz\Desktop\pl\WindowsFormsApp1\WindowsFormsApp1\bin\Debug\Microsoft.WindowsAPICodePack.Shell.dll
+C:\Users\Oguz\Desktop\pl\WindowsFormsApp1\WindowsFormsApp1\bin\Debug\Microsoft.WindowsAPICodePack.ShellExtensions.dll
+C:\Users\Oguz\Desktop\pl\WindowsFormsApp1\WindowsFormsApp1\bin\Debug\Microsoft.WindowsAPICodePack.pdb
+C:\Users\Oguz\Desktop\pl\WindowsFormsApp1\WindowsFormsApp1\bin\Debug\Microsoft.WindowsAPICodePack.xml
+C:\Users\Oguz\Desktop\pl\WindowsFormsApp1\WindowsFormsApp1\bin\Debug\Microsoft.WindowsAPICodePack.Shell.pdb
+C:\Users\Oguz\Desktop\pl\WindowsFormsApp1\WindowsFormsApp1\bin\Debug\Microsoft.WindowsAPICodePack.Shell.xml
+C:\Users\Oguz\Desktop\pl\WindowsFormsApp1\WindowsFormsApp1\bin\Debug\Microsoft.WindowsAPICodePack.ShellExtensions.pdb
+C:\Users\Oguz\Desktop\pl\WindowsFormsApp1\WindowsFormsApp1\bin\Debug\Microsoft.WindowsAPICodePack.ShellExtensions.xml
+C:\Users\Oguz\Desktop\pl\WindowsFormsApp1\WindowsFormsApp1\obj\Debug\WindowsFormsApp1.csproj.CopyComplete

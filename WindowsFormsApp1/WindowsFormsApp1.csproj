@@ -34,6 +34,15 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Microsoft.WindowsAPICodePack, Version=1.1.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.WindowsAPICodePack-Core.1.1.0.0\lib\Microsoft.WindowsAPICodePack.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.WindowsAPICodePack.Shell, Version=1.1.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.WindowsAPICodePack-Shell.1.1.0.0\lib\Microsoft.WindowsAPICodePack.Shell.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.WindowsAPICodePack.ShellExtensions, Version=1.1.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.WindowsAPICodePack-Shell.1.1.0.0\lib\Microsoft.WindowsAPICodePack.ShellExtensions.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
@@ -49,6 +58,12 @@
   <ItemGroup>
     <Compile Include="Classes\ButtonInfo.cs">
       <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Forms\CounterMenu.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\CounterMenu.Designer.cs">
+      <DependentUpon>CounterMenu.cs</DependentUpon>
     </Compile>
     <Compile Include="Forms\coilMenu.cs">
       <SubType>Form</SubType>
@@ -93,6 +108,22 @@
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Classes\Streams.cs" />
+    <Compile Include="Forms\SetMenu.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\SetMenu.Designer.cs">
+      <DependentUpon>SetMenu.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ResetMenu.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ResetMenu.Designer.cs">
+      <DependentUpon>ResetMenu.cs</DependentUpon>
+    </Compile>
+    <Compile Include="SaveLoad.cs" />
+    <EmbeddedResource Include="Forms\CounterMenu.resx">
+      <DependentUpon>CounterMenu.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Forms\coilMenu.resx">
       <DependentUpon>coilMenu.cs</DependentUpon>
     </EmbeddedResource>
@@ -116,6 +147,13 @@
       <SubType>Designer</SubType>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
+    <EmbeddedResource Include="Forms\SetMenu.resx">
+      <DependentUpon>SetMenu.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ResetMenu.resx">
+      <DependentUpon>ResetMenu.cs</DependentUpon>
+    </EmbeddedResource>
+    <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
@@ -175,6 +213,27 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\coil.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\set-rest.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\set.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\reset.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\mov.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\counter.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\timer.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\reset1.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
