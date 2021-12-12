@@ -7,11 +7,13 @@ using System.Windows.Forms;
 
 namespace WindowsFormsApp1
 {
-    public class ButtonInfo : Button
+    public class NewButton : Button
     {
         public string Network { get; set; }
-        public bool Has_prl = false;
-        public Button prl_to;
+        public bool HasPrl { get; set; }
+        public NewButton PrlTo { get; set; }
+
+        public NewButton[] Parallels { get; set; }
         
 
     }

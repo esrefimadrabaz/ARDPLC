@@ -14,7 +14,7 @@ namespace WindowsFormsApp1
         public static StreamReader reader;
         static string path;
         public static int Network_Count { get; set; }
-        public static SortedDictionary<int, List<Button>> All_List;
+        public static SortedDictionary<int, List<NewButton>> All_List;
         public static List<string> Pre_Used_Pins;
 
 
@@ -47,19 +47,19 @@ namespace WindowsFormsApp1
                         writer.WriteLine();
                         for (int i = 1; i <= Network_Count; i++)
                         {
-                            foreach (Button btn in All_List[i])
+                            foreach (NewButton btn in All_List[i])
                             {
-                                var Data = (ButtonInfo)btn.Tag;
+                                
                                 writer.WriteLine(btn.AccessibleDescription);
                                 writer.WriteLine(btn.AccessibleName);
                                 writer.WriteLine(btn.Text);
-                                writer.WriteLine(Data.Has_prl);
+                                writer.WriteLine(btn.HasPrl);
 
-                                if (Data.Has_prl)
+                                if (btn.HasPrl)
                                 {
-                                    writer.WriteLine(Data.prl_to.AccessibleDescription);
-                                    writer.WriteLine(Data.prl_to.AccessibleName);
-                                    writer.WriteLine(Data.prl_to.Text);
+                                    writer.WriteLine(btn.PrlTo.AccessibleDescription);
+                                    writer.WriteLine(btn.PrlTo.AccessibleName);
+                                    writer.WriteLine(btn.PrlTo.Text);
                                 }
                             }
                         }

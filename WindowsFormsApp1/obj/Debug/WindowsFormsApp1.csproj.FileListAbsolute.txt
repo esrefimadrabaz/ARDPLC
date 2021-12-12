@@ -7,7 +7,6 @@ C:\Users\Oguz\Desktop\pl\WindowsFormsApp1\WindowsFormsApp1\obj\Debug\WindowsForm
 C:\Users\Oguz\Desktop\pl\WindowsFormsApp1\WindowsFormsApp1\obj\Debug\WindowsFormsApp1.csproj.CoreCompileInputs.cache
 C:\Users\Oguz\Desktop\pl\WindowsFormsApp1\WindowsFormsApp1\obj\Debug\WindowsFormsApp1.exe
 C:\Users\Oguz\Desktop\pl\WindowsFormsApp1\WindowsFormsApp1\obj\Debug\WindowsFormsApp1.pdb
-C:\Users\Oguz\Desktop\pl\WindowsFormsApp1\WindowsFormsApp1\obj\Debug\WindowsFormsApp1.csprojAssemblyReference.cache
 C:\Users\Oguz\Desktop\pl\WindowsFormsApp1\WindowsFormsApp1\obj\Debug\WindowsFormsApp1.Clock.resources
 C:\Users\Oguz\Desktop\pl\WindowsFormsApp1\WindowsFormsApp1\obj\Debug\WindowsFormsApp1.ncMenu.resources
 C:\Users\Oguz\Desktop\pl\WindowsFormsApp1\WindowsFormsApp1\obj\Debug\WindowsFormsApp1.noMenu.resources
@@ -26,3 +25,4 @@ C:\Users\Oguz\Desktop\pl\WindowsFormsApp1\WindowsFormsApp1\bin\Debug\Microsoft.W
 C:\Users\Oguz\Desktop\pl\WindowsFormsApp1\WindowsFormsApp1\bin\Debug\Microsoft.WindowsAPICodePack.ShellExtensions.pdb
 C:\Users\Oguz\Desktop\pl\WindowsFormsApp1\WindowsFormsApp1\bin\Debug\Microsoft.WindowsAPICodePack.ShellExtensions.xml
 C:\Users\Oguz\Desktop\pl\WindowsFormsApp1\WindowsFormsApp1\obj\Debug\WindowsFormsApp1.csproj.CopyComplete
+C:\Users\Oguz\Desktop\pl\WindowsFormsApp1\WindowsFormsApp1\obj\Debug\WindowsFormsApp1.csprojAssemblyReference.cache

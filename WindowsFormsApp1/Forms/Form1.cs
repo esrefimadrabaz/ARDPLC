@@ -21,16 +21,16 @@ namespace WindowsFormsApp1
         public static string path;
         string buton;
         private bool buton_checked = false;
-        private List<Button> network_1;
-        private Button yaratilan;
-        private Button previous;
-        private Button secili;
-        private Button prl_to;
+        private List<NewButton> network_1;
+        private NewButton yaratilan;
+        private NewButton previous;
+        private NewButton secili;
+        private NewButton prl_to;
         public static int network_count = 1;
         int x = 10;
         int y = 150;
         int x_loc = 0;
-        public static SortedDictionary<int, List<Button>> all_list;
+        public static SortedDictionary<int, List<NewButton>> all_list;
         public static List<string> Pre_Used_Pins;
         public static List<string> Used_Pins;
         private StreamReader reader;
@@ -41,42 +41,43 @@ namespace WindowsFormsApp1
             Used_Pins = new List<string>();
             Pre_Used_Pins = new List<string>();
             Pre_Used_Pins.Add("I0");
-            network_1 = new List<Button> { button1, button2, button3, button4, button5, button6, button7, button8, button9 };
-            all_list = new SortedDictionary<int, List<Button>>();
-            all_list.Add(network_count, new List<Button>());
-            foreach (Button btn in network_1)
-            {
-                btn.Tag = new ButtonInfo() { Network = "Network_" + network_count.ToString()};
-
+            network_1 = new List<NewButton> { button1, button2, button3, button4, button5, button6, button7, button8, button9 };
+            all_list = new SortedDictionary<int, List<NewButton>>();
+            all_list.Add(network_count, new List<NewButton>());
+            foreach (NewButton btn in network_1)
+            {                
+                btn.Network = "Network_" + network_count;
                 all_list[network_count].Add(btn);
             }
         }
 
 
         private void ToolStripButton4_Click(object sender, EventArgs e) // network button
-                {
-                    y = all_list[all_list.Keys.Last()][0].Location.Y + 150;
-                    //y = network_1[0].Location.Y + 150;
-                    network_count += 1;
-                    network_1.Clear();
-                    x_loc = 0;
-            
-                    for (int i = 0; i<=8; i++)
-                    {
-                        if (i == 0) { Buton_yarat(0 + x_loc, y, Properties.Resources.net, 132, 44, false); yaratilan.AccessibleDescription = "11"; }
-                        else { Buton_yarat(0 + x_loc, y, Properties.Resources.link, 132, 44, false); yaratilan.AccessibleDescription = "10"; }
-                        network_1.Add(yaratilan);
-                        x_loc += 132;
-                    }
-            
-                    //button_names = button_names.Substring(1);
-                    all_list.Add(network_count, new List<Button>());
-                    foreach (Button btn in network_1)
-                        all_list[network_count].Add(btn);
+        {
+            y = all_list[all_list.Keys.Last()][0].Location.Y + 150;
+            //y = network_1[0].Location.Y + 150;
+            network_count += 1;
+            network_1.Clear();
+            x_loc = 0;
+
+            for (int i = 0; i <= 8; i++)
+            {
+                if (i == 0) { Buton_yarat(0 + x_loc, y, Properties.Resources.net, 132, 44, false); yaratilan.AccessibleDescription = "11"; }
+                else { Buton_yarat(0 + x_loc, y, Properties.Resources.link, 132, 44, false); yaratilan.AccessibleDescription = "10"; }
+                network_1.Add(yaratilan);
+                x_loc += 132;
+            }
+
+            //button_names = button_names.Substring(1);
+            all_list.Add(network_count, new List<NewButton>());
+            foreach (NewButton btn in network_1)
+            {
+                all_list[network_count].Add(btn);
+            }
+            Debug.WriteLine("hey");
 
 
-
-                }
+        }
         private void ToolStripButton3_Click(object sender, EventArgs e) // link button
                 {
                     if (buton_checked)
@@ -127,113 +128,119 @@ namespace WindowsFormsApp1
             }
         }
         private void ToolStripButton6_Click(object sender, EventArgs e) //down button
+        {
+            if (buton_checked)
+            {
+
+                if (buton_checked && (secili.AccessibleName != "down") && (!secili.HasPrl))
                 {
-                    if (buton_checked)
-                    {
-                        var Data = (ButtonInfo)secili.Tag;
-                
-                        if (buton_checked && (secili.AccessibleName != "down") && (!Data.Has_prl))
-                        {
-                            //creating down button
-                            int new_x = secili.Location.X - (132 / 7 * 2);
-                            int new_y = secili.Location.Y + 23;
-                            Buton_yarat(new_x, new_y, Properties.Resources.down_n, 56, 43, true);
-                            yaratilan.AccessibleDescription = "99";
-                            yaratilan.Tag = new ButtonInfo() { prl_to = secili };
-                            prl_to = secili;
+                    
+                    //creating down button
+                    int new_x = secili.Location.X - (132 / 7 * 2);
+                    int new_y = secili.Location.Y + 23;
+                    Buton_yarat(new_x, new_y, Properties.Resources.down_n, 56, 43, true);
+                    yaratilan.AccessibleDescription = "99";
+                    NewButton dispButton = yaratilan;
+                    yaratilan.PrlTo = secili;
+                    prl_to = secili;
 
-                            //creating link to down
-                            new_x = yaratilan.Location.X + 39;
-                            new_y = yaratilan.Location.Y + 20;
-                            Buton_yarat(new_x, new_y, Properties.Resources.link, 132, 44, true);
-                            yaratilan.AccessibleDescription = "10";
-                            var data = (ButtonInfo)secili.Tag;
-                            string network = data.Network;
-                            prl_to.Tag = new ButtonInfo() { Network = network, Has_prl = true, prl_to = yaratilan };
-                            //end
+                    //creating link to down
+                    new_x = yaratilan.Location.X + 39;
+                    new_y = yaratilan.Location.Y + 20;
+                    Buton_yarat(new_x, new_y, Properties.Resources.link, 132, 44, true);
+                    yaratilan.AccessibleDescription = "10";
 
-                            //creating up to link
-                            new_x = yaratilan.Location.X + 114;
-                            new_y = yaratilan.Location.Y - 20;
-                            Buton_yarat(new_x, new_y, Properties.Resources.up, 56, 43, true);
-                            yaratilan.AccessibleDescription = "98";
-                            yaratilan.Tag = new ButtonInfo() { prl_to = secili };
+                    yaratilan.Parallels = new NewButton[2];
+                    yaratilan.Parallels[0] = dispButton;
+                    
+                    prl_to.Network = secili.Network;
+                    prl_to.HasPrl = true;
+                    prl_to.PrlTo = yaratilan;
+                    //end
 
-                            //end
+                    //creating up to link
+                    new_x = yaratilan.Location.X + 114;
+                    new_y = yaratilan.Location.Y - 20;
+                    Buton_yarat(new_x, new_y, Properties.Resources.up, 56, 43, true);
+                    yaratilan.AccessibleDescription = "98";
+                    yaratilan.PrlTo = secili;
 
-                        }
-                    }
+                    secili.PrlTo.Parallels[1] = yaratilan;
+                    //end
+
                 }
+            }
+        }
         private void ToolStripButton7_Click(object sender, EventArgs e) // clock button
+        {
+            if (buton_checked)
+            {
+                secili.BackgroundImage = Properties.Resources.clock_n;
+                deletefromUsed(secili.AccessibleName);
+                using (Clock clock = new Clock())
                 {
-                    if (buton_checked)
+                    if (clock.ShowDialog() == DialogResult.OK)
                     {
-                        secili.BackgroundImage = Properties.Resources.clock_n;
-                        deletefromUsed(secili.AccessibleName);
-                        using (Clock clock = new Clock())
+                        if (clock.Type.Substring(0, 3) == "TON") //timeron
                         {
-                            if (clock.ShowDialog() == DialogResult.OK)
-                            {
-                                if (clock.Type.Substring(0, 3) == "TON") //timeron
-                                {
-                                    secili.AccessibleName = "TON" + clock.Timer;
-                                    addtoUsed(secili.AccessibleName);
-                                    if (clock.Interval_Def == "K") { secili.Text = "TON=" + clock.Interval; }
-                                    else {secili.Text = "TON=" + clock.Interval_Def + clock.Interval; }
+                            secili.AccessibleName = "TON" + clock.Timer;
+                            addtoUsed(secili.AccessibleName);
+                            if (clock.Interval_Def == "K") { secili.Text = "TON=" + clock.Interval; }
+                            else { secili.Text = "TON=" + clock.Interval_Def + clock.Interval; }
 
-                                    secili.AccessibleDescription = "2";
-                                }
-                                else if (clock.Type.Substring(0, 4) == "TOFF") //timeroff
-                                {
-                                    secili.AccessibleName = "TOFF" + clock.Timer;
-                                    addtoUsed(secili.AccessibleName);
-                                    if (clock.Interval_Def == "K") { secili.Text = "TOFF=" + clock.Interval; }
-                                    else { secili.Text = "TOFF=" + clock.Interval_Def + clock.Interval; }
-                                    secili.AccessibleDescription = "3";
-                                }
-                            }
-                            else { secili.BackgroundImage = Properties.Resources.link; }
+                            secili.AccessibleDescription = "2";
+                        }
+                        else if (clock.Type.Substring(0, 4) == "TOFF") //timeroff
+                        {
+                            secili.AccessibleName = "TOFF" + clock.Timer;
+                            addtoUsed(secili.AccessibleName);
+                            if (clock.Interval_Def == "K") { secili.Text = "TOFF=" + clock.Interval; }
+                            else { secili.Text = "TOFF=" + clock.Interval_Def + clock.Interval; }
+                            secili.AccessibleDescription = "3";
                         }
                     }
+                    else { secili.BackgroundImage = Properties.Resources.link; }
                 }
+            }
+        }
         private void ToolStripButton8_Click(object sender, EventArgs e)  // coil button
+        {
+            if (buton_checked)
+            {
+                NewButton Coil_btn = all_list[Convert.ToInt32(secili.Network.Split('_')[1])][secili.Network.Length - 1];
+               
+                if (Coil_btn == secili)
                 {
-                    if (buton_checked )
-                    {
-                        var Data = (ButtonInfo)secili.Tag;
-                        Button coil_btn = all_list[Convert.ToInt32(Data.Network.Split('_')[1])][Data.Network.Length - 1];
-                        if (coil_btn == secili)
+                    using (coilMenu menuu = new coilMenu())
+                        if (menuu.ShowDialog() == DialogResult.OK)
                         {
-                            using (coilMenu menuu = new coilMenu())
-                                if (menuu.ShowDialog() == DialogResult.OK)
-                                {
-                                    secili.AccessibleName = menuu.Type + Convert.ToString(menuu.Pin);
-                                    addtoUsed(secili.AccessibleName);
-                                    secili.BackgroundImage = toolStripButton8.BackgroundImage;
-                                    secili.AccessibleDescription = "4";
-                                }
+                            secili.AccessibleName = menuu.Type + Convert.ToString(menuu.Pin);
+                            addtoUsed(secili.AccessibleName);
+                            secili.BackgroundImage = toolStripButton8.BackgroundImage;
+                            secili.AccessibleDescription = "4";
                         }
-                    }
                 }
+            }
+        }
         private void ToolStripButton9_Click(object sender, EventArgs e) // MOV button
+        {
+            if (buton_checked)
+            {
+                secili.BackgroundImage = Properties.Resources.clock_n;
+                deletefromUsed(secili.AccessibleName);
+                using (MovMenu Mov = new MovMenu())
                 {
-                    if (buton_checked)
+                    if (Mov.ShowDialog() == DialogResult.OK)
                     {
-                        secili.BackgroundImage = Properties.Resources.clock_n;
-                        deletefromUsed(secili.AccessibleName);
-                        using (MovMenu Mov = new MovMenu())
-                        {
-                            if (Mov.ShowDialog() == DialogResult.OK)
-                            {
-                                secili.AccessibleName = Mov.Type_From + Mov.Val_From + "=" + Mov.Type_To + Mov.Val_To;
-                                addtoUsed(Mov.Type_To + Mov.Val_To);
-                                secili.AccessibleDescription = "5";
-                                secili.Text = "MOV," + Mov.Type_From + Mov.Val_From + "," + Mov.Type_To + Mov.Val_To;
-                            }
-                            else { secili.BackgroundImage = Properties.Resources.link; }
-                        }
+                        secili.AccessibleName = Mov.Type_From + Mov.Val_From + "=" + Mov.Type_To + Mov.Val_To;
+                        addtoUsed(Mov.Type_To + Mov.Val_To);
+                        secili.AccessibleDescription = "5";
+                        secili.Text = "MOV," + Mov.Type_From + Mov.Val_From + "," + Mov.Type_To + Mov.Val_To;
                     }
+                    else { secili.BackgroundImage = Properties.Resources.link; }
                 }
+            }
+        }
         private void ToolStripButton10_Click(object sender, EventArgs e) // CNTR button
         {
             if (buton_checked)
@@ -246,10 +253,10 @@ namespace WindowsFormsApp1
                     {
                         secili.AccessibleName = "CNTR" + counter.Counter;
                         addtoUsed(secili.AccessibleName);
-                        if(counter.Type == "CounterUp")
+                        if (counter.Type == "CounterUp")
                         {
                             secili.AccessibleDescription = "6";
-                            if(counter.Preset_Def == "K") { secili.Text = "CNTR" + counter.Counter + "_UP=" + counter.Preset; }
+                            if (counter.Preset_Def == "K") { secili.Text = "CNTR" + counter.Counter + "_UP=" + counter.Preset; }
                             else if (counter.Preset_Def == "D") { secili.Text = "CNTR" + counter.Counter + "_UP=" + counter.Preset_Def + counter.Preset; }
                         }
                         else if (counter.Type == "CounterDown")
@@ -268,9 +275,8 @@ namespace WindowsFormsApp1
             if (buton_checked)
             {
                 deletefromUsed(secili.AccessibleName);
-                var Data = (ButtonInfo)secili.Tag;
-                Button coil_btn = all_list[Convert.ToInt32(Data.Network.Split('_')[1])][Data.Network.Length - 1];
-                if (coil_btn == secili)
+                NewButton Coil_btn = all_list[Convert.ToInt32(secili.Network.Split('_')[1])][secili.Network.Length - 1];
+                if (Coil_btn == secili)
                 {
                     using (SetMenu set = new SetMenu())
                         if (set.ShowDialog() == DialogResult.OK)
@@ -291,9 +297,8 @@ namespace WindowsFormsApp1
             if (buton_checked)
             {
                 deletefromUsed(secili.AccessibleName);
-                var Data = (ButtonInfo)secili.Tag;
-                Button coil_btn = all_list[Convert.ToInt32(Data.Network.Split('_')[1])][Data.Network.Length - 1];
-                if (coil_btn == secili)
+                NewButton Coil_btn = all_list[Convert.ToInt32(secili.Network.Split('_')[1])][secili.Network.Length - 1];
+                if (Coil_btn == secili)
                 {
                     using (ResetMenu reset = new ResetMenu())
                         if (reset.ShowDialog() == DialogResult.OK)
@@ -329,20 +334,18 @@ namespace WindowsFormsApp1
             {
                 int lastKey = all_list.Keys.Last();
                 DeleteNetwork(all_list[lastKey][0]);
-                foreach (Button x in all_list[1])
+                foreach (NewButton x in all_list[1])
                 {
                     if (x.Name != "button1")
                     {
-                        var Data_1 = (ButtonInfo)x.Tag;
-                        if (Data_1.Has_prl)
+                        if (x.HasPrl)
                         {
-                            string Button_Name = Data_1.prl_to.Name;
+                            string Button_Name = x.PrlTo.Name;
                             Button_Name = Button_Name.Substring(0, 6) + Convert.ToString((Convert.ToInt32(Button_Name.Substring(6)) - 1));
-                            Control prl_bt = panel1.Controls[Button_Name] as Button;
-                            DeleteParallel(prl_bt as Button);
-                            Data_1.Has_prl = false;
-                            Data_1.prl_to = null;
-                            x.Tag = Data_1;
+                            Control prl_bt = panel1.Controls[Button_Name] as NewButton;
+                            DeleteParallel(prl_bt as NewButton);
+                            x.HasPrl = false;
+                            x.PrlTo = null;                            
                         }
                         x.BackgroundImage = toolStripButton3.BackgroundImage;
                         x.AccessibleDescription = "10";
@@ -365,7 +368,7 @@ namespace WindowsFormsApp1
 
         private void Checker(object sender)
         {
-            Button btn = sender as Button;
+            NewButton btn = sender as NewButton;
             if (btn.BackColor == Color.White)
             {
                 secili = btn;
@@ -377,8 +380,8 @@ namespace WindowsFormsApp1
                 textBox2.Text = buton;
                 buton_checked = true;
                 previous = secili;
-                var foo = (ButtonInfo)secili.Tag;
-                textBox3.Text = secili.AccessibleDescription;
+                //textBox3.Text = secili.AccessibleDescription;
+                textBox3.Text = Convert.ToString(secili.HasPrl);
             }
             else if (buton_checked == true & btn.BackColor == Color.Transparent)
             {
@@ -393,13 +396,13 @@ namespace WindowsFormsApp1
 
         private void Button2_MouseEnter(object sender, EventArgs e) 
         {
-            Button name = sender as Button;
+            NewButton name = sender as NewButton;
             name.BringToFront();
         }
 
         private void Button2_MouseLeave(object sender, EventArgs e) 
         {
-            Button name = sender as Button;
+            NewButton name = sender as NewButton;
             if (name.AccessibleName != "down")
             { name.SendToBack(); }
         }
@@ -438,7 +441,7 @@ namespace WindowsFormsApp1
 
         private void Buton_yarat(int pos_x, int pos_y, Image img, int size_x, int size_y, bool down)
         {
-            Button name = new Button();
+            NewButton name = new NewButton();
             panel1.Controls.Add(name);
             name.Location = new Point(pos_x, pos_y);
             name.BackgroundImage = img;
@@ -459,7 +462,7 @@ namespace WindowsFormsApp1
             name.MaximumSize = new Size(size_x * 2, size_y * 2);
             if (down) { name.AccessibleName = "down"; }
             name.BringToFront();
-            name.Tag = new ButtonInfo() { Network = "Network_" + network_count.ToString() };
+            name.Network = "Network_" + network_count;
             name.Name = "button" + x.ToString();
             yaratilan = name;
 
@@ -478,28 +481,22 @@ namespace WindowsFormsApp1
 
         }
 
-        private void DeleteParallel(Button foo)
+        private void DeleteParallel(NewButton foo)
         {
             if (foo.AccessibleName == "down" && (foo.AccessibleDescription =="99" || foo.AccessibleDescription =="98"))
             {
-                Control foo1;
-                Control foo2;
-                Control foo3;
-                Control fooToFix;
+                NewButton foo1;
+                NewButton foo2;
+                NewButton foo3;
+                NewButton fooToFix;
                 int next;
                 string foo_name;
                 if (foo.AccessibleDescription == "99") // if clicked on down
                 {
-                    foo1 = this.Controls.Find(foo.Name, true).First() as Button; // down button foo1
 
-                    next = Convert.ToInt32(foo1.Name.Substring(6));
-                    next += 1;
-                    foo_name = "button" + Convert.ToString(next);
-                    foo2 = this.Controls.Find(foo_name, true).First() as Button;  // link button foo2
-
-                    next += 1;
-                    foo_name = "button" + Convert.ToString(next);
-                    foo3 = this.Controls.Find(foo_name, true).First() as Button;  //up button foo3
+                    foo1 = foo.PrlTo.PrlTo.Parallels[0];
+                    foo2 = foo.PrlTo.PrlTo.Parallels[1];
+                    foo3 = foo.PrlTo.PrlTo;
 
                     foo1.Dispose();
                     this.Controls.Remove(foo1);
@@ -510,16 +507,9 @@ namespace WindowsFormsApp1
                 }
                 else if (foo.AccessibleDescription == "98") // if clicked on up
                 {
-                    foo1 = this.Controls.Find(foo.Name, true).First() as Button;  // up button foo1
-
-                    next = Convert.ToInt32(foo1.Name.Substring(6));
-                    next -= 1;
-                    foo_name = "button" + Convert.ToString(next);
-                    foo2 = this.Controls.Find(foo_name, true).First() as Button;  // link button foo2
-
-                    next -= 1;
-                    foo_name = "button" + Convert.ToString(next);
-                    foo3 = this.Controls.Find(foo_name, true).First() as Button;  //down button foo3
+                    foo1 = foo.PrlTo.PrlTo.Parallels[0];
+                    foo2 = foo.PrlTo.PrlTo.Parallels[1];
+                    foo3 = foo.PrlTo.PrlTo;
 
                     foo1.Dispose();
                     this.Controls.Remove(foo1);
@@ -529,34 +519,26 @@ namespace WindowsFormsApp1
                     this.Controls.Remove(foo3);
                 }
                 
-                var which = (ButtonInfo)secili.Tag;
-                fooToFix = which.prl_to;
+                fooToFix = secili.PrlTo;
                 if (fooToFix != null)
                 {
-                    var Data = (ButtonInfo)fooToFix.Tag;
-                    Data.Has_prl = false;
-                    Data.prl_to = null;
-                    fooToFix.Tag = Data;
+                    fooToFix.HasPrl = false;
+                    fooToFix.PrlTo = null;
                 }
             }
         }
 
-        private void DeleteNetwork(Button foo)
+        private void DeleteNetwork(NewButton foo)
         {
             Debug.WriteLine(all_list.Count);
             bool checking;
-            var FirstData = (ButtonInfo)foo.Tag;
-            int newKey = Convert.ToInt32(FirstData.Network.Split('_')[1]);
-            List<Button> Net_Buttons = all_list[newKey];
-            foreach (Button x in Net_Buttons)
+            int newKey = Convert.ToInt32(foo.Network.Split('_')[1]);
+            List<NewButton> Net_Buttons = all_list[newKey];
+            foreach (NewButton x in Net_Buttons)
             {
-                var Data_1 = (ButtonInfo)x.Tag;
-                if (Data_1.Has_prl)
+                if (x.HasPrl)
                 {
-                    string Button_Name = Data_1.prl_to.Name;                   
-                    Button_Name = Button_Name.Substring(0, 6) + Convert.ToString((Convert.ToInt32(Button_Name.Substring(6)) - 1));
-                    Control prl_bt = this.Controls.Find(Button_Name, true).First() as Button;
-                    DeleteParallel(prl_bt as Button);
+                    DeleteParallel(x.PrlTo.Parallels[0]);
                 }
             }
             foreach (Control x in Net_Buttons)
@@ -575,13 +557,19 @@ namespace WindowsFormsApp1
             {
                 for (int x = newKey + 1; x<= all_list.Keys.Last(); x++)
                 {
-                    List<Button> disposable = all_list[x];
-                    foreach(Button dispBtn in disposable)
+                    List<NewButton> disposable = all_list[x];
+                    foreach(NewButton dispBtn in disposable)
                     {
-                        var disData = (ButtonInfo)dispBtn.Tag;
-                        disData.Network = "Network_" + Convert.ToString(x - 1);
-                        dispBtn.Tag = disData;
+                        dispBtn.Network = "Network_" + Convert.ToString(x - 1);
                         dispBtn.Location = new Point(dispBtn.Location.X, dispBtn.Location.Y - 150);
+                        if (dispBtn.HasPrl) {
+                            dispBtn.PrlTo.Location = new Point(dispBtn.PrlTo.Location.X, dispBtn.PrlTo.Location.Y - 150);
+
+                            dispBtn.PrlTo.Parallels[0].Location = new Point(dispBtn.PrlTo.Parallels[0].Location.X, dispBtn.PrlTo.Parallels[0].Location.Y - 150);
+
+                            dispBtn.PrlTo.Parallels[1].Location = new Point(dispBtn.PrlTo.Parallels[1].Location.X, dispBtn.PrlTo.Parallels[1].Location.Y - 150);
+                        }
+                        
                     }
                     all_list.Remove(x);
                     all_list.Add(x - 1, disposable);
@@ -605,7 +593,7 @@ namespace WindowsFormsApp1
             foreach(int x in all_list.Keys)
             {
                 Debug.WriteLine("");
-                foreach(Button btn in all_list[x])
+                foreach(NewButton btn in all_list[x])
                 {
                     Debug.Write(btn.Name);
                 }
@@ -618,35 +606,31 @@ namespace WindowsFormsApp1
             if (path == "x") { return; }
             reader = new StreamReader(path);
 
-            int number = Convert.ToInt32(yaratilan.Name.Substring(6)) + 2;
             int foo = Convert.ToInt32(reader.ReadLine());
             reader.ReadLine();
             for (int i = 1; i <= foo; i++)
             {
-                foreach (Button btn in all_list[i])
+                foreach (NewButton btn in all_list[i])
                 {
-                    ButtonInfo Data = (ButtonInfo)btn.Tag;
                     btn.AccessibleDescription = reader.ReadLine();
                     btn.AccessibleName = reader.ReadLine();
                     btn.Text = reader.ReadLine();
-                    string bar = reader.ReadLine();
+                    string PrlCheck = reader.ReadLine();
 
-                    if (bar == "True")
+                    if (PrlCheck == "True")
                     {
-                        string new_name = "button" + number;
                         secili = btn;
                         buton_checked = true;
                         ToolStripButton6_Click(sender, e);
-                        
-                        Button prl = this.Controls.Find(new_name, true).First() as Button;
+
+                        NewButton prl = yaratilan.PrlTo.PrlTo;
                         prl.AccessibleDescription = reader.ReadLine();
                         prl.AccessibleName = reader.ReadLine();
                         prl.Text = reader.ReadLine();
                         
                         ImageLoad(prl);
-                        number += 3;
                     }
-                    else if (bar == "False") { Data.Has_prl = false; btn.Tag = Data; }
+                    else if (PrlCheck == "False") { btn.HasPrl = false; }
                     
                     ImageLoad(btn);
                 }
@@ -656,7 +640,7 @@ namespace WindowsFormsApp1
 
         }
 
-        private void ImageLoad(Button foo)
+        private void ImageLoad(NewButton foo)
         {
             switch (foo.AccessibleDescription)
             {
@@ -706,20 +690,18 @@ namespace WindowsFormsApp1
                     int lastKey = all_list.Keys.Last();
                     DeleteNetwork(all_list[lastKey][0]);
                 }
-                foreach (Button x in all_list[1])
+                foreach (NewButton x in all_list[1])
                 {
                     if (x.Name != "button1")
                     {
-                        var Data_1 = (ButtonInfo)x.Tag;
-                        if (Data_1.Has_prl)
+                        if (x.HasPrl)
                         {
-                            string Button_Name = Data_1.prl_to.Name;
+                            string Button_Name = x.PrlTo.Name;
                             Button_Name = Button_Name.Substring(0, 6) + Convert.ToString((Convert.ToInt32(Button_Name.Substring(6)) - 1));
-                            Control prl_bt = panel1.Controls[Button_Name] as Button;
-                            DeleteParallel(prl_bt as Button);
-                            Data_1.Has_prl = false;
-                            Data_1.prl_to = null;
-                            x.Tag = Data_1;
+                            Control prl_bt = panel1.Controls[Button_Name] as NewButton;
+                            DeleteParallel(prl_bt as NewButton);
+                            x.HasPrl = false;
+                            x.PrlTo = null;
                         }
                         x.BackgroundImage = toolStripButton3.BackgroundImage;
                         x.AccessibleDescription = "10";

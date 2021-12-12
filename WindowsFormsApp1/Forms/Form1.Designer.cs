@@ -36,15 +36,6 @@
             this.textBox2 = new System.Windows.Forms.TextBox();
             this.textBox3 = new System.Windows.Forms.TextBox();
             this.panel1 = new System.Windows.Forms.Panel();
-            this.button7 = new System.Windows.Forms.Button();
-            this.button8 = new System.Windows.Forms.Button();
-            this.button9 = new System.Windows.Forms.Button();
-            this.button4 = new System.Windows.Forms.Button();
-            this.button5 = new System.Windows.Forms.Button();
-            this.button3 = new System.Windows.Forms.Button();
-            this.button2 = new System.Windows.Forms.Button();
-            this.button1 = new System.Windows.Forms.Button();
-            this.button6 = new System.Windows.Forms.Button();
             this.Compile = new System.Windows.Forms.Button();
             this.toolStrip1 = new System.Windows.Forms.ToolStrip();
             this.toolStripButton4 = new System.Windows.Forms.ToolStripButton();
@@ -89,6 +80,15 @@
             this.toolStripSeparator7 = new System.Windows.Forms.ToolStripSeparator();
             this.aboutToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.bindingSource1 = new System.Windows.Forms.BindingSource(this.components);
+            this.button2 = new WindowsFormsApp1.NewButton();
+            this.button9 = new WindowsFormsApp1.NewButton();
+            this.button8 = new WindowsFormsApp1.NewButton();
+            this.button7 = new WindowsFormsApp1.NewButton();
+            this.button6 = new WindowsFormsApp1.NewButton();
+            this.button5 = new WindowsFormsApp1.NewButton();
+            this.button4 = new WindowsFormsApp1.NewButton();
+            this.button3 = new WindowsFormsApp1.NewButton();
+            this.button1 = new WindowsFormsApp1.NewButton();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
             this.splitContainer1.Panel1.SuspendLayout();
             this.splitContainer1.Panel2.SuspendLayout();
@@ -153,146 +153,17 @@
             // 
             resources.ApplyResources(this.panel1, "panel1");
             this.panel1.BackColor = System.Drawing.Color.Transparent;
-            this.panel1.Controls.Add(this.button7);
-            this.panel1.Controls.Add(this.button8);
-            this.panel1.Controls.Add(this.button9);
-            this.panel1.Controls.Add(this.button4);
-            this.panel1.Controls.Add(this.button5);
-            this.panel1.Controls.Add(this.button3);
             this.panel1.Controls.Add(this.button2);
-            this.panel1.Controls.Add(this.button1);
+            this.panel1.Controls.Add(this.button9);
+            this.panel1.Controls.Add(this.button8);
+            this.panel1.Controls.Add(this.button7);
             this.panel1.Controls.Add(this.button6);
+            this.panel1.Controls.Add(this.button5);
+            this.panel1.Controls.Add(this.button4);
+            this.panel1.Controls.Add(this.button3);
+            this.panel1.Controls.Add(this.button1);
             this.panel1.ForeColor = System.Drawing.Color.Transparent;
             this.panel1.Name = "panel1";
-            // 
-            // button7
-            // 
-            resources.ApplyResources(this.button7, "button7");
-            this.button7.BackColor = System.Drawing.Color.White;
-            this.button7.FlatAppearance.BorderColor = System.Drawing.Color.White;
-            this.button7.FlatAppearance.BorderSize = 0;
-            this.button7.ForeColor = System.Drawing.Color.Black;
-            this.button7.Name = "button7";
-            this.button7.Tag = "new ButtonInfo() { Network = \"Network_1\"};";
-            this.button7.UseVisualStyleBackColor = false;
-            this.button7.Click += new System.EventHandler(this.Button2_Click);
-            this.button7.MouseEnter += new System.EventHandler(this.Button2_MouseEnter);
-            this.button7.MouseLeave += new System.EventHandler(this.Button2_MouseLeave);
-            // 
-            // button8
-            // 
-            resources.ApplyResources(this.button8, "button8");
-            this.button8.BackColor = System.Drawing.Color.White;
-            this.button8.FlatAppearance.BorderColor = System.Drawing.Color.White;
-            this.button8.FlatAppearance.BorderSize = 0;
-            this.button8.ForeColor = System.Drawing.Color.Black;
-            this.button8.Name = "button8";
-            this.button8.Tag = "new ButtonInfo() { Network = \"Network_1\"};";
-            this.button8.UseVisualStyleBackColor = false;
-            this.button8.Click += new System.EventHandler(this.Button2_Click);
-            this.button8.MouseEnter += new System.EventHandler(this.Button2_MouseEnter);
-            this.button8.MouseLeave += new System.EventHandler(this.Button2_MouseLeave);
-            // 
-            // button9
-            // 
-            resources.ApplyResources(this.button9, "button9");
-            this.button9.BackColor = System.Drawing.Color.White;
-            this.button9.BackgroundImage = global::WindowsFormsApp1.Properties.Resources.link;
-            this.button9.FlatAppearance.BorderColor = System.Drawing.Color.White;
-            this.button9.FlatAppearance.BorderSize = 0;
-            this.button9.ForeColor = System.Drawing.Color.Black;
-            this.button9.Name = "button9";
-            this.button9.Tag = "new ButtonInfo() { Network = \"Network_1\"};";
-            this.button9.UseVisualStyleBackColor = false;
-            this.button9.Click += new System.EventHandler(this.Button2_Click);
-            this.button9.MouseEnter += new System.EventHandler(this.Button2_MouseEnter);
-            this.button9.MouseLeave += new System.EventHandler(this.Button2_MouseLeave);
-            // 
-            // button4
-            // 
-            resources.ApplyResources(this.button4, "button4");
-            this.button4.BackColor = System.Drawing.Color.White;
-            this.button4.FlatAppearance.BorderColor = System.Drawing.Color.White;
-            this.button4.FlatAppearance.BorderSize = 0;
-            this.button4.ForeColor = System.Drawing.Color.Black;
-            this.button4.Name = "button4";
-            this.button4.Tag = "ButtonInfo.Network = 1";
-            this.button4.UseVisualStyleBackColor = false;
-            this.button4.Click += new System.EventHandler(this.Button2_Click);
-            this.button4.MouseEnter += new System.EventHandler(this.Button2_MouseEnter);
-            this.button4.MouseLeave += new System.EventHandler(this.Button2_MouseLeave);
-            // 
-            // button5
-            // 
-            resources.ApplyResources(this.button5, "button5");
-            this.button5.BackColor = System.Drawing.Color.White;
-            this.button5.FlatAppearance.BorderColor = System.Drawing.Color.White;
-            this.button5.FlatAppearance.BorderSize = 0;
-            this.button5.ForeColor = System.Drawing.Color.Black;
-            this.button5.Name = "button5";
-            this.button5.Tag = "new ButtonInfo() { Network = \"Network_1\"};";
-            this.button5.UseVisualStyleBackColor = false;
-            this.button5.Click += new System.EventHandler(this.Button2_Click);
-            this.button5.MouseEnter += new System.EventHandler(this.Button2_MouseEnter);
-            this.button5.MouseLeave += new System.EventHandler(this.Button2_MouseLeave);
-            // 
-            // button3
-            // 
-            resources.ApplyResources(this.button3, "button3");
-            this.button3.BackColor = System.Drawing.Color.White;
-            this.button3.BackgroundImage = global::WindowsFormsApp1.Properties.Resources.link;
-            this.button3.FlatAppearance.BorderColor = System.Drawing.Color.White;
-            this.button3.FlatAppearance.BorderSize = 0;
-            this.button3.ForeColor = System.Drawing.Color.Black;
-            this.button3.Name = "button3";
-            this.button3.Tag = "new ButtonInfo() { Network = \"Network_1\"};";
-            this.button3.UseVisualStyleBackColor = false;
-            this.button3.Click += new System.EventHandler(this.Button2_Click);
-            this.button3.MouseEnter += new System.EventHandler(this.Button2_MouseEnter);
-            this.button3.MouseLeave += new System.EventHandler(this.Button2_MouseLeave);
-            // 
-            // button2
-            // 
-            resources.ApplyResources(this.button2, "button2");
-            this.button2.BackColor = System.Drawing.Color.White;
-            this.button2.BackgroundImage = global::WindowsFormsApp1.Properties.Resources.link;
-            this.button2.FlatAppearance.BorderColor = System.Drawing.Color.White;
-            this.button2.FlatAppearance.BorderSize = 0;
-            this.button2.ForeColor = System.Drawing.Color.Black;
-            this.button2.Name = "button2";
-            this.button2.Tag = "new ButtonInfo() { Network = \"Network_1\"};";
-            this.button2.UseVisualStyleBackColor = false;
-            this.button2.Click += new System.EventHandler(this.Button2_Click);
-            this.button2.MouseEnter += new System.EventHandler(this.Button2_MouseEnter);
-            this.button2.MouseLeave += new System.EventHandler(this.Button2_MouseLeave);
-            // 
-            // button1
-            // 
-            resources.ApplyResources(this.button1, "button1");
-            this.button1.BackColor = System.Drawing.Color.White;
-            this.button1.FlatAppearance.BorderColor = System.Drawing.Color.White;
-            this.button1.FlatAppearance.BorderSize = 0;
-            this.button1.ForeColor = System.Drawing.Color.Black;
-            this.button1.Name = "button1";
-            this.button1.Tag = "new ButtonInfo() { Network = \"Network_1\"};";
-            this.button1.UseVisualStyleBackColor = false;
-            this.button1.MouseEnter += new System.EventHandler(this.Button2_MouseEnter);
-            this.button1.MouseLeave += new System.EventHandler(this.Button2_MouseLeave);
-            // 
-            // button6
-            // 
-            resources.ApplyResources(this.button6, "button6");
-            this.button6.BackColor = System.Drawing.Color.White;
-            this.button6.BackgroundImage = global::WindowsFormsApp1.Properties.Resources.link;
-            this.button6.FlatAppearance.BorderColor = System.Drawing.Color.White;
-            this.button6.FlatAppearance.BorderSize = 0;
-            this.button6.ForeColor = System.Drawing.Color.Black;
-            this.button6.Name = "button6";
-            this.button6.Tag = "new ButtonInfo() { Network = \"Network_1\"};";
-            this.button6.UseVisualStyleBackColor = false;
-            this.button6.Click += new System.EventHandler(this.Button2_Click);
-            this.button6.MouseEnter += new System.EventHandler(this.Button2_MouseEnter);
-            this.button6.MouseLeave += new System.EventHandler(this.Button2_MouseLeave);
             // 
             // Compile
             // 
@@ -612,6 +483,159 @@
             this.aboutToolStripMenuItem.Name = "aboutToolStripMenuItem";
             resources.ApplyResources(this.aboutToolStripMenuItem, "aboutToolStripMenuItem");
             // 
+            // button2
+            // 
+            resources.ApplyResources(this.button2, "button2");
+            this.button2.BackColor = System.Drawing.Color.White;
+            this.button2.BackgroundImage = global::WindowsFormsApp1.Properties.Resources.link;
+            this.button2.FlatAppearance.BorderColor = System.Drawing.Color.White;
+            this.button2.FlatAppearance.BorderSize = 0;
+            this.button2.ForeColor = System.Drawing.Color.Black;
+            this.button2.HasPrl = false;
+            this.button2.Name = "button2";
+            this.button2.Network = null;
+            this.button2.PrlTo = null;
+            this.button2.UseVisualStyleBackColor = false;
+            this.button2.Click += new System.EventHandler(this.Button2_Click);
+            this.button2.MouseEnter += new System.EventHandler(this.Button2_MouseEnter);
+            this.button2.MouseLeave += new System.EventHandler(this.Button2_MouseLeave);
+            // 
+            // button9
+            // 
+            resources.ApplyResources(this.button9, "button9");
+            this.button9.BackColor = System.Drawing.Color.White;
+            this.button9.BackgroundImage = global::WindowsFormsApp1.Properties.Resources.link;
+            this.button9.FlatAppearance.BorderColor = System.Drawing.Color.White;
+            this.button9.FlatAppearance.BorderSize = 0;
+            this.button9.ForeColor = System.Drawing.Color.Black;
+            this.button9.HasPrl = false;
+            this.button9.Name = "button9";
+            this.button9.Network = null;
+            this.button9.PrlTo = null;
+            this.button9.UseVisualStyleBackColor = false;
+            this.button9.Click += new System.EventHandler(this.Button2_Click);
+            this.button9.MouseEnter += new System.EventHandler(this.Button2_MouseEnter);
+            this.button9.MouseLeave += new System.EventHandler(this.Button2_MouseLeave);
+            // 
+            // button8
+            // 
+            resources.ApplyResources(this.button8, "button8");
+            this.button8.BackColor = System.Drawing.Color.White;
+            this.button8.BackgroundImage = global::WindowsFormsApp1.Properties.Resources.link;
+            this.button8.FlatAppearance.BorderColor = System.Drawing.Color.White;
+            this.button8.FlatAppearance.BorderSize = 0;
+            this.button8.ForeColor = System.Drawing.Color.Black;
+            this.button8.HasPrl = false;
+            this.button8.Name = "button8";
+            this.button8.Network = null;
+            this.button8.PrlTo = null;
+            this.button8.UseVisualStyleBackColor = false;
+            this.button8.Click += new System.EventHandler(this.Button2_Click);
+            this.button8.MouseEnter += new System.EventHandler(this.Button2_MouseEnter);
+            this.button8.MouseLeave += new System.EventHandler(this.Button2_MouseLeave);
+            // 
+            // button7
+            // 
+            resources.ApplyResources(this.button7, "button7");
+            this.button7.BackColor = System.Drawing.Color.White;
+            this.button7.BackgroundImage = global::WindowsFormsApp1.Properties.Resources.link;
+            this.button7.FlatAppearance.BorderColor = System.Drawing.Color.White;
+            this.button7.FlatAppearance.BorderSize = 0;
+            this.button7.ForeColor = System.Drawing.Color.Black;
+            this.button7.HasPrl = false;
+            this.button7.Name = "button7";
+            this.button7.Network = null;
+            this.button7.PrlTo = null;
+            this.button7.UseVisualStyleBackColor = false;
+            this.button7.Click += new System.EventHandler(this.Button2_Click);
+            this.button7.MouseEnter += new System.EventHandler(this.Button2_MouseEnter);
+            this.button7.MouseLeave += new System.EventHandler(this.Button2_MouseLeave);
+            // 
+            // button6
+            // 
+            resources.ApplyResources(this.button6, "button6");
+            this.button6.BackColor = System.Drawing.Color.White;
+            this.button6.BackgroundImage = global::WindowsFormsApp1.Properties.Resources.link;
+            this.button6.FlatAppearance.BorderColor = System.Drawing.Color.White;
+            this.button6.FlatAppearance.BorderSize = 0;
+            this.button6.ForeColor = System.Drawing.Color.Black;
+            this.button6.HasPrl = false;
+            this.button6.Name = "button6";
+            this.button6.Network = null;
+            this.button6.PrlTo = null;
+            this.button6.UseVisualStyleBackColor = false;
+            this.button6.Click += new System.EventHandler(this.Button2_Click);
+            this.button6.MouseEnter += new System.EventHandler(this.Button2_MouseEnter);
+            this.button6.MouseLeave += new System.EventHandler(this.Button2_MouseLeave);
+            // 
+            // button5
+            // 
+            resources.ApplyResources(this.button5, "button5");
+            this.button5.BackColor = System.Drawing.Color.White;
+            this.button5.BackgroundImage = global::WindowsFormsApp1.Properties.Resources.link;
+            this.button5.FlatAppearance.BorderColor = System.Drawing.Color.White;
+            this.button5.FlatAppearance.BorderSize = 0;
+            this.button5.ForeColor = System.Drawing.Color.Black;
+            this.button5.HasPrl = false;
+            this.button5.Name = "button5";
+            this.button5.Network = null;
+            this.button5.PrlTo = null;
+            this.button5.UseVisualStyleBackColor = false;
+            this.button5.Click += new System.EventHandler(this.Button2_Click);
+            this.button5.MouseEnter += new System.EventHandler(this.Button2_MouseEnter);
+            this.button5.MouseLeave += new System.EventHandler(this.Button2_MouseLeave);
+            // 
+            // button4
+            // 
+            resources.ApplyResources(this.button4, "button4");
+            this.button4.BackColor = System.Drawing.Color.White;
+            this.button4.BackgroundImage = global::WindowsFormsApp1.Properties.Resources.link;
+            this.button4.FlatAppearance.BorderColor = System.Drawing.Color.White;
+            this.button4.FlatAppearance.BorderSize = 0;
+            this.button4.ForeColor = System.Drawing.Color.Black;
+            this.button4.HasPrl = false;
+            this.button4.Name = "button4";
+            this.button4.Network = null;
+            this.button4.PrlTo = null;
+            this.button4.UseVisualStyleBackColor = false;
+            this.button4.Click += new System.EventHandler(this.Button2_Click);
+            this.button4.MouseEnter += new System.EventHandler(this.Button2_MouseEnter);
+            this.button4.MouseLeave += new System.EventHandler(this.Button2_MouseLeave);
+            // 
+            // button3
+            // 
+            resources.ApplyResources(this.button3, "button3");
+            this.button3.BackColor = System.Drawing.Color.White;
+            this.button3.BackgroundImage = global::WindowsFormsApp1.Properties.Resources.link;
+            this.button3.FlatAppearance.BorderColor = System.Drawing.Color.White;
+            this.button3.FlatAppearance.BorderSize = 0;
+            this.button3.ForeColor = System.Drawing.Color.Black;
+            this.button3.HasPrl = false;
+            this.button3.Name = "button3";
+            this.button3.Network = null;
+            this.button3.PrlTo = null;
+            this.button3.UseVisualStyleBackColor = false;
+            this.button3.Click += new System.EventHandler(this.Button2_Click);
+            this.button3.MouseEnter += new System.EventHandler(this.Button2_MouseEnter);
+            this.button3.MouseLeave += new System.EventHandler(this.Button2_MouseLeave);
+            // 
+            // button1
+            // 
+            resources.ApplyResources(this.button1, "button1");
+            this.button1.BackColor = System.Drawing.Color.White;
+            this.button1.BackgroundImage = global::WindowsFormsApp1.Properties.Resources.net;
+            this.button1.FlatAppearance.BorderColor = System.Drawing.Color.White;
+            this.button1.FlatAppearance.BorderSize = 0;
+            this.button1.ForeColor = System.Drawing.Color.Black;
+            this.button1.HasPrl = false;
+            this.button1.Name = "button1";
+            this.button1.Network = null;
+            this.button1.PrlTo = null;
+            this.button1.UseVisualStyleBackColor = false;
+            this.button1.Click += new System.EventHandler(this.Button2_Click);
+            this.button1.MouseEnter += new System.EventHandler(this.Button2_MouseEnter);
+            this.button1.MouseLeave += new System.EventHandler(this.Button2_MouseLeave);
+            // 
             // Form1
             // 
             resources.ApplyResources(this, "$this");
@@ -682,15 +706,6 @@
         private System.Windows.Forms.ToolStripButton toolStripButton5;
         private System.Windows.Forms.ToolStripButton toolStripButton6;
         private System.Windows.Forms.Panel panel1;
-        private System.Windows.Forms.Button button6;
-        private System.Windows.Forms.Button button7;
-        private System.Windows.Forms.Button button8;
-        private System.Windows.Forms.Button button9;
-        private System.Windows.Forms.Button button4;
-        private System.Windows.Forms.Button button5;
-        private System.Windows.Forms.Button button3;
-        private System.Windows.Forms.Button button2;
-        private System.Windows.Forms.Button button1;
         private System.Windows.Forms.TextBox textBox2;
         private System.Windows.Forms.ToolStripButton toolStripButton7;
         private System.Windows.Forms.Button Compile;
@@ -702,6 +717,15 @@
         private System.Windows.Forms.TreeView treeView1;
         private System.Windows.Forms.SplitContainer splitContainer2;
         private System.Windows.Forms.TextBox textBox3;
+        private NewButton button1;
+        private NewButton button3;
+        private NewButton button2;
+        private NewButton button9;
+        private NewButton button8;
+        private NewButton button7;
+        private NewButton button6;
+        private NewButton button5;
+        private NewButton button4;
     }
 }
 
