@@ -12,7 +12,6 @@ namespace WindowsFormsApp1
         public string Network { get; set; }
         public bool HasPrl { get; set; }
         public NewButton PrlTo { get; set; }
-
         public NewButton[] Parallels { get; set; }
         
 

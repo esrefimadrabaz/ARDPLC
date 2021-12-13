@@ -44,7 +44,7 @@
             this.textBox1.BackColor = System.Drawing.SystemColors.Control;
             this.textBox1.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.textBox1.Cursor = System.Windows.Forms.Cursors.Default;
-            this.textBox1.Location = new System.Drawing.Point(73, 91);
+            this.textBox1.Location = new System.Drawing.Point(89, 59);
             this.textBox1.Name = "textBox1";
             this.textBox1.ReadOnly = true;
             this.textBox1.Size = new System.Drawing.Size(100, 13);
@@ -57,7 +57,7 @@
             this.textBox2.BackColor = System.Drawing.SystemColors.Control;
             this.textBox2.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.textBox2.Cursor = System.Windows.Forms.Cursors.Default;
-            this.textBox2.Location = new System.Drawing.Point(73, 169);
+            this.textBox2.Location = new System.Drawing.Point(89, 169);
             this.textBox2.Name = "textBox2";
             this.textBox2.ReadOnly = true;
             this.textBox2.Size = new System.Drawing.Size(100, 13);
@@ -72,9 +72,11 @@
             this.comboBox1.FormattingEnabled = true;
             this.comboBox1.Items.AddRange(new object[] {
             "K",
+            "F",
+            "L",
             "D",
             "CNTR"});
-            this.comboBox1.Location = new System.Drawing.Point(12, 122);
+            this.comboBox1.Location = new System.Drawing.Point(64, 78);
             this.comboBox1.Name = "comboBox1";
             this.comboBox1.Size = new System.Drawing.Size(135, 21);
             this.comboBox1.TabIndex = 9;
@@ -82,7 +84,8 @@
             // 
             // numericUpDown2
             // 
-            this.numericUpDown2.Location = new System.Drawing.Point(178, 123);
+            this.numericUpDown2.DecimalPlaces = 6;
+            this.numericUpDown2.Location = new System.Drawing.Point(64, 105);
             this.numericUpDown2.Maximum = new decimal(new int[] {
             2000000000,
             0,
@@ -94,10 +97,9 @@
             0,
             -2147483648});
             this.numericUpDown2.Name = "numericUpDown2";
-            this.numericUpDown2.Size = new System.Drawing.Size(75, 20);
+            this.numericUpDown2.Size = new System.Drawing.Size(135, 20);
             this.numericUpDown2.TabIndex = 10;
             this.numericUpDown2.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-            this.numericUpDown2.ThousandsSeparator = true;
             this.numericUpDown2.Value = new decimal(new int[] {
             1000,
             0,

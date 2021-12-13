@@ -18,7 +18,7 @@ namespace WindowsFormsApp1
         public static List<string> Pre_Used_Pins;
 
 
-        public static void Save()    //first line is network_count, then preusedpins, then for each btn = a.desc,a.name,loc.x,loc.y,has.prl,prl.to,network
+        public static void Save()    //first line is network_count, then preusedpins, then for each btn = a.desc,a.name, text, has.prl (if yes -> a.desc, a.name, text)
         {
             using (SaveFileDialog dialog = new SaveFileDialog())
             {
@@ -49,7 +49,7 @@ namespace WindowsFormsApp1
                         {
                             foreach (NewButton btn in All_List[i])
                             {
-                                
+
                                 writer.WriteLine(btn.AccessibleDescription);
                                 writer.WriteLine(btn.AccessibleName);
                                 writer.WriteLine(btn.Text);
@@ -67,9 +67,9 @@ namespace WindowsFormsApp1
                     }
                 }
             }
-
-
         }
+
+        
         public static void Pre_Load()
         {
             using (OpenFileDialog dialog = new OpenFileDialog())

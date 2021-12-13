@@ -283,7 +283,12 @@ namespace WindowsFormsApp1.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-
+        /*internal static System.Drawing.Bitmap reset {
+            get {
+                object obj = ResourceManager.GetObject("reset", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }*/
         
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
@@ -311,6 +316,16 @@ namespace WindowsFormsApp1.Properties {
         internal static System.Drawing.Bitmap set_reset {
             get {
                 object obj = ResourceManager.GetObject("set_reset", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap set_rest {
+            get {
+                object obj = ResourceManager.GetObject("set-rest", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }

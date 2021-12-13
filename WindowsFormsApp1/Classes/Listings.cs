@@ -12,7 +12,7 @@ namespace WindowsFormsApp1
 {
     /* Contact & Coil Codes 
      0 = NO     1 = NC      2 = CLOCK_ON       3 = CLOCK_OFF        4 = COIL    5 = MOV     6 = COUNTER_UP      7 = COUNTER_DOWN        8 = SET     9 = RESET    
-     10 = LINK       11 = NETWORK_START      99 = down       98 = up
+     10 = LINK       11 = NETWORK_START    12 = ARITHMETICS  99 = down       98 = up
     */
 
     class Listings
@@ -149,7 +149,8 @@ namespace WindowsFormsApp1
                         string[] vals = btn.AccessibleName.Split('=');
                         Streams.writer.WriteLine("");
                         Streams.writer.WriteLine("if(dugum) {prl = true;}");
-                        if (vals[0][0] == 'K') { Streams.Ard_MOV(vals[0].Substring(1), vals[1]); }
+                        if (vals[0][0] == 'K' || vals[0][0] == 'F') { Streams.Ard_MOV(vals[0].Substring(1), vals[1]); }
+                        else if (vals[0][0] == 'L') { Streams.Ard_MOV(vals[0].Substring(1) + "L", vals[1]);}
                         else { Streams.Ard_MOV(vals[0], vals[1]); }
                         Streams.writer.WriteLine("if (prl)  {dugum=true;}");
                         Sort(btn.PrlTo);
@@ -159,7 +160,7 @@ namespace WindowsFormsApp1
                     else
                     {
                         string[] vals = btn.AccessibleName.Split('=');
-                        if (vals[0][0] == 'K') { Streams.Ard_MOV(vals[0].Substring(1), vals[1]); }
+                        if (vals[0][0] == 'K' || vals[0][0] == 'F' || vals[0][0] == 'L') { Streams.Ard_MOV(vals[0].Substring(1), vals[1]); }
                         else { Streams.Ard_MOV(vals[0], vals[1]); }
                     }
                     break;
@@ -236,6 +237,38 @@ namespace WindowsFormsApp1
                 case "10": // Link
                     break;
                 case "11": // Network Start
+                    break;
+                case "12": // Arithmetic
+                    if (btn.HasPrl)
+                    {
+                        string[] dispVals = btn.AccessibleName.Split('=');
+                        string[] Vals = dispVals[0].Split('+','-','*','/');
+                        string op = null;
+                        if (dispVals[0].Contains('+')) {  op = "+"; }
+                        else if (dispVals[0].Contains('-')) {  op = "-"; }
+                        else if (dispVals[0].Contains('*')) {  op = "*"; }
+                        else if (dispVals[0].Contains('/')) {  op = "/"; }
+
+                        Streams.writer.WriteLine("");
+                        Streams.writer.WriteLine("if(dugum) {prl = true;}");
+                        Streams.Ard_Arithmetic(Vals[0].Substring(1), op, Vals[1].Substring(1), dispVals[1]);
+                        Streams.writer.WriteLine("if (prl)  {dugum=true;}");
+                        Sort(btn.PrlTo);
+                        Streams.writer.WriteLine("if (next) { dugum = true; }");
+                        Streams.writer.WriteLine("prl,next = false;");
+                    }
+                    else
+                    {
+                        string[] dispVals = btn.AccessibleName.Split('=');
+                        string[] Vals = dispVals[0].Split('+', '-', '*', '/');
+                        string op = null;
+                        if (dispVals[0].Contains('+')) {  op = "+"; }
+                        else if (dispVals[0].Contains('-')) {  op = "-"; }
+                        else if (dispVals[0].Contains('*')) {  op = "*"; }
+                        else if (dispVals[0].Contains('/')) {  op = "/"; }
+
+                        Streams.Ard_Arithmetic(Vals[0].Substring(1), op, Vals[1].Substring(1), dispVals[1]);
+                    }
                     break;
                 default:
                     Debug.WriteLine("Empty");

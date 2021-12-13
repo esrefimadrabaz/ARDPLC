@@ -14,9 +14,10 @@ namespace WindowsFormsApp1
         public static StreamWriter writer;
         public static void Ard_Init()
         {
+
             writer = new StreamWriter(path);
             writer.WriteLine("#include \"deneme.h\"");
-            writer.WriteLine("#include <wire.h>");
+            writer.WriteLine("#include <Wire.h>");
             writer.WriteLine("bool dugum = true;");
             writer.WriteLine("bool prl;");
             writer.WriteLine("bool next;");
@@ -38,7 +39,37 @@ namespace WindowsFormsApp1
                 }
                 else if (pins[0] == 'D')
                 {
-                    writer.WriteLine("int {0};", pins);
+                    switch (pins[1])
+                    {
+                        case 'F':
+                            writer.WriteLine("float D{0};", pins.Substring(2));
+                            break;
+                        case 'L':
+                            writer.WriteLine("long D{0};", pins.Substring(2));
+                            break;
+                        case 'D':
+                            switch (pins[2])
+                            {
+                                case 'F':
+                                    writer.WriteLine("float D{0};", pins.Substring(3));
+                                    break;
+                                case 'K':
+                                    writer.WriteLine("int D{0};", pins.Substring(3));
+                                    break;
+                                case 'L':
+                                    writer.WriteLine("long D{0};", pins.Substring(3));
+                                    break;
+                                default:
+                                    writer.WriteLine("int D{0};", pins.Substring(3));
+                                    break;
+                            }
+                            break;
+                        default:
+                            writer.WriteLine("int D{0};", pins.Substring(2));
+                            break;
+
+                    }
+                    
                 }
                 else if (pins.Substring(0,3) == "TON")
                 {
@@ -150,6 +181,10 @@ namespace WindowsFormsApp1
         public static void Ard_Reset_M(string pin)
         {
             writer.WriteLine("Reset_M({0});", pin);
+        }
+        public static void Ard_Arithmetic(string PreVal, string Operation, string PostVal, string Result)
+        {
+            writer.WriteLine("{3} = {0} {1} {2};", PreVal, Operation, PostVal, Result);
         }
         public static void Ard_NetStart()
         {

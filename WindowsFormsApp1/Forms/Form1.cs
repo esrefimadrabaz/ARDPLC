@@ -49,6 +49,7 @@ namespace WindowsFormsApp1
                 btn.Network = "Network_" + network_count;
                 all_list[network_count].Add(btn);
             }
+;
         }
 
 
@@ -233,7 +234,19 @@ namespace WindowsFormsApp1
                     if (Mov.ShowDialog() == DialogResult.OK)
                     {
                         secili.AccessibleName = Mov.Type_From + Mov.Val_From + "=" + Mov.Type_To + Mov.Val_To;
-                        addtoUsed(Mov.Type_To + Mov.Val_To);
+                        if(Mov.Type_From == Mov.Type_To) // if moving from Data to Data
+                        {
+                            foreach (string pin in Pre_Used_Pins.ToList())
+                            {
+                                string dispString = Mov.Type_From[0] + Convert.ToString(Mov.Val_From);
+                                if (dispString == pin[0] + pin.Substring(2))
+                                {
+                                    addtoUsed(Mov.Type_To + Mov.Type_From[0] + pin[1] + Mov.Val_To);
+                                }
+                            }
+                        }
+                        else {addtoUsed(Mov.Type_To + Mov.Type_From[0] + Mov.Val_To); }
+                        
                         secili.AccessibleDescription = "5";
                         secili.Text = "MOV," + Mov.Type_From + Mov.Val_From + "," + Mov.Type_To + Mov.Val_To;
                     }
@@ -314,7 +327,29 @@ namespace WindowsFormsApp1
                 }
             }
         }
+        private void ToolStripButton13_Click(object sender, EventArgs e) //ARITHMETIC button
+        {
+            if (buton_checked)
+            {
+                deletefromUsed(secili.AccessibleName);
+                secili.BackgroundImage = Properties.Resources.clock_n;
+                using (ArithmeticMenu Arithmetic = new ArithmeticMenu())
+                {
+                    if (Arithmetic.ShowDialog() == DialogResult.OK)
+                    {
+                        secili.AccessibleName = Arithmetic.PreDef + Convert.ToString(Arithmetic.PreValue)
+                            + Arithmetic.Operation + Arithmetic.PostDef + Convert.ToString(Arithmetic.PostValue)
+                            + "=D" + Arithmetic.ResultValue;
+                        secili.Text = secili.AccessibleName;
+                        secili.AccessibleDescription = "12";
+                        addtoUsed("D" + Arithmetic.PostDef + Convert.ToString(Arithmetic.ResultValue));
 
+                    }
+                    else { secili.BackgroundImage = Properties.Resources.link; }
+                }
+
+            }
+        }
         // -------------------- toolstrip buttons ----------------------------
         private void NewToolStripMenuItem_Click(object sender, EventArgs e) // new button-toolstrip
         {
@@ -769,5 +804,7 @@ namespace WindowsFormsApp1
                         else if (e.KeyCode == Keys.M) { ToolStripButton9_Click(sender, e); } // mov
                         else if (e.KeyCode == Keys.C) { ToolStripButton10_Click(sender, e); } // COUNTER     
         }
+
+        
     }
 }
