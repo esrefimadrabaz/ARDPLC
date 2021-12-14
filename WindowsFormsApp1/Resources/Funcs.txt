@@ -1,0 +1,193 @@
+extern bool dugum;
+extern bool next;
+
+void NC(int x1) {
+  if (dugum) {
+    if (digitalRead(x1) == LOW) {
+      dugum = true;
+      next = true;
+    }
+    else if (digitalRead(x1) == HIGH) {
+      dugum = false;
+    }
+  }
+}
+
+void NO(int x1) {
+  if (dugum) {
+    if (digitalRead(x1) == HIGH) {
+      dugum = true;
+      next = true;
+    }
+    else if (digitalRead(x1) == LOW) {
+      dugum = false;
+    }
+  }
+}
+
+void Coil(int x1) {
+  if (dugum) {
+    digitalWrite(x1, HIGH);
+  }
+  else {
+    digitalWrite(x1, LOW);
+  }
+}
+
+void cON(int time, int &timer) {
+  if (!dugum) {
+    timer = millis();
+  }
+  if (dugum) {
+    if (millis() - timer >= time) {
+      dugum = true;
+      next = true;
+    }
+    else {
+      dugum = false;
+    }
+  }
+}
+
+void cRTO(int time, int &timer, bool &rtn) {
+  if (dugum) {
+    if (!rtn) {timer = millis(); rtn = true;}
+    if (millis() - timer >= time) {
+      dugum = true;
+      next = true;
+    }
+    else {
+      dugum = false;
+    }
+  }
+}
+
+void cOFF(int time, int &timer) {
+  if (dugum) {
+    timer = millis();
+    dugum = true;
+    next = true;
+  }
+
+  if (!dugum && timer != 0) {
+    if (millis() - timer >= time) {
+      dugum = false;
+    }
+    else {
+      dugum = true;
+      next = true;
+    }
+  }
+}
+
+void Set(int x1) {
+  if (dugum) {
+    digitalWrite(x1, HIGH);
+  }
+}
+void Reset (int x1) {
+  if (dugum) {
+    digitalWrite(x1, LOW);
+  }
+}
+
+void Reset_O(int &contact) {
+  if (dugum) {
+    contact = 0;
+  }
+}
+
+void Reset_T(int &timer){
+  if(dugum){
+    timer = millis();
+  }
+}
+
+void CNTU(int Preset, int &CNTR, bool &CNT_Last, bool &CNT_Done) {
+  if (dugum) {
+    if (!CNT_Last) {
+      CNTR = 1 + CNTR;
+      delayMicroseconds(50);
+      CNT_Last = true;
+    }
+  } else {
+    CNT_Last = false;
+  }
+
+  if (CNTR >= Preset) {
+    dugum = true;
+    CNT_Done = true;
+    next = true;
+  } else {
+    dugum = false;
+    CNT_Done = false;
+  }
+}
+
+void CNTD(int Preset, int &CNTR, bool &CNT_Last, bool &CNT_Done) {
+  if (dugum) {
+    if (!CNT_Last) {
+      CNTR = CNTR - 1;
+      delayMicroseconds(50);
+      CNT_Last = true;
+    }
+  } else {
+    CNT_Last = false;
+  }
+
+  if (CNTR >= Preset) {
+    dugum = true;
+    CNT_Done = true;
+    next = true;
+  } else {
+    dugum = false;
+    CNT_Done = false;
+  }
+}
+
+
+
+
+
+// ************ virtual pin inits, may delete
+void NO_M(bool &x1) {
+  if (dugum) {
+    if (x1 == true) {
+      dugum = true;
+      next = true;
+    }
+    else if (x1 == false) {
+      dugum = false;
+    }
+  }
+}
+void NC_M(bool &x1) {
+  if (dugum) {
+    if (x1 == false) {
+      dugum = true;
+      next = true;
+    }
+    else if (x1 == true) {
+      dugum = false;
+    }
+  }
+}
+void Coil_M(bool &x1) {
+  if (dugum) {
+    x1 = true;
+  }
+  else {
+    x1 = false;
+  }
+}
+void Set_M(bool &contact) {
+  if (dugum) {
+    contact = true;
+  }
+}
+void Reset_M(bool &contact) {
+  if (dugum) {
+    contact = false;
+  }
+}
+//************** ends here

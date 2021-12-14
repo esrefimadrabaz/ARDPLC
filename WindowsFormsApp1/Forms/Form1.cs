@@ -17,6 +17,7 @@ namespace WindowsFormsApp1
 {
     public partial class Form1 : Form
     {
+        private bool MadeChange;
         private string MainText = "PLC_.1";
         public static string path;
         string buton;
@@ -35,12 +36,13 @@ namespace WindowsFormsApp1
         public static List<string> Used_Pins;
         private StreamReader reader;
 
+
         public Form1()
         {
             InitializeComponent();
             Used_Pins = new List<string>();
             Pre_Used_Pins = new List<string>();
-            Pre_Used_Pins.Add("I0");
+
             network_1 = new List<NewButton> { button1, button2, button3, button4, button5, button6, button7, button8, button9 };
             all_list = new SortedDictionary<int, List<NewButton>>();
             all_list.Add(network_count, new List<NewButton>());
@@ -51,6 +53,7 @@ namespace WindowsFormsApp1
             }
 ;
         }
+
 
 
         private void ToolStripButton4_Click(object sender, EventArgs e) // network button
@@ -191,6 +194,14 @@ namespace WindowsFormsApp1
 
                             secili.AccessibleDescription = "2";
                         }
+                        else if (clock.Type == "TRO") //timer retentive
+                        {
+                            secili.AccessibleName = "TRO" + clock.Timer;
+                            addtoUsed(secili.AccessibleName);
+                            if (clock.Interval_Def == "K") { secili.Text = "TRO=" + clock.Interval; }
+                            else { secili.Text = "TRO=" + clock.Interval_Def + clock.Interval; }
+                            secili.AccessibleDescription = "13";
+                        }
                         else if (clock.Type.Substring(0, 4) == "TOFF") //timeroff
                         {
                             secili.AccessibleName = "TOFF" + clock.Timer;
@@ -241,7 +252,7 @@ namespace WindowsFormsApp1
                                 string dispString = Mov.Type_From[0] + Convert.ToString(Mov.Val_From);
                                 if (dispString == pin[0] + pin.Substring(2))
                                 {
-                                    addtoUsed(Mov.Type_To + Mov.Type_From[0] + pin[1] + Mov.Val_To);
+                                    addtoUsed(Mov.Type_To  + pin[1] + Mov.Val_To);
                                 }
                             }
                         }
@@ -340,9 +351,34 @@ namespace WindowsFormsApp1
                         secili.AccessibleName = Arithmetic.PreDef + Convert.ToString(Arithmetic.PreValue)
                             + Arithmetic.Operation + Arithmetic.PostDef + Convert.ToString(Arithmetic.PostValue)
                             + "=D" + Arithmetic.ResultValue;
-                        secili.Text = secili.AccessibleName;
+
+                        if (Arithmetic.Operation == "|")
+                        {
+                            secili.Text = Arithmetic.PreDef + Convert.ToString(Arithmetic.PreValue)
+                            + "-" + Arithmetic.PostDef + Convert.ToString(Arithmetic.PostValue)
+                            + "=D" + Arithmetic.ResultValue;
+                        }
+                        else { secili.Text = secili.AccessibleName; }
                         secili.AccessibleDescription = "12";
-                        addtoUsed("D" + Arithmetic.PostDef + Convert.ToString(Arithmetic.ResultValue));
+                        
+                        if ( Arithmetic.PostDef == "D")
+                        {
+                            string dispName = "D" + Convert.ToString(Arithmetic.PostValue);
+                            foreach (string pin in Pre_Used_Pins.ToList())
+                            {                               
+                                if (pin[0] + pin.Substring(2) == dispName) { addtoUsed("D" + pin[1] + Convert.ToString(Arithmetic.ResultValue)); }
+                            }
+                        }
+                        if (Arithmetic.PreDef == "D")
+                        {
+                            string dispName = "D" + Convert.ToString(Arithmetic.PreValue);
+                            foreach (string pin in Pre_Used_Pins.ToList())
+                            {
+                                if (pin[0] + pin.Substring(2) == dispName) { addtoUsed("D" + pin[1] + Convert.ToString(Arithmetic.ResultValue)); }
+                            }
+                        }
+                        else {addtoUsed("D" + Arithmetic.PostDef + Convert.ToString(Arithmetic.ResultValue)); }
+                        
 
                     }
                     else { secili.BackgroundImage = Properties.Resources.link; }
@@ -354,17 +390,32 @@ namespace WindowsFormsApp1
         private void NewToolStripMenuItem_Click(object sender, EventArgs e) // new button-toolstrip
         {
             NewFile();
-            Form Form_1 = Application.OpenForms["Form1"];
-            Form_1.Text = MainText;
+            this.Text = MainText;
+            MadeChange = false;
         }
         private void SaveToolStripMenuItem_Click(object sender, EventArgs e) // save button-toolstrip
         {
+            path = SaveLoad.path;
             SaveLoad.Save();
             Form Form_1 = Application.OpenForms["Form1"];
             Form_1.Text = MainText + " - " + path.Split('\\').Last();
+            MadeChange = false;
+            leftPanel1.PopulateTreeViewDirectories();
         }
         private void OpenToolStripMenuItem_Click(object sender, EventArgs e) // open button-toolstrip
         {
+            if (MadeChange)
+            {
+                DialogResult result = MessageBox.Show("Save changes before closing?", "Save Changes", MessageBoxButtons.OKCancel);
+                if (result == DialogResult.OK)
+                {
+                    path = SaveLoad.path;
+                    SaveLoad.Save();
+                    this.Text = MainText + " - " + path.Split('\\').Last();
+                    MadeChange = false;
+                }
+            }
+
             while (all_list.Keys.Count > 1) // deleting the drawing before load
             {
                 int lastKey = all_list.Keys.Last();
@@ -380,7 +431,7 @@ namespace WindowsFormsApp1
                             Control prl_bt = panel1.Controls[Button_Name] as NewButton;
                             DeleteParallel(prl_bt as NewButton);
                             x.HasPrl = false;
-                            x.PrlTo = null;                            
+                            x.PrlTo = null;
                         }
                         x.BackgroundImage = toolStripButton3.BackgroundImage;
                         x.AccessibleDescription = "10";
@@ -388,88 +439,37 @@ namespace WindowsFormsApp1
                     }
                 }
             }
-            Load_Main(sender , e);
+            Load_Main(sender, e);
             Form Form_1 = Application.OpenForms["Form1"];
             Form_1.Text = MainText + " - " + path.Split('\\').Last();
-            PopulateTreeView();
+            leftPanel1.PopulateTreeViewDirectories();
+
         }
-
-
-
-        private void Button2_Click(object sender, EventArgs e)
+        private void Button13_Click(object sender, EventArgs e)  //compile button-toolstrip
         {
-            Checker(sender);
-        }
 
-        private void Checker(object sender)
-        {
-            NewButton btn = sender as NewButton;
-            if (btn.BackColor == Color.White)
+            if (path == null || MadeChange == true)
             {
-                secili = btn;
-                if (previous != null & previous != secili)
-                { previous.BackColor = Color.White; previous.Image = null; }
-                btn.BackColor = Color.Transparent;
-                btn.Image = Properties.Resources.checks2;
-                buton = btn.Name;
-                textBox2.Text = buton;
-                buton_checked = true;
-                previous = secili;
-                //textBox3.Text = secili.AccessibleDescription;
-                textBox3.Text = Convert.ToString(secili.HasPrl);
-            }
-            else if (buton_checked == true & btn.BackColor == Color.Transparent)
-            {
-                secili = null;
-                btn.BackColor = Color.White;
-                btn.Image = null;
-                buton_checked = false;
-                buton = null;
-                textBox2.Text = null;
-            }
-        }
-
-        private void Button2_MouseEnter(object sender, EventArgs e) 
-        {
-            NewButton name = sender as NewButton;
-            name.BringToFront();
-        }
-
-        private void Button2_MouseLeave(object sender, EventArgs e) 
-        {
-            NewButton name = sender as NewButton;
-            if (name.AccessibleName != "down")
-            { name.SendToBack(); }
-        }
-
-        private void ToolStripButton5_Click(object sender, EventArgs e) // up button, can delete later
-        {
-            if (buton_checked & (secili.AccessibleName == "down"))
-            {
-
-                int new_x = secili.Location.X + 114;
-                int new_y = secili.Location.Y - 20;
-                Buton_yarat(new_x, new_y, Properties.Resources.up, 56, 43, true);
-
-            }
-        }      
-
-
-        private void Button13_Click(object sender, EventArgs e)  //compile button
-        {
-            Pre_Used_Pins.RemoveAt(0);
-            Used_Pins = Pre_Used_Pins.Distinct().ToList();
-            if (secili != null)
-            {
-                
-                Listings.Compile();               
-                foreach(int x in all_list.Keys)
+                DialogResult result = MessageBox.Show("Saving is mandatory before compiling.", "Warning!", MessageBoxButtons.OKCancel);
+                if (result == DialogResult.Cancel)
                 {
-                    Debug.WriteLine(x);
+                    return;
                 }
-                Debug.WriteLine(network_count);
+                path = SaveLoad.path;
+                SaveLoad.Save();
+                Form Form_1 = Application.OpenForms["Form1"];
+                Form_1.Text = MainText + " - " + path.Split('\\').Last();
             }
+            Used_Pins = Pre_Used_Pins.Distinct().ToList();
+            Listings.Compile();
+            foreach (int x in all_list.Keys)
+            {
+                Debug.WriteLine(x);
+            }
+            Debug.WriteLine(network_count);
             Debug.WriteLine("---------------------");
+
+
         }
 
 
@@ -491,6 +491,7 @@ namespace WindowsFormsApp1
             name.MouseClick += Button2_Click;
             name.MouseEnter += Button2_MouseEnter;
             name.MouseLeave += Button2_MouseLeave;
+            name.BackgroundImageChanged += ChangesMadeEvent;
             name.ImageAlign = ContentAlignment.MiddleCenter;
             name.BackColor = Color.White;
             //name.Anchor = (AnchorStyles.Bottom | AnchorStyles.Right | AnchorStyles.Left | AnchorStyles.Top);
@@ -503,19 +504,16 @@ namespace WindowsFormsApp1
 
             x++;
         }
-
         private void addtoUsed(string foo)
         {
             Pre_Used_Pins.Add(foo);
             
         }
-
         private void deletefromUsed(string foo)
         {
             Pre_Used_Pins.Remove(foo);
 
         }
-
         private void DeleteParallel(NewButton foo)
         {
             if (foo.AccessibleName == "down" && (foo.AccessibleDescription =="99" || foo.AccessibleDescription =="98"))
@@ -562,7 +560,6 @@ namespace WindowsFormsApp1
                 }
             }
         }
-
         private void DeleteNetwork(NewButton foo)
         {
             Debug.WriteLine(all_list.Count);
@@ -612,8 +609,7 @@ namespace WindowsFormsApp1
                 }
             }
             network_count -= 1;
-        }
-        
+        }      
         private void Load_Main(object sender, EventArgs e)
         {
             
@@ -634,7 +630,6 @@ namespace WindowsFormsApp1
                 }
             }
         }
-
         private void Load(object sender, EventArgs e)
         {
             path = SaveLoad.Init_Load();
@@ -672,9 +667,8 @@ namespace WindowsFormsApp1
             }
             buton_checked = false;
             reader.Close();
-
+            MadeChange = false;
         }
-
         private void ImageLoad(NewButton foo)
         {
             switch (foo.AccessibleDescription)
@@ -709,102 +703,154 @@ namespace WindowsFormsApp1
                 case "9":
                     foo.BackgroundImage = Properties.Resources.clock_n;
                     break;
+                case "12":
+                    foo.BackgroundImage = Properties.Resources.clock_n;
+                    break;
+                case "13":
+                    foo.BackgroundImage = Properties.Resources.clock_n;
+                    break;
                 default:
                     break;
             }
 
         }
-
         private void NewFile()
         {
-            DialogResult result = MessageBox.Show("Are you SURE?!!!", "Title", MessageBoxButtons.OKCancel);
-            if (result == DialogResult.OK)
+            if (MadeChange)
             {
-                while (all_list.Keys.Count > 1)
+                DialogResult result = MessageBox.Show("Save changes before new file?", "Save Changes", MessageBoxButtons.YesNoCancel);
+                if (result == DialogResult.Cancel)
                 {
-                    int lastKey = all_list.Keys.Last();
-                    DeleteNetwork(all_list[lastKey][0]);
+                    return;
                 }
-                foreach (NewButton x in all_list[1])
+                else if (result == DialogResult.Yes)
                 {
-                    if (x.Name != "button1")
+                    path = SaveLoad.path;
+                    SaveLoad.Save();
+                    Form Form_1 = Application.OpenForms["Form1"];
+                    Form_1.Text = MainText + " - " + path.Split('\\').Last();
+                    MadeChange = false;
+                }
+            }
+            while (all_list.Keys.Count > 1)
+            {
+                int lastKey = all_list.Keys.Last();
+                DeleteNetwork(all_list[lastKey][0]);
+            }
+            foreach (NewButton x in all_list[1])
+            {
+                if (x.Name != "button1")
+                {
+                    if (x.HasPrl)
                     {
-                        if (x.HasPrl)
-                        {
-                            string Button_Name = x.PrlTo.Name;
-                            Button_Name = Button_Name.Substring(0, 6) + Convert.ToString((Convert.ToInt32(Button_Name.Substring(6)) - 1));
-                            Control prl_bt = panel1.Controls[Button_Name] as NewButton;
-                            DeleteParallel(prl_bt as NewButton);
-                            x.HasPrl = false;
-                            x.PrlTo = null;
-                        }
-                        x.BackgroundImage = toolStripButton3.BackgroundImage;
-                        x.AccessibleDescription = "10";
-                        x.AccessibleName = null;
+                        string Button_Name = x.PrlTo.Name;
+                        Button_Name = Button_Name.Substring(0, 6) + Convert.ToString((Convert.ToInt32(Button_Name.Substring(6)) - 1));
+                        Control prl_bt = panel1.Controls[Button_Name] as NewButton;
+                        DeleteParallel(prl_bt as NewButton);
+                        x.HasPrl = false;
+                        x.PrlTo = null;
                     }
+                    x.BackgroundImage = toolStripButton3.BackgroundImage;
+                    x.AccessibleDescription = "10";
+                    x.AccessibleName = null;
                 }
             }
-            else { return; }
+
         }
 
-        private void PopulateTreeView()
+
+
+        private void Button2_Click(object sender, EventArgs e)
         {
-            treeView1.Nodes.Clear();
-            TreeNode rootNode;
-            string tempPath = path.Substring(0, (path.Length - path.Split('\\').Last().Length - 1));
-            DirectoryInfo info = new DirectoryInfo(tempPath);
-            FileInfo fileInfo = new FileInfo(tempPath);
-            if (info.Exists)
-            {
-                rootNode = new TreeNode(info.Name);
-                rootNode.Tag = info;
-                GetDirectories(info.GetDirectories(), rootNode);
-                treeView1.Nodes.Add(rootNode);
-                foreach (var file in info.GetFiles())
-                {
-                    rootNode.Nodes.Add(new TreeNode(file.Name));
-                }
-            }
-            treeView1.TopNode.Expand();
+            Checker(sender);
+            leftPanel1.CurrentPinPopulate(secili);
         }
-
-        private void GetDirectories(DirectoryInfo[] subDirs, TreeNode nodeToAddTo)
+        private void Checker(object sender)
         {
-            TreeNode aNode;
-            DirectoryInfo[] subSubDirs;
-            foreach (DirectoryInfo subDir in subDirs)
+            NewButton btn = sender as NewButton;
+            if (btn.BackColor == Color.White)
             {
-                aNode = new TreeNode(subDir.Name, 0, 0);
-                aNode.Tag = subDir;
-                aNode.ImageKey = "folder";
-                subSubDirs = subDir.GetDirectories();
-                if (subSubDirs.Length != 0)
-                {
-                    GetDirectories(subSubDirs, aNode);
-                }
-                nodeToAddTo.Nodes.Add(aNode);
-
-                foreach (var file in subDir.GetFiles())
-                {
-                    aNode.Nodes.Add(new TreeNode(file.Name));
-                }
+                secili = btn;
+                if (previous != null & previous != secili)
+                { previous.BackColor = Color.White; previous.Image = null; }
+                btn.BackColor = Color.Transparent;
+                btn.Image = Properties.Resources.checks2;
+                buton = btn.Name;
+                textBox2.Text = buton;
+                buton_checked = true;
+                previous = secili;
+                //textBox3.Text = secili.AccessibleDescription;
+                textBox3.Text = Convert.ToString(secili.HasPrl);
+            }
+            else if (buton_checked == true & btn.BackColor == Color.Transparent)
+            {
+                secili = null;
+                btn.BackColor = Color.White;
+                btn.Image = null;
+                buton_checked = false;
+                buton = null;
+                textBox2.Text = null;
             }
         }
-
-
-        private void Form1_KeyDown (object sender, KeyEventArgs e) //shortcuts
+        private void Button2_MouseEnter(object sender, EventArgs e)
+        {
+            NewButton name = sender as NewButton;
+            name.BringToFront();
+        }
+        private void Button2_MouseLeave(object sender, EventArgs e)
+        {
+            NewButton name = sender as NewButton;
+            if (name.AccessibleName != "down")
+            { name.SendToBack(); }
+        }
+        private void Form1_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            if (MadeChange == true)
+            {
+                DialogResult result = MessageBox.Show("Save changes before closing?", "Warning!", MessageBoxButtons.OKCancel);
+                if (result == DialogResult.OK)
                 {
-                        if (e.KeyCode == Keys.O) { ToolStripButton1_Click_1(sender, e); } // normally open
-                        else if (e.KeyCode == Keys.K) { ToolStripButton2_Click_1(sender, e); } // normally close
-                        else if (e.KeyCode == Keys.T) { ToolStripButton7_Click(sender, e); } // clock on
-                        else if (e.KeyCode == Keys.N) { ToolStripButton4_Click(sender, e); } // network
-                        else if (e.KeyCode == Keys.Y) { ToolStripButton8_Click(sender, e); } // coil
-                        else if (e.KeyCode == Keys.Delete) { ToolStripButton3_Click(sender, e); } // link
-                        else if (e.KeyCode == Keys.D) { ToolStripButton6_Click(sender, e); } // down
-                        else if (e.KeyCode == Keys.M) { ToolStripButton9_Click(sender, e); } // mov
-                        else if (e.KeyCode == Keys.C) { ToolStripButton10_Click(sender, e); } // COUNTER     
+                    path = SaveLoad.path;
+                    SaveLoad.Save();
+                    Form Form_1 = Application.OpenForms["Form1"];
+                    Form_1.Text = MainText + " - " + path.Split('\\').Last();
+                }
+                else if (result == DialogResult.Cancel) { return; }
+            }
+        }
+        private void ChangesMade(object sender, ControlEventArgs e)
+        {
+            if (MadeChange == false)
+            {
+                MadeChange = true;
+                this.Text = this.Text + "*";
+            }
+            leftPanel1.PopulateTreeviewPins();
+
+        }
+        private void ChangesMadeEvent(object sender, EventArgs e)
+        {
+            if (MadeChange == false)
+            {
+                MadeChange = true;
+                this.Text = this.Text + "*";
+            }
+            leftPanel1.PopulateTreeviewPins();
         }
 
-        
+
+
+        private void Form1_KeyDown(object sender, KeyEventArgs e) //shortcuts
+        {
+            if (e.KeyCode == Keys.O) { ToolStripButton1_Click_1(sender, e); } // normally open
+            else if (e.KeyCode == Keys.K) { ToolStripButton2_Click_1(sender, e); } // normally close
+            else if (e.KeyCode == Keys.T) { ToolStripButton7_Click(sender, e); } // clock on
+            else if (e.KeyCode == Keys.N) { ToolStripButton4_Click(sender, e); } // network
+            else if (e.KeyCode == Keys.Y) { ToolStripButton8_Click(sender, e); } // coil
+            else if (e.KeyCode == Keys.Delete) { ToolStripButton3_Click(sender, e); } // link
+            else if (e.KeyCode == Keys.D) { ToolStripButton6_Click(sender, e); } // down
+            else if (e.KeyCode == Keys.M) { ToolStripButton9_Click(sender, e); } // mov
+            else if (e.KeyCode == Keys.C) { ToolStripButton10_Click(sender, e); } // COUNTER     
+        }
     }
 }

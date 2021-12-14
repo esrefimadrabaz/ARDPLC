@@ -56,10 +56,10 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="ArithmeticMenu.cs">
+    <Compile Include="Forms\ArithmeticMenu.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="ArithmeticMenu.Designer.cs">
+    <Compile Include="Forms\ArithmeticMenu.Designer.cs">
       <DependentUpon>ArithmeticMenu.cs</DependentUpon>
     </Compile>
     <Compile Include="Classes\ButtonInfo.cs">
@@ -112,6 +112,12 @@
     <Compile Include="Forms\MovMenu.Designer.cs">
       <DependentUpon>MovMenu.cs</DependentUpon>
     </Compile>
+    <Compile Include="UserControls\LeftPanels.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UserControls\LeftPanels.Designer.cs">
+      <DependentUpon>LeftPanels.cs</DependentUpon>
+    </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Classes\Streams.cs" />
     <Compile Include="Forms\SetMenu.cs">
@@ -127,7 +133,7 @@
       <DependentUpon>ResetMenu.cs</DependentUpon>
     </Compile>
     <Compile Include="Classes\SaveLoad.cs" />
-    <EmbeddedResource Include="ArithmeticMenu.resx">
+    <EmbeddedResource Include="Forms\ArithmeticMenu.resx">
       <DependentUpon>ArithmeticMenu.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\CounterMenu.resx">
@@ -151,8 +157,11 @@
     <EmbeddedResource Include="Forms\MovMenu.resx">
       <DependentUpon>MovMenu.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="UserControls\LeftPanels.resx">
+      <DependentUpon>LeftPanels.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
-      <Generator>ResXFileCodeGenerator</Generator>
+      <Generator>PublicResXFileCodeGenerator</Generator>
       <SubType>Designer</SubType>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
@@ -246,6 +255,9 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\set-rest1.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Funcs.txt" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

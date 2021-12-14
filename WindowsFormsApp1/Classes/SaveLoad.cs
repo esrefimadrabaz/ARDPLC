@@ -12,7 +12,7 @@ namespace WindowsFormsApp1
     class SaveLoad
     {
         public static StreamReader reader;
-        static string path;
+        public static string path;
         public static int Network_Count { get; set; }
         public static SortedDictionary<int, List<NewButton>> All_List;
         public static List<string> Pre_Used_Pins;
@@ -87,6 +87,7 @@ namespace WindowsFormsApp1
             }
             if (path == "x") { return; }
             Pre_Used_Pins = new List<string>();
+
             reader = new StreamReader(path);
             Form1.network_count = Convert.ToInt32(reader.ReadLine());
             foreach (string foo in reader.ReadLine().Split(','))

@@ -10,13 +10,16 @@ namespace WindowsFormsApp1
 {
     class Streams
     {
-        static string path = @"C:\Users\Oguz\Desktop\plc0.1\plc0.1.ino";
+        
+        static string SavePath;
         public static StreamWriter writer;
+        static string headerName;
         public static void Ard_Init()
         {
-
-            writer = new StreamWriter(path);
-            writer.WriteLine("#include \"deneme.h\"");
+            Init_Files();
+            SavePath = Form1.path.Substring(0, Form1.path.Length-4) + "\\" + headerName + ".ino";
+            writer = new StreamWriter(SavePath);
+            writer.WriteLine("#include " + "\"" + headerName + ".h\"");
             writer.WriteLine("#include <Wire.h>");
             writer.WriteLine("bool dugum = true;");
             writer.WriteLine("bool prl;");
@@ -47,23 +50,6 @@ namespace WindowsFormsApp1
                         case 'L':
                             writer.WriteLine("long D{0};", pins.Substring(2));
                             break;
-                        case 'D':
-                            switch (pins[2])
-                            {
-                                case 'F':
-                                    writer.WriteLine("float D{0};", pins.Substring(3));
-                                    break;
-                                case 'K':
-                                    writer.WriteLine("int D{0};", pins.Substring(3));
-                                    break;
-                                case 'L':
-                                    writer.WriteLine("long D{0};", pins.Substring(3));
-                                    break;
-                                default:
-                                    writer.WriteLine("int D{0};", pins.Substring(3));
-                                    break;
-                            }
-                            break;
                         default:
                             writer.WriteLine("int D{0};", pins.Substring(2));
                             break;
@@ -78,6 +64,11 @@ namespace WindowsFormsApp1
                 else if (pins.Substring(0, 4) == "TOFF")
                 {
                     writer.WriteLine("int TOFF{0};", pins.Substring(4));
+                }
+                else if (pins.Substring(0, 3) == "TRO")
+                {
+                    writer.WriteLine("int TRO{0};", pins.Substring(3));
+                    writer.WriteLine("bool TRB{0};", pins.Substring(3));
                 }
                 else if(pins.Substring(0,4) == "CNTR")
                 {
@@ -150,6 +141,10 @@ namespace WindowsFormsApp1
         {
             writer.WriteLine("cOFF({0}, {1});", interval, timer);
         }
+        public static void Ard_CRTO(string interval, string timer, string rtn)
+        {
+            writer.WriteLine("cRTO({0}, {1}, {2});", interval, timer, rtn);
+        }
         public static void Ard_MOV(string From, string To)
         {
             writer.WriteLine("{0} = {1};", To, From);
@@ -182,14 +177,38 @@ namespace WindowsFormsApp1
         {
             writer.WriteLine("Reset_M({0});", pin);
         }
+        public static void Ard_Reset_T(string pin)
+        {
+            writer.WriteLine("Reset_T({0});", pin);
+        }
         public static void Ard_Arithmetic(string PreVal, string Operation, string PostVal, string Result)
         {
-            writer.WriteLine("{3} = {0} {1} {2};", PreVal, Operation, PostVal, Result);
+            writer.WriteLine("{3} = ({0}){1}({2});", PreVal, Operation, PostVal, Result);
         }
         public static void Ard_NetStart()
         {
             writer.WriteLine("//New Network Start ---------------");
             writer.WriteLine("dugum = true;");
+        }
+
+        private static void Init_Files()
+        {
+            headerName = Form1.path.Split('\\').Last();
+            headerName = headerName.Substring(0, headerName.Length - 4);
+
+            string newPath = Form1.path.Substring(0, Form1.path.Length - 4);
+            string Funcs = Properties.Resources.Funcs;
+            Directory.CreateDirectory(newPath);
+
+            File.Create(newPath + "\\" + headerName + ".h" ).Dispose();
+
+            File.Create(newPath + "\\"+ headerName + ".ino").Dispose();
+            using (StreamWriter DispWriter = new StreamWriter(newPath + "\\" + headerName + ".h"))
+            {
+                DispWriter.WriteLine(Funcs);
+                DispWriter.Close();
+            }
+
         }
 
     }

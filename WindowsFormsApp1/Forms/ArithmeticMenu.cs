@@ -26,6 +26,8 @@ namespace WindowsFormsApp1
             PostDef = "K";
             Operation = "+";
             ResultValue = 0;
+            PreValue = 0;
+            PostValue = 0;
 
             Pre.SelectedIndex = 0;
             Post.SelectedIndex = 0;
@@ -101,7 +103,12 @@ namespace WindowsFormsApp1
 
         private void Ops_SelectedIndexChanged(object sender, EventArgs e)
         {
-            Operation = Convert.ToString(Ops.SelectedItem);
+            if (Convert.ToString(Ops.SelectedItem) == "-")
+            {
+                Operation = "|";
+            }
+            else { Operation = Convert.ToString(Ops.SelectedItem); }
+            
         }
 
         private void ResultVal_ValueChanged(object sender, EventArgs e)
