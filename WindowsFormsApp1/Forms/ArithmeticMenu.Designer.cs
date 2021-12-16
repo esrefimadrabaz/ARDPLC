@@ -155,6 +155,8 @@
             this.Controls.Add(this.PreVal);
             this.Controls.Add(this.Ops);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
+            this.MaximizeBox = false;
+            this.MinimizeBox = false;
             this.Name = "ArithmeticMenu";
             this.Text = "ArithmeticMenu";
             ((System.ComponentModel.ISupportInitialize)(this.PreVal)).EndInit();

@@ -146,6 +146,25 @@ void CNTD(int Preset, int &CNTR, bool &CNT_Last, bool &CNT_Done) {
 }
 
 
+void CMP(float first, float last, bool &MF, bool &MM, bool ML)
+{
+  if(dugum)
+  {
+    if(first > last){MF = true;}
+    else if (first == last) {MM = true;}
+    else if ( first < last) {ML = true;}
+  }
+}
+void ZCMP(float first, float middle, float last, bool &MF, bool &MM, bool ML)
+{
+  if(dugum)
+  {
+    if(first > last){MF = true;}
+    else if ((first <= last) && (last <= middle)) {MM = true;}
+    else if ( last > middle) {ML = true;}
+  }
+}
+
 
 
 

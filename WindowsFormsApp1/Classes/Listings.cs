@@ -12,7 +12,8 @@ namespace WindowsFormsApp1
 {
     /* Contact & Coil Codes 
      0 = NO     1 = NC      2 = CLOCK_ON       3 = CLOCK_OFF        4 = COIL    5 = MOV     6 = COUNTER_UP      7 = COUNTER_DOWN        8 = SET     9 = RESET    
-     10 = LINK       11 = NETWORK_START    12 = ARITHMETICS    13 = CLOCK_RETENTIVE  99 = down       98 = up
+     10 = LINK       11 = NETWORK_START    12 = ARITHMETICS    13 = CLOCK_RETENTIVE     14 = CMP        15 = ZCMP
+     99 = down       98 = up
     */
 
     class Listings
@@ -282,6 +283,98 @@ namespace WindowsFormsApp1
                     else
                     {
                         Streams.Ard_CRTO(btn.Text.Substring(4), btn.AccessibleName, "TRB" + btn.AccessibleName.Substring(3));
+                    }
+                    break;
+                case "14": //CMP
+                    if (btn.HasPrl)
+                    {
+                        string[] Vals = btn.AccessibleName.Split('|');
+                        string First = null;
+                        string Last = null;
+                        int M = Convert.ToInt32(Vals[3].Substring(1));
+                        if (Vals[1].Contains("CNTR")) { First = "CNTR" + Vals[1].Substring(4); }
+                        else if (Vals[1][0] == 'D') { First = Vals[1]; }
+                        else { First = Vals[1].Substring(1); }
+
+                        if (Vals[2].Contains("CNTR")) { Last = "CNTR" + Vals[2].Substring(4); }
+                        else if (Vals[2][0] == 'D') { First = Vals[2]; }
+                        else { Last =  Vals[2].Substring(1); }
+
+                        Streams.writer.WriteLine("");
+                        Streams.writer.WriteLine("if(dugum) {prl = true;}");
+                        Streams.Ard_CMP(First,Last, ("M" + M.ToString()), ("M" + (M+1).ToString()),("M" + (M+2).ToString()));
+                        Streams.writer.WriteLine("if (prl)  {dugum=true;}");
+                        Sort(btn.PrlTo);
+                        Streams.writer.WriteLine("if (next) { dugum = true; }");
+                        Streams.writer.WriteLine("prl,next = false;");
+                    }
+                    else
+                    {
+                        string[] Vals = btn.AccessibleName.Split('|');
+                        string First = null;
+                        string Last = null;
+                        int M = Convert.ToInt32(Vals[3].Substring(1));
+                        if (Vals[1].Contains("CNTR")) { First = "CNTR" + Vals[1].Substring(4); }
+                        else if (Vals[1][0] == 'D') { First = Vals[1]; }
+                        else { First = Vals[1].Substring(1); }
+
+                        if (Vals[2].Contains("CNTR")) { Last = "CNTR" + Vals[2].Substring(4); }
+                        else if (Vals[2][0] == 'D') { First = Vals[2]; }
+                        else { Last = Vals[2].Substring(1); }
+
+                        Streams.Ard_CMP(First, Last, ("M" + M.ToString()), ("M" + (M + 1).ToString()), ("M" + (M + 2).ToString()));
+                    }
+                    break;
+                case "15": //CMP
+                    if (btn.HasPrl)
+                    {
+                        string[] Vals = btn.AccessibleName.Split('|');
+                        string First = null;
+                        string Middle = null;
+                        string Last = null;
+                        int M = Convert.ToInt32(Vals[4].Substring(1));
+
+                        if (Vals[1].Contains("CNTR")) { First = "CNTR" + Vals[1].Substring(4); }
+                        else if (Vals[1][0] == 'D') { First = Vals[1]; }
+                        else { First = Vals[1].Substring(1); }
+
+                        if (Vals[2].Contains("CNTR")) { Middle = "CNTR" + Vals[2].Substring(4); }
+                        else if (Vals[2][0] == 'D') { Middle = Vals[2]; }
+                        else { Middle = Vals[2].Substring(1); }
+
+                        if (Vals[3].Contains("CNTR")) { Last = "CNTR" + Vals[3].Substring(4); }
+                        else if (Vals[3][0] == 'D') { Last = Vals[3]; }
+                        else { Last = Vals[3].Substring(1); }
+
+                        Streams.writer.WriteLine("");
+                        Streams.writer.WriteLine("if(dugum) {prl = true;}");
+                        Streams.Ard_ZCMP(First, Middle, Last, ("M" + M.ToString()), ("M" + (M + 1).ToString()), ("M" + (M + 2).ToString()));
+                        Streams.writer.WriteLine("if (prl)  {dugum=true;}");
+                        Sort(btn.PrlTo);
+                        Streams.writer.WriteLine("if (next) { dugum = true; }");
+                        Streams.writer.WriteLine("prl,next = false;");
+                    }
+                    else
+                    {
+                        string[] Vals = btn.AccessibleName.Split('|');
+                        string First = null;
+                        string Middle = null;
+                        string Last = null;
+                        int M = Convert.ToInt32(Vals[4].Substring(1));
+
+                        if (Vals[1].Contains("CNTR")) { First = "CNTR" + Vals[1].Substring(4); }
+                        else if (Vals[1][0] == 'D') { First = Vals[1]; }
+                        else { First = Vals[1].Substring(1); }
+
+                        if (Vals[2].Contains("CNTR")) { Middle = "CNTR" + Vals[2].Substring(4); }
+                        else if (Vals[2][0] == 'D') { Middle = Vals[2]; }
+                        else { Middle = Vals[2].Substring(1); }
+
+                        if (Vals[3].Contains("CNTR")) { Last = "CNTR" + Vals[3].Substring(4); }
+                        else if (Vals[3][0] == 'D') { Last = Vals[3]; }
+                        else { Last = Vals[3].Substring(1); }
+
+                        Streams.Ard_ZCMP(First, Middle, Last, ("M" + M.ToString()), ("M" + (M + 1).ToString()), ("M" + (M + 2).ToString()));
                     }
                     break;
                 default:

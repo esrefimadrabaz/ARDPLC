@@ -386,6 +386,45 @@ namespace WindowsFormsApp1
 
             }
         }
+        private void ToolStripButton14_Click(object sender, EventArgs e) // CMP button
+        {
+            if (buton_checked)
+            {
+                secili.BackgroundImage = Properties.Resources.clock_n;
+                deletefromUsed(secili.AccessibleName);
+                using (CMPMenu CMP = new CMPMenu())
+                {
+                    if (CMP.ShowDialog() == DialogResult.OK)
+                    {
+                        if (CMP.Type == "CMP")
+                        {
+                            secili.AccessibleName = (CMP.Type + "|" + CMP.First + Convert.ToString(CMP.FirstValue)
+                                +"|" + CMP.Last + Convert.ToString(CMP.LastValue) + "|" + "M" + Convert.ToString(CMP.ResultValue));
+                            addtoUsed("M" + Convert.ToString(CMP.ResultValue));
+                            addtoUsed("M" + Convert.ToString(CMP.ResultValue + 1));
+                            addtoUsed("M" + Convert.ToString(CMP.ResultValue + 2));
+                            secili.Text = CMP.Type + "|M" + Convert.ToString(CMP.ResultValue);
+                            secili.AccessibleDescription = "14";
+            
+                        }
+                        else
+                        {
+                            secili.AccessibleName = (CMP.Type + "|" + CMP.First + Convert.ToString(CMP.FirstValue)
+                             + "|" + CMP.Middle + Convert.ToString(CMP.MiddleValue) + CMP.Last + Convert.ToString(CMP.LastValue)
+                             + "|" + "M" + Convert.ToString(CMP.ResultValue));
+                            addtoUsed("M" + Convert.ToString(CMP.ResultValue));
+                            addtoUsed("M" + Convert.ToString(CMP.ResultValue + 1));
+                            addtoUsed("M" + Convert.ToString(CMP.ResultValue + 2));
+                            secili.Text = CMP.Type + "|M" + Convert.ToString(CMP.ResultValue);
+                            secili.AccessibleDescription = "15";
+                        }
+
+                    }
+                    else { secili.BackgroundImage = Properties.Resources.link; }
+
+                }
+            }
+        }
         // -------------------- toolstrip buttons ----------------------------
         private void NewToolStripMenuItem_Click(object sender, EventArgs e) // new button-toolstrip
         {
@@ -707,6 +746,12 @@ namespace WindowsFormsApp1
                     foo.BackgroundImage = Properties.Resources.clock_n;
                     break;
                 case "13":
+                    foo.BackgroundImage = Properties.Resources.clock_n;
+                    break;
+                case "14":
+                    foo.BackgroundImage = Properties.Resources.clock_n;
+                    break;
+                case "15":
                     foo.BackgroundImage = Properties.Resources.clock_n;
                     break;
                 default:

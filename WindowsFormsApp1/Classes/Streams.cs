@@ -183,7 +183,17 @@ namespace WindowsFormsApp1
         }
         public static void Ard_Arithmetic(string PreVal, string Operation, string PostVal, string Result)
         {
+            writer.WriteLine("if (dugum){");
             writer.WriteLine("{3} = ({0}){1}({2});", PreVal, Operation, PostVal, Result);
+            writer.WriteLine("}");
+        }
+        public static void Ard_CMP(string first, string last, string MF, string MM, string ML)
+        {
+            writer.WriteLine("CMP({0},{1},{2},{3},{4});", first, last, MF, MM, ML);
+        }
+        public static void Ard_ZCMP(string first, string middle, string last, string MF, string MM, string ML)
+        {
+            writer.WriteLine("ZCMP({0},{1},{2},{3},{4},{5});", first, middle, last, MF, MM, ML);
         }
         public static void Ard_NetStart()
         {
