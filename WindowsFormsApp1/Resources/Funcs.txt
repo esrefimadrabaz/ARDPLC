@@ -146,7 +146,7 @@ void CNTD(int Preset, int &CNTR, bool &CNT_Last, bool &CNT_Done) {
 }
 
 
-void CMP(float first, float last, bool &MF, bool &MM, bool ML)
+void CMP(float first, float last, bool &MF, bool &MM, bool &ML)
 {
   if(dugum)
   {
@@ -155,7 +155,7 @@ void CMP(float first, float last, bool &MF, bool &MM, bool ML)
     else if ( first < last) {ML = true;}
   }
 }
-void ZCMP(float first, float middle, float last, bool &MF, bool &MM, bool ML)
+void ZCMP(float first, float middle, float last, bool &MF, bool &MM, bool &ML)
 {
   if(dugum)
   {
@@ -165,7 +165,21 @@ void ZCMP(float first, float middle, float last, bool &MF, bool &MM, bool ML)
   }
 }
 
+void ADC(int pin, int &destination)
+{
+  if(dugum)
+   {
+     destination = analogRead(pin);
+   }
+}
 
+void PWM (int pin, int Value)
+{
+  if(dugum)
+  {
+    analogWrite(pin, value);
+  }
+}
 
 
 // ************ virtual pin inits, may delete

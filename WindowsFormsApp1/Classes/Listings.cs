@@ -12,7 +12,7 @@ namespace WindowsFormsApp1
 {
     /* Contact & Coil Codes 
      0 = NO     1 = NC      2 = CLOCK_ON       3 = CLOCK_OFF        4 = COIL    5 = MOV     6 = COUNTER_UP      7 = COUNTER_DOWN        8 = SET     9 = RESET    
-     10 = LINK       11 = NETWORK_START    12 = ARITHMETICS    13 = CLOCK_RETENTIVE     14 = CMP        15 = ZCMP
+     10 = LINK       11 = NETWORK_START    12 = ARITHMETICS    13 = CLOCK_RETENTIVE     14 = CMP        15 = ZCMP       16 = ADC        17 = PWM
      99 = down       98 = up
     */
 
@@ -375,6 +375,63 @@ namespace WindowsFormsApp1
                         else { Last = Vals[3].Substring(1); }
 
                         Streams.Ard_ZCMP(First, Middle, Last, ("M" + M.ToString()), ("M" + (M + 1).ToString()), ("M" + (M + 2).ToString()));
+                    }
+                    break;
+                case "16": // ADC
+                    if (btn.HasPrl)
+                    {
+                        string pin;
+                        string destination;
+                        pin = btn.AccessibleName.Split('-')[1];
+                        destination = btn.AccessibleName.Split('-')[2];
+
+                        Streams.writer.WriteLine("");
+                        Streams.writer.WriteLine("if(dugum) {prl = true;}");
+                        Streams.Ard_ADC(pin, destination);
+                        Streams.writer.WriteLine("if (prl)  {dugum=true;}");
+                        Sort(btn.PrlTo);
+                        Streams.writer.WriteLine("if (next) { dugum = true; }");
+                        Streams.writer.WriteLine("prl,next = false;");
+                    }
+                    else
+                    {
+                        string pin;
+                        string destination;
+                        pin = btn.AccessibleName.Split('-')[1];
+                        destination = btn.AccessibleName.Split('-')[2];
+                        Streams.Ard_ADC(pin, destination);
+                    }
+                    break;
+                case "17": // PWM
+                    if (btn.HasPrl)
+                    {
+                        string pin;
+                        string value;
+                        char type;
+                        pin = btn.AccessibleName.Split('-')[2];
+                        type = btn.AccessibleName.Split('-')[1][0];
+                        value = btn.AccessibleName.Split('-')[1].Substring(1);
+
+                        Streams.writer.WriteLine("");
+                        Streams.writer.WriteLine("if(dugum) {prl = true;}");
+                        if (type == 'K') { Streams.Ard_PWM(pin, value); }
+                        else { Streams.Ard_PWM(pin, "D" + value); }
+                        Streams.writer.WriteLine("if (prl)  {dugum=true;}");
+                        Sort(btn.PrlTo);
+                        Streams.writer.WriteLine("if (next) { dugum = true; }");
+                        Streams.writer.WriteLine("prl,next = false;");
+                    }
+                    else
+                    {
+                        string pin;
+                        string value;
+                        char type;
+                        pin = btn.AccessibleName.Split('-')[2];
+                        type = btn.AccessibleName.Split('-')[1][0];
+                        value = btn.AccessibleName.Split('-')[1].Substring(1);
+
+                        if (type == 'K') { Streams.Ard_PWM(pin, value); }
+                        else { Streams.Ard_PWM(pin, "D" + value); }
                     }
                     break;
                 default:

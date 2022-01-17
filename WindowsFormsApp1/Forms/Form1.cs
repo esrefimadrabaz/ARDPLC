@@ -51,7 +51,7 @@ namespace WindowsFormsApp1
                 btn.Network = "Network_" + network_count;
                 all_list[network_count].Add(btn);
             }
-;
+            
         }
 
 
@@ -83,348 +83,388 @@ namespace WindowsFormsApp1
 
         }
         private void ToolStripButton3_Click(object sender, EventArgs e) // link button
-                {
-                    if (buton_checked)
-                    {
-                        if(secili.AccessibleDescription == "11") { DeleteNetwork(secili); }
-                        deletefromUsed(secili.AccessibleName);
-                        if (secili.AccessibleName == "down")
-                        {
-                            DeleteParallel(secili);
-                        }
-                        else
-                        {
-                            secili.BackgroundImage = toolStripButton3.BackgroundImage;
-                            secili.AccessibleDescription = "10";
-                            secili.AccessibleName = null;
-                        }
-                    }
-                }
+        {
+            if (!buton_checked) { return; }
+
+            if (secili.AccessibleDescription == "11") { DeleteNetwork(secili); }
+            deletefromUsed(secili.AccessibleName);
+            if (secili.AccessibleName == "down")
+            {
+                DeleteParallel(secili);
+            }
+            else
+            {
+                secili.Text = null;
+                secili.BackgroundImage = toolStripButton3.BackgroundImage;
+                secili.AccessibleDescription = "10";
+                secili.AccessibleName = null;
+            }
+
+        }
         private void ToolStripButton1_Click_1(object sender, EventArgs e) // no button
         {
-            if (buton_checked)
-            {
-                deletefromUsed(secili.AccessibleName);
-                using (noMenu menuu = new noMenu())
-                if (menuu.ShowDialog() == DialogResult.OK)
-                    {
-                        secili.AccessibleName = menuu.Type + Convert.ToString(menuu.Pin);
-                        addtoUsed(secili.AccessibleName);
-                        secili.BackgroundImage = toolStripButton1.BackgroundImage;
-                        secili.AccessibleDescription = "0";
-                    }
+            if (!buton_checked) { return; }
 
-            }
+            deletefromUsed(secili.AccessibleName);
+            using (noMenu menuu = new noMenu())
+                if (menuu.ShowDialog() == DialogResult.OK)
+                {
+                    secili.AccessibleName = menuu.Type + Convert.ToString(menuu.Pin); // I-M-O-CNTR + PİN
+                    addtoUsed(secili.AccessibleName);
+                    secili.BackgroundImage = toolStripButton1.BackgroundImage;
+                    secili.AccessibleDescription = "0";
+                }
+
+
         }
         private void ToolStripButton2_Click_1(object sender, EventArgs e) // nc button
         {
-            if (buton_checked)
-            {
-                deletefromUsed(secili.AccessibleName);
-                using (ncMenu menuu = new ncMenu())
-                    if (menuu.ShowDialog() == DialogResult.OK)
-                    {
-                        secili.AccessibleName = menuu.Type + Convert.ToString(menuu.Pin);
-                        addtoUsed(secili.AccessibleName);
-                        secili.BackgroundImage = toolStripButton2.BackgroundImage;
-                        secili.AccessibleDescription = "1";
-                    }
-            }
+            if (!buton_checked) { return; }
+
+            deletefromUsed(secili.AccessibleName);
+            using (ncMenu menuu = new ncMenu())
+                if (menuu.ShowDialog() == DialogResult.OK)
+                {
+                    secili.AccessibleName = menuu.Type + Convert.ToString(menuu.Pin); // I-M-O-CNTR + PİN
+                    addtoUsed(secili.AccessibleName);
+                    secili.BackgroundImage = toolStripButton2.BackgroundImage;
+                    secili.AccessibleDescription = "1";
+                }
+
         }
         private void ToolStripButton6_Click(object sender, EventArgs e) //down button
         {
-            if (buton_checked)
+
+
+            if (buton_checked && (secili.AccessibleName != "down") && (!secili.HasPrl))
             {
 
-                if (buton_checked && (secili.AccessibleName != "down") && (!secili.HasPrl))
-                {
-                    
-                    //creating down button
-                    int new_x = secili.Location.X - (132 / 7 * 2);
-                    int new_y = secili.Location.Y + 23;
-                    Buton_yarat(new_x, new_y, Properties.Resources.down_n, 56, 43, true);
-                    yaratilan.AccessibleDescription = "99";
-                    NewButton dispButton = yaratilan;
-                    yaratilan.PrlTo = secili;
-                    prl_to = secili;
+                //creating down button
+                int new_x = secili.Location.X - (132 / 7 * 2);
+                int new_y = secili.Location.Y + 23;
+                Buton_yarat(new_x, new_y, Properties.Resources.down_n, 56, 43, true);
+                yaratilan.AccessibleDescription = "99";
+                NewButton dispButton = yaratilan;
+                yaratilan.PrlTo = secili;
+                prl_to = secili;
 
-                    //creating link to down
-                    new_x = yaratilan.Location.X + 39;
-                    new_y = yaratilan.Location.Y + 20;
-                    Buton_yarat(new_x, new_y, Properties.Resources.link, 132, 44, true);
-                    yaratilan.AccessibleDescription = "10";
+                //creating link to down
+                new_x = yaratilan.Location.X + 39;
+                new_y = yaratilan.Location.Y + 20;
+                Buton_yarat(new_x, new_y, Properties.Resources.link, 132, 44, true);
+                yaratilan.AccessibleDescription = "10";
 
-                    yaratilan.Parallels = new NewButton[2];
-                    yaratilan.Parallels[0] = dispButton;
-                    
-                    prl_to.Network = secili.Network;
-                    prl_to.HasPrl = true;
-                    prl_to.PrlTo = yaratilan;
-                    //end
+                yaratilan.Parallels = new NewButton[2];
+                yaratilan.Parallels[0] = dispButton;
 
-                    //creating up to link
-                    new_x = yaratilan.Location.X + 114;
-                    new_y = yaratilan.Location.Y - 20;
-                    Buton_yarat(new_x, new_y, Properties.Resources.up, 56, 43, true);
-                    yaratilan.AccessibleDescription = "98";
-                    yaratilan.PrlTo = secili;
+                prl_to.Network = secili.Network;
+                prl_to.HasPrl = true;
+                prl_to.PrlTo = yaratilan;
+                //end
 
-                    secili.PrlTo.Parallels[1] = yaratilan;
-                    //end
+                //creating up to link
+                new_x = yaratilan.Location.X + 114;
+                new_y = yaratilan.Location.Y - 20;
+                Buton_yarat(new_x, new_y, Properties.Resources.up, 56, 43, true);
+                yaratilan.AccessibleDescription = "98";
+                yaratilan.PrlTo = secili;
 
-                }
+                secili.PrlTo.Parallels[1] = yaratilan;
+                //end
+
             }
+
         }
         private void ToolStripButton7_Click(object sender, EventArgs e) // clock button
         {
-            if (buton_checked)
-            {
-                secili.BackgroundImage = Properties.Resources.clock_n;
-                deletefromUsed(secili.AccessibleName);
-                using (Clock clock = new Clock())
-                {
-                    if (clock.ShowDialog() == DialogResult.OK)
-                    {
-                        if (clock.Type.Substring(0, 3) == "TON") //timeron
-                        {
-                            secili.AccessibleName = "TON" + clock.Timer;
-                            addtoUsed(secili.AccessibleName);
-                            if (clock.Interval_Def == "K") { secili.Text = "TON=" + clock.Interval; }
-                            else { secili.Text = "TON=" + clock.Interval_Def + clock.Interval; }
+            if (!buton_checked) { return; }
 
-                            secili.AccessibleDescription = "2";
-                        }
-                        else if (clock.Type == "TRO") //timer retentive
-                        {
-                            secili.AccessibleName = "TRO" + clock.Timer;
-                            addtoUsed(secili.AccessibleName);
-                            if (clock.Interval_Def == "K") { secili.Text = "TRO=" + clock.Interval; }
-                            else { secili.Text = "TRO=" + clock.Interval_Def + clock.Interval; }
-                            secili.AccessibleDescription = "13";
-                        }
-                        else if (clock.Type.Substring(0, 4) == "TOFF") //timeroff
-                        {
-                            secili.AccessibleName = "TOFF" + clock.Timer;
-                            addtoUsed(secili.AccessibleName);
-                            if (clock.Interval_Def == "K") { secili.Text = "TOFF=" + clock.Interval; }
-                            else { secili.Text = "TOFF=" + clock.Interval_Def + clock.Interval; }
-                            secili.AccessibleDescription = "3";
-                        }
+            secili.BackgroundImage = Properties.Resources.clock_n;
+            deletefromUsed(secili.AccessibleName);
+            using (Clock clock = new Clock())
+            {
+                if (clock.ShowDialog() == DialogResult.OK)
+                {
+                    if (clock.Type.Substring(0, 3) == "TON") //timeron
+                    {
+                        secili.AccessibleName = "TON" + clock.Timer;
+                        addtoUsed(secili.AccessibleName); 
+                        if (clock.Interval_Def == "K") { secili.Text = "TON=" + clock.Interval; }
+                        else { secili.Text = "TON=" + clock.Interval_Def + clock.Interval; }
+
+                        secili.AccessibleDescription = "2";
                     }
-                    else { secili.BackgroundImage = Properties.Resources.link; }
+                    else if (clock.Type == "TRO") //timer retentive
+                    {
+                        secili.AccessibleName = "TRO" + clock.Timer;
+                        addtoUsed(secili.AccessibleName);
+                        if (clock.Interval_Def == "K") { secili.Text = "TRO=" + clock.Interval; }
+                        else { secili.Text = "TRO=" + clock.Interval_Def + clock.Interval; }
+                        secili.AccessibleDescription = "13";
+                    }
+                    else if (clock.Type.Substring(0, 4) == "TOFF") //timeroff
+                    {
+                        secili.AccessibleName = "TOFF" + clock.Timer;
+                        addtoUsed(secili.AccessibleName);
+                        if (clock.Interval_Def == "K") { secili.Text = "TOFF=" + clock.Interval; }
+                        else { secili.Text = "TOFF=" + clock.Interval_Def + clock.Interval; }
+                        secili.AccessibleDescription = "3";
+                    }
                 }
+                else { secili.BackgroundImage = Properties.Resources.link; }
             }
+
         }
         private void ToolStripButton8_Click(object sender, EventArgs e)  // coil button
         {
-            if (buton_checked)
+            if (!buton_checked) { return; }
+
+            NewButton Coil_btn = all_list[Convert.ToInt32(secili.Network.Split('_')[1])][secili.Network.Length - 1];
+
+            if (Coil_btn == secili)
             {
-                NewButton Coil_btn = all_list[Convert.ToInt32(secili.Network.Split('_')[1])][secili.Network.Length - 1];
-               
-                if (Coil_btn == secili)
-                {
-                    using (coilMenu menuu = new coilMenu())
-                        if (menuu.ShowDialog() == DialogResult.OK)
-                        {
-                            secili.AccessibleName = menuu.Type + Convert.ToString(menuu.Pin);
-                            addtoUsed(secili.AccessibleName);
-                            secili.BackgroundImage = toolStripButton8.BackgroundImage;
-                            secili.AccessibleDescription = "4";
-                        }
-                }
+                using (coilMenu menuu = new coilMenu())
+                    if (menuu.ShowDialog() == DialogResult.OK)
+                    {
+                        secili.AccessibleName = menuu.Type + Convert.ToString(menuu.Pin);
+                        addtoUsed(secili.AccessibleName); // O-M + PİN
+                        secili.BackgroundImage = toolStripButton8.BackgroundImage;
+                        secili.AccessibleDescription = "4";
+                    }
             }
+
         }
         private void ToolStripButton9_Click(object sender, EventArgs e) // MOV button
         {
-            if (buton_checked)
+            if (!buton_checked) { return; }
+            secili.BackgroundImage = Properties.Resources.clock_n;
+            deletefromUsed(secili.AccessibleName);
+            using (MovMenu Mov = new MovMenu())
             {
-                secili.BackgroundImage = Properties.Resources.clock_n;
-                deletefromUsed(secili.AccessibleName);
-                using (MovMenu Mov = new MovMenu())
+                if (Mov.ShowDialog() == DialogResult.OK)
                 {
-                    if (Mov.ShowDialog() == DialogResult.OK)
+                    secili.AccessibleName = Mov.Type_From + Mov.Val_From + "=" + Mov.Type_To + Mov.Val_To;
+                    secili.AccessibleDescription = "5";
+                    secili.Text = "MOV," + Mov.Type_From + Mov.Val_From + "," + Mov.Type_To + Mov.Type_From + Mov.Val_To;
+                    if (Mov.Type_From == Mov.Type_To) // if moving from Data to Data
                     {
-                        secili.AccessibleName = Mov.Type_From + Mov.Val_From + "=" + Mov.Type_To + Mov.Val_To;
-                        if(Mov.Type_From == Mov.Type_To) // if moving from Data to Data
+                        foreach (string pin in Pre_Used_Pins.ToList())
                         {
-                            foreach (string pin in Pre_Used_Pins.ToList())
+                            string dispString = Mov.Type_From[0] + Convert.ToString(Mov.Val_From);
+                            if (dispString == pin[0] + pin.Substring(2))
                             {
-                                string dispString = Mov.Type_From[0] + Convert.ToString(Mov.Val_From);
-                                if (dispString == pin[0] + pin.Substring(2))
-                                {
-                                    addtoUsed(Mov.Type_To  + pin[1] + Mov.Val_To);
-                                }
+                                addtoUsed(Mov.Type_To + pin[1] + Mov.Val_To); // D + TYPE + NMBR
                             }
                         }
-                        else {addtoUsed(Mov.Type_To + Mov.Type_From[0] + Mov.Val_To); }
-                        
-                        secili.AccessibleDescription = "5";
-                        secili.Text = "MOV," + Mov.Type_From + Mov.Val_From + "," + Mov.Type_To + Mov.Val_To;
                     }
-                    else { secili.BackgroundImage = Properties.Resources.link; }
+                    else { addtoUsed(Mov.Type_To + Mov.Type_From[0] + Mov.Val_To); } // D + TYPE + NMBR
+
                 }
+                else { secili.BackgroundImage = Properties.Resources.link; }
             }
+
         }
         private void ToolStripButton10_Click(object sender, EventArgs e) // CNTR button
         {
-            if (buton_checked)
+            if (!buton_checked) { return; }
+
+            secili.BackgroundImage = Properties.Resources.clock_n;
+            deletefromUsed(secili.AccessibleName);
+            using (CounterMenu counter = new CounterMenu())
             {
-                secili.BackgroundImage = Properties.Resources.clock_n;
-                deletefromUsed(secili.AccessibleName);
-                using (CounterMenu counter = new CounterMenu())
+                if (counter.ShowDialog() == DialogResult.OK)
                 {
-                    if (counter.ShowDialog() == DialogResult.OK)
+                    secili.AccessibleName = "CNTR" + counter.Counter;
+                    addtoUsed(secili.AccessibleName); 
+                    if (counter.Type == "CounterUp")
                     {
-                        secili.AccessibleName = "CNTR" + counter.Counter;
-                        addtoUsed(secili.AccessibleName);
-                        if (counter.Type == "CounterUp")
-                        {
-                            secili.AccessibleDescription = "6";
-                            if (counter.Preset_Def == "K") { secili.Text = "CNTR" + counter.Counter + "_UP=" + counter.Preset; }
-                            else if (counter.Preset_Def == "D") { secili.Text = "CNTR" + counter.Counter + "_UP=" + counter.Preset_Def + counter.Preset; }
-                        }
-                        else if (counter.Type == "CounterDown")
-                        {
-                            secili.AccessibleDescription = "7";
-                            if (counter.Preset_Def == "K") { secili.Text = "CNTR" + counter.Counter + "_D=" + counter.Preset; }
-                            else if (counter.Preset_Def == "D") { secili.Text = "CNTR" + counter.Counter + "_D=" + counter.Preset_Def + counter.Preset; }
-                        }
+                        secili.AccessibleDescription = "6";
+                        if (counter.Preset_Def == "K") { secili.Text = "CNTR" + counter.Counter + "_UP=" + counter.Preset; }
+                        else if (counter.Preset_Def == "D") { secili.Text = "CNTR" + counter.Counter + "_UP=" + counter.Preset_Def + counter.Preset; }
                     }
-                    else { secili.BackgroundImage = Properties.Resources.link; }
+                    else if (counter.Type == "CounterDown")
+                    {
+                        secili.AccessibleDescription = "7";
+                        if (counter.Preset_Def == "K") { secili.Text = "CNTR" + counter.Counter + "_D=" + counter.Preset; }
+                        else if (counter.Preset_Def == "D") { secili.Text = "CNTR" + counter.Counter + "_D=" + counter.Preset_Def + counter.Preset; }
+                    }
                 }
+                else { secili.BackgroundImage = Properties.Resources.link; }
             }
+
         }
         private void ToolStripButton11_Click(object sender, EventArgs e) // SET BUTTON
         {
-            if (buton_checked)
+            if (!buton_checked) { return; }
+
+            deletefromUsed(secili.AccessibleName);
+            NewButton Coil_btn = all_list[Convert.ToInt32(secili.Network.Split('_')[1])][secili.Network.Length - 1];
+            if (Coil_btn == secili)
             {
-                deletefromUsed(secili.AccessibleName);
-                NewButton Coil_btn = all_list[Convert.ToInt32(secili.Network.Split('_')[1])][secili.Network.Length - 1];
-                if (Coil_btn == secili)
-                {
-                    using (SetMenu set = new SetMenu())
-                        if (set.ShowDialog() == DialogResult.OK)
-                        {
-                            secili.AccessibleName = set.Type + Convert.ToString(set.Pin);
-                            addtoUsed(secili.AccessibleName);
-                            secili.Text = "SET= " + secili.AccessibleName;
-                            secili.BackgroundImage = Properties.Resources.clock_n;
-                            secili.AccessibleDescription = "8";
-                        }
-                        else { secili.BackgroundImage = Properties.Resources.link; }
-                    
-                }
+                using (SetMenu set = new SetMenu())
+                    if (set.ShowDialog() == DialogResult.OK)
+                    {
+                        secili.AccessibleName = set.Type + Convert.ToString(set.Pin);
+                        addtoUsed(secili.AccessibleName); // O-M + PİN
+                        secili.Text = "SET= " + secili.AccessibleName;
+                        secili.BackgroundImage = Properties.Resources.clock_n;
+                        secili.AccessibleDescription = "8";
+                    }
+                    else { secili.BackgroundImage = Properties.Resources.link; }
+
             }
-        } 
+
+        }
         private void ToolStripButton12_Click(object sender, EventArgs e) // RESET button
         {
-            if (buton_checked)
-            {
-                deletefromUsed(secili.AccessibleName);
-                NewButton Coil_btn = all_list[Convert.ToInt32(secili.Network.Split('_')[1])][secili.Network.Length - 1];
-                if (Coil_btn == secili)
-                {
-                    using (ResetMenu reset = new ResetMenu())
-                        if (reset.ShowDialog() == DialogResult.OK)
-                        {
-                            secili.AccessibleName = reset.Type + Convert.ToString(reset.Pin);
-                            addtoUsed(secili.AccessibleName);
-                            secili.Text = "RESET= " + secili.AccessibleName;
-                            secili.BackgroundImage = Properties.Resources.clock_n;
-                            secili.AccessibleDescription = "9";
-                        }
-                        else { secili.BackgroundImage = Properties.Resources.link; }
+            if (!buton_checked) { return; }
 
-                }
+            deletefromUsed(secili.AccessibleName);
+            NewButton Coil_btn = all_list[Convert.ToInt32(secili.Network.Split('_')[1])][secili.Network.Length - 1];
+            if (Coil_btn == secili)
+            {
+                using (ResetMenu reset = new ResetMenu())
+                    if (reset.ShowDialog() == DialogResult.OK)
+                    {
+                        secili.AccessibleName = reset.Type + Convert.ToString(reset.Pin);
+                        addtoUsed(secili.AccessibleName); // O - M + PİN 
+                        secili.Text = "RESET= " + secili.AccessibleName;
+                        secili.BackgroundImage = Properties.Resources.clock_n;
+                        secili.AccessibleDescription = "9";
+                    }
+                    else { secili.BackgroundImage = Properties.Resources.link; }
             }
         }
         private void ToolStripButton13_Click(object sender, EventArgs e) //ARITHMETIC button
         {
-            if (buton_checked)
+            if (!buton_checked) { return; }
+
+            deletefromUsed(secili.AccessibleName);
+            secili.BackgroundImage = Properties.Resources.clock_n;
+            using (ArithmeticMenu Arithmetic = new ArithmeticMenu())
             {
-                deletefromUsed(secili.AccessibleName);
-                secili.BackgroundImage = Properties.Resources.clock_n;
-                using (ArithmeticMenu Arithmetic = new ArithmeticMenu())
+                if (Arithmetic.ShowDialog() == DialogResult.OK)
                 {
-                    if (Arithmetic.ShowDialog() == DialogResult.OK)
+                    secili.AccessibleName = Arithmetic.PreDef + Convert.ToString(Arithmetic.PreValue)
+                        + Arithmetic.Operation + Arithmetic.PostDef + Convert.ToString(Arithmetic.PostValue)
+                        + "=D" + Arithmetic.ResultValue;
+
+                    if (Arithmetic.Operation == "|")
                     {
-                        secili.AccessibleName = Arithmetic.PreDef + Convert.ToString(Arithmetic.PreValue)
-                            + Arithmetic.Operation + Arithmetic.PostDef + Convert.ToString(Arithmetic.PostValue)
-                            + "=D" + Arithmetic.ResultValue;
-
-                        if (Arithmetic.Operation == "|")
-                        {
-                            secili.Text = Arithmetic.PreDef + Convert.ToString(Arithmetic.PreValue)
-                            + "-" + Arithmetic.PostDef + Convert.ToString(Arithmetic.PostValue)
-                            + "=D" + Arithmetic.ResultValue;
-                        }
-                        else { secili.Text = secili.AccessibleName; }
-                        secili.AccessibleDescription = "12";
-                        
-                        if ( Arithmetic.PostDef == "D")
-                        {
-                            string dispName = "D" + Convert.ToString(Arithmetic.PostValue);
-                            foreach (string pin in Pre_Used_Pins.ToList())
-                            {                               
-                                if (pin[0] + pin.Substring(2) == dispName) { addtoUsed("D" + pin[1] + Convert.ToString(Arithmetic.ResultValue)); }
-                            }
-                        }
-                        if (Arithmetic.PreDef == "D")
-                        {
-                            string dispName = "D" + Convert.ToString(Arithmetic.PreValue);
-                            foreach (string pin in Pre_Used_Pins.ToList())
-                            {
-                                if (pin[0] + pin.Substring(2) == dispName) { addtoUsed("D" + pin[1] + Convert.ToString(Arithmetic.ResultValue)); }
-                            }
-                        }
-                        else {addtoUsed("D" + Arithmetic.PostDef + Convert.ToString(Arithmetic.ResultValue)); }
-                        
-
+                        secili.Text = Arithmetic.PreDef + Convert.ToString(Arithmetic.PreValue)
+                        + "-" + Arithmetic.PostDef + Convert.ToString(Arithmetic.PostValue)
+                        + "=D" + Arithmetic.ResultValue;
                     }
-                    else { secili.BackgroundImage = Properties.Resources.link; }
-                }
+                    else { secili.Text = secili.AccessibleName; }
+                    secili.AccessibleDescription = "12";
 
+                    if (Arithmetic.PostDef == "D")
+                    {
+                        string dispName = "D" + Convert.ToString(Arithmetic.PostValue);
+                        foreach (string pin in Pre_Used_Pins.ToList())
+                        {
+                            if (pin[0] + pin.Substring(2) == dispName) {
+                                addtoUsed("D" + pin[1] + Convert.ToString(Arithmetic.ResultValue));  
+                            } 
+                        }
+                    }
+                    if (Arithmetic.PreDef == "D")
+                    {
+                        string dispName = "D" + Convert.ToString(Arithmetic.PreValue);
+                        foreach (string pin in Pre_Used_Pins.ToList())
+                        {
+                            if (pin[0] + pin.Substring(2) == dispName) { addtoUsed("D" + pin[1] + Convert.ToString(Arithmetic.ResultValue)); }
+                        }
+                    }
+                    else { addtoUsed("D" + Arithmetic.PostDef + Convert.ToString(Arithmetic.ResultValue)); }
+
+
+                }
+                else { secili.BackgroundImage = Properties.Resources.link; }
             }
         }
         private void ToolStripButton14_Click(object sender, EventArgs e) // CMP button
         {
-            if (buton_checked)
+            if (!buton_checked) { return; }
+
+            secili.BackgroundImage = Properties.Resources.clock_n;
+            deletefromUsed(secili.AccessibleName);
+            using (CMPMenu CMP = new CMPMenu())
             {
-                secili.BackgroundImage = Properties.Resources.clock_n;
-                deletefromUsed(secili.AccessibleName);
-                using (CMPMenu CMP = new CMPMenu())
+                if (CMP.ShowDialog() == DialogResult.OK)
                 {
-                    if (CMP.ShowDialog() == DialogResult.OK)
+                    if (CMP.Type == "CMP")
                     {
-                        if (CMP.Type == "CMP")
-                        {
-                            secili.AccessibleName = (CMP.Type + "|" + CMP.First + Convert.ToString(CMP.FirstValue)
-                                +"|" + CMP.Last + Convert.ToString(CMP.LastValue) + "|" + "M" + Convert.ToString(CMP.ResultValue));
-                            addtoUsed("M" + Convert.ToString(CMP.ResultValue));
-                            addtoUsed("M" + Convert.ToString(CMP.ResultValue + 1));
-                            addtoUsed("M" + Convert.ToString(CMP.ResultValue + 2));
-                            secili.Text = CMP.Type + "|M" + Convert.ToString(CMP.ResultValue);
-                            secili.AccessibleDescription = "14";
-            
-                        }
-                        else
-                        {
-                            secili.AccessibleName = (CMP.Type + "|" + CMP.First + Convert.ToString(CMP.FirstValue)
-                             + "|" + CMP.Middle + Convert.ToString(CMP.MiddleValue) + CMP.Last + Convert.ToString(CMP.LastValue)
-                             + "|" + "M" + Convert.ToString(CMP.ResultValue));
-                            addtoUsed("M" + Convert.ToString(CMP.ResultValue));
-                            addtoUsed("M" + Convert.ToString(CMP.ResultValue + 1));
-                            addtoUsed("M" + Convert.ToString(CMP.ResultValue + 2));
-                            secili.Text = CMP.Type + "|M" + Convert.ToString(CMP.ResultValue);
-                            secili.AccessibleDescription = "15";
-                        }
+                        secili.AccessibleName = (CMP.Type + "|" + CMP.First + Convert.ToString(CMP.FirstValue)
+                            + "|" + CMP.Last + Convert.ToString(CMP.LastValue) + "|" + "M" + Convert.ToString(CMP.ResultValue));
+                        addtoUsed("M" + Convert.ToString(CMP.ResultValue));
+                        addtoUsed("M" + Convert.ToString(CMP.ResultValue + 1));
+                        addtoUsed("M" + Convert.ToString(CMP.ResultValue + 2));
+                        secili.Text = CMP.Type + "|M" + Convert.ToString(CMP.ResultValue);
+                        secili.AccessibleDescription = "14";
 
                     }
-                    else { secili.BackgroundImage = Properties.Resources.link; }
+                    else
+                    {
+                        secili.AccessibleName = (CMP.Type + "|" + CMP.First + Convert.ToString(CMP.FirstValue)
+                         + "|" + CMP.Middle + Convert.ToString(CMP.MiddleValue) + CMP.Last + Convert.ToString(CMP.LastValue)
+                         + "|" + "M" + Convert.ToString(CMP.ResultValue));
+                        addtoUsed("M" + Convert.ToString(CMP.ResultValue));
+                        addtoUsed("M" + Convert.ToString(CMP.ResultValue + 1));
+                        addtoUsed("M" + Convert.ToString(CMP.ResultValue + 2));
+                        secili.Text = CMP.Type + "|M" + Convert.ToString(CMP.ResultValue);
+                        secili.AccessibleDescription = "15";
+                    }
 
+                }
+                else { secili.BackgroundImage = Properties.Resources.link; }
+
+            }
+
+        }
+        private void ToolStripButton5_Click(object sender, EventArgs e) // ADC Button
+        {
+            if (!buton_checked) {return;}
+
+            secili.BackgroundImage = Properties.Resources.clock_n;
+            deletefromUsed(secili.AccessibleName);
+
+            using (ADCMenu ADC = new ADCMenu())
+            {
+                if (ADC.ShowDialog() == DialogResult.OK)
+                {
+                    secili.AccessibleName = "ADC-A" + ADC.Pin + "-D" + ADC.Destination;
+                    secili.Text = secili.AccessibleName;
+                    secili.AccessibleDescription = "16";
+                    addtoUsed("DK" + ADC.Destination);
+                    addtoUsed("A" + ADC.Pin);
+                }
+                else { secili.BackgroundImage = Properties.Resources.link; }
+            }
+
+        }
+        private void ToolStripButton15_Click(object sender, EventArgs e) // PWM Button
+        {
+            if (!buton_checked) { return; }
+            secili.BackgroundImage = Properties.Resources.clock_n;
+            deletefromUsed(secili.AccessibleName);
+
+            using (PWMMenu PWM = new PWMMenu())
+            {
+                if (PWM.ShowDialog() == DialogResult.OK)
+                {
+                    secili.AccessibleDescription = "17";
+                    secili.AccessibleName = "PWM-" + PWM.ValueType + PWM.Value + "-O" + PWM.Pin;
+                    secili.Text = secili.AccessibleName;
+                    addtoUsed(("O" + PWM.Pin));
+                }
+                else
+                {
+                    secili.BackgroundImage = Properties.Resources.link;
                 }
             }
         }
+
         // -------------------- toolstrip buttons ----------------------------
         private void NewToolStripMenuItem_Click(object sender, EventArgs e) // new button-toolstrip
         {
@@ -545,12 +585,45 @@ namespace WindowsFormsApp1
         }
         private void addtoUsed(string foo)
         {
-            Pre_Used_Pins.Add(foo);
-            
+
+            if (foo[0] == 'D')
+            {
+                foreach (string temp in Pre_Used_Pins)
+                {
+                    if ((temp[0] + temp.Substring(2) == foo[0]+foo.Substring(2)) && (temp[1] != foo[1]))
+                    {
+                        MessageBox.Show("This adress is already declared.", "Error", MessageBoxButtons.OK);
+
+                        secili.AccessibleName = null;
+                        ToolStripButton3_Click(new object(), new EventArgs());
+                        return;
+                    }
+                }
+            }
+            Pre_Used_Pins.Add(foo);           
         }
         private void deletefromUsed(string foo)
         {
-            Pre_Used_Pins.Remove(foo);
+            if (foo == null) return;
+
+            foreach (string tmp in Pre_Used_Pins)
+            {
+                if (tmp[0] == 'D')
+                {
+                    if (foo.Contains(tmp[0] + tmp.Substring(2)))
+                    {
+                        Pre_Used_Pins.Remove(tmp);
+                        return;
+                    }
+                }
+                else if (foo.Contains(tmp))
+                {
+                    Pre_Used_Pins.Remove(tmp);
+                    return;
+                }
+
+            }
+
 
         }
         private void DeleteParallel(NewButton foo)
@@ -754,6 +827,12 @@ namespace WindowsFormsApp1
                 case "15":
                     foo.BackgroundImage = Properties.Resources.clock_n;
                     break;
+                case "16":
+                    foo.BackgroundImage = Properties.Resources.clock_n;
+                    break;
+                case "17":
+                    foo.BackgroundImage = Properties.Resources.clock_n;
+                    break;
                 default:
                     break;
             }
@@ -809,6 +888,12 @@ namespace WindowsFormsApp1
         {
             Checker(sender);
             leftPanel1.CurrentPinPopulate(secili);
+            string tmper = "";
+            foreach (string foo in Pre_Used_Pins)
+            {
+                tmper = tmper + foo;
+            }
+            richTextBox1.Text = tmper;
         }
         private void Checker(object sender)
         {
@@ -824,7 +909,6 @@ namespace WindowsFormsApp1
                 textBox2.Text = buton;
                 buton_checked = true;
                 previous = secili;
-                //textBox3.Text = secili.AccessibleDescription;
                 textBox3.Text = Convert.ToString(secili.HasPrl);
             }
             else if (buton_checked == true & btn.BackColor == Color.Transparent)

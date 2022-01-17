@@ -56,6 +56,12 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Forms\ADCMenu.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\ADCMenu.Designer.cs">
+      <DependentUpon>ADCMenu.cs</DependentUpon>
+    </Compile>
     <Compile Include="Forms\CMPMenu.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -118,6 +124,12 @@
     <Compile Include="Forms\MovMenu.Designer.cs">
       <DependentUpon>MovMenu.cs</DependentUpon>
     </Compile>
+    <Compile Include="Forms\PWMMenu.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\PWMMenu.Designer.cs">
+      <DependentUpon>PWMMenu.cs</DependentUpon>
+    </Compile>
     <Compile Include="UserControls\LeftPanels.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -139,6 +151,9 @@
       <DependentUpon>ResetMenu.cs</DependentUpon>
     </Compile>
     <Compile Include="Classes\SaveLoad.cs" />
+    <EmbeddedResource Include="Forms\ADCMenu.resx">
+      <DependentUpon>ADCMenu.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Forms\CMPMenu.resx">
       <DependentUpon>CMPMenu.cs</DependentUpon>
     </EmbeddedResource>
@@ -165,6 +180,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\MovMenu.resx">
       <DependentUpon>MovMenu.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\PWMMenu.resx">
+      <DependentUpon>PWMMenu.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="UserControls\LeftPanels.resx">
       <DependentUpon>LeftPanels.cs</DependentUpon>

@@ -40,7 +40,7 @@ namespace WindowsFormsApp1
         private void ComboBox2_SelectedIndexChanged(object sender, EventArgs e)
         {
             Preset_Def = Convert.ToString(comboBox2.SelectedItem);
-            if (comboBox2.SelectedIndex == 0) { numericUpDown2.Maximum = 2000000000; numericUpDown2.Minimum = 1; }
+            if (comboBox2.SelectedIndex == 0) { numericUpDown2.Maximum = 65535; numericUpDown2.Minimum = 1; }
             else if (comboBox2.SelectedIndex == 1) { numericUpDown2.Maximum = 100; numericUpDown2.Minimum = 0; }
         }
 

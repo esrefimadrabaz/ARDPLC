@@ -44,7 +44,7 @@ namespace WindowsFormsApp1
 
         private void ComboBox2_SelectedIndexChanged(object sender, EventArgs e)
         {
-            if (comboBox2.SelectedIndex == 0) { numericUpDown2.Maximum = 32767; numericUpDown2.Minimum = 1; } 
+            if (comboBox2.SelectedIndex == 0) { numericUpDown2.Maximum = 65536; numericUpDown2.Minimum = 1; } 
             else { numericUpDown2.Maximum = 100; numericUpDown2.Minimum = 0; }
             Interval_Def = Convert.ToString(comboBox2.SelectedItem);
         }

@@ -21,20 +21,32 @@ namespace WindowsFormsApp1
             writer = new StreamWriter(SavePath);
             writer.WriteLine("#include " + "\"" + headerName + ".h\"");
             writer.WriteLine("#include <Wire.h>");
+
+            /*
             writer.WriteLine("bool dugum = true;");
             writer.WriteLine("bool prl;");
             writer.WriteLine("bool next;");
-            writer.WriteLine("int K;");
-            //writer.Close();
+            */
+
             foreach (string pins in Form1.Used_Pins)
             {
                 if (pins[0] == 'I')
                 {
-                    writer.WriteLine("const int I{0} = {0};", pins[1]);
+                    char newpin = '0';
+                    if (Convert.ToInt32(pins[1]) < 3) { newpin = Convert.ToChar(Convert.ToInt32(pins[1]) + 2); }
+                    else if (Convert.ToInt32(pins[1]) == 3) { newpin = '7'; }
+                    else if (Convert.ToInt32(pins[1]) == 4) { newpin = '8'; }
+                    writer.WriteLine("const int I{0} = {0};", newpin);
                 }
                 else if (pins[0] == 'O')
                 {
-                    writer.WriteLine("const int O{0} = {0};", pins[1]);
+                    string newpin = "0";
+                    if (Convert.ToInt32(pins[1]) == 0) { newpin = "5"; }
+                    else if (Convert.ToInt32(pins[1]) == 1) { newpin = "6"; }
+                    else if (Convert.ToInt32(pins[1]) == 2) { newpin = "9"; }
+                    else if (Convert.ToInt32(pins[1]) == 3) { newpin = "10"; }
+                    else if (Convert.ToInt32(pins[1]) == 3) { newpin = "11"; }
+                    writer.WriteLine("const int O{0} = {0};", newpin);
                 }
                 else if (pins[0] == 'M')
                 {
@@ -55,44 +67,40 @@ namespace WindowsFormsApp1
                             break;
 
                     }
-                    
+                }
+                else if(pins[0] == 'A')
+                {
+                    break;
                 }
                 else if (pins.Substring(0,3) == "TON")
                 {
-                    writer.WriteLine("int TON{0};", pins.Substring(3));
+                    writer.WriteLine("unsigned int TON{0};", pins.Substring(3));
                 }
                 else if (pins.Substring(0, 4) == "TOFF")
                 {
-                    writer.WriteLine("int TOFF{0};", pins.Substring(4));
+                    writer.WriteLine("unsigned int TOFF{0};", pins.Substring(4));
                 }
                 else if (pins.Substring(0, 3) == "TRO")
                 {
-                    writer.WriteLine("int TRO{0};", pins.Substring(3));
+                    writer.WriteLine("unsigned int TRO{0};", pins.Substring(3));
                     writer.WriteLine("bool TRB{0};", pins.Substring(3));
                 }
                 else if(pins.Substring(0,4) == "CNTR")
                 {
-                    writer.WriteLine("int CNTR{0};", pins.Substring(4));
+                    writer.WriteLine("unsigned int CNTR{0};", pins.Substring(4));
                     writer.WriteLine("bool CNTR{0}L;", pins.Substring(4));
                     writer.WriteLine("bool CNTR{0}D;", pins.Substring(4));
-                }
+                }               
             }
             writer.WriteLine("//End Of Declaration ----------------");
-            writer.WriteLine("void setup() {");
 
-            foreach (string pins in Form1.Used_Pins)
-            {
-                if (pins[0] == 'I')
-                {
-                    writer.WriteLine("pinMode(I{0}, INPUT);", pins[1]);
-                }
-                else if (pins[0] == 'O')
-                {
-                    writer.WriteLine("pinMode(O{0}, OUTPUT);", pins[1]);
-                }
-            }
+            writer.WriteLine("void setup() {");
+            writer.WriteLine("DDRD = DDRD | 0b01100000;"); 
+            writer.WriteLine("DDRB = DDRB | 0b00001110;"); 
+            writer.WriteLine("DDRC = DDRC | 0b00000000;"); //analog pins
             writer.WriteLine("}");
             writer.WriteLine("//End of Setup Func ------------------");
+
             writer.WriteLine("void loop() {");
         }
 
@@ -147,7 +155,9 @@ namespace WindowsFormsApp1
         }
         public static void Ard_MOV(string From, string To)
         {
+            writer.WriteLine("if (dugum){");
             writer.WriteLine("{0} = {1};", To, From);
+            writer.WriteLine("}");
         }
         public static void Ard_CNTUP(string preset, string CNTR, string CNTLAST, string DONE)
         {
@@ -195,11 +205,21 @@ namespace WindowsFormsApp1
         {
             writer.WriteLine("ZCMP({0},{1},{2},{3},{4},{5});", first, middle, last, MF, MM, ML);
         }
+        public static void Ard_ADC(string pin, string destination)
+        {
+            writer.WriteLine("ADC({0},{1});", pin, destination);
+        }
+        public static void Ard_PWM(string pin, string value)
+        {
+            writer.WriteLine("PWM({0},{1});", pin, value);
+        }
         public static void Ard_NetStart()
         {
             writer.WriteLine("//New Network Start ---------------");
             writer.WriteLine("dugum = true;");
         }
+
+
 
         private static void Init_Files()
         {

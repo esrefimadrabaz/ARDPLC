@@ -70,7 +70,7 @@ namespace WindowsFormsApp1
             {
                 foreach (string Pin in Form1.Pre_Used_Pins)
                 {
-                    if (Pin[0] == 'D') { rootNode = new TreeNode(Pin[0] + Pin.Substring(2)); rootNode.Tag = Pin[0] + Pin.Substring(2); }
+                    if (Pin[0] == 'D') { rootNode = new TreeNode(Pin); rootNode.Tag = Pin; }
                     else { rootNode = new TreeNode(Pin); rootNode.Tag = Pin; }
                     treeView2.Nodes.Add(rootNode);
                 }
