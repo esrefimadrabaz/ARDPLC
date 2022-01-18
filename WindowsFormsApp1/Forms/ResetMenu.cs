@@ -24,7 +24,7 @@ namespace WindowsFormsApp1
 
         private void ComboBox2_SelectedIndexChanged(object sender, EventArgs e)
         {
-            if (comboBox2.SelectedIndex == 0) { numericUpDown1.Maximum = 9; numericUpDown1.Minimum = 0; }
+            if (comboBox2.SelectedIndex == 0) { numericUpDown1.Maximum = 4; numericUpDown1.Minimum = 0; }
             else if (comboBox2.SelectedIndex == 1) { numericUpDown1.Maximum = 100; numericUpDown1.Minimum = 0; }
             else if(comboBox2.SelectedIndex == 3) { numericUpDown1.Maximum = 100; numericUpDown1.Minimum = 0; }
             else if (comboBox2.SelectedIndex == 4) { numericUpDown1.Maximum = 9; numericUpDown1.Minimum = 0; }

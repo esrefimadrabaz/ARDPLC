@@ -1,38 +1,29 @@
-extern bool dugum;
-extern bool next;
+bool I0, I1, I2, I3, I4, O0, O1, O2, O3, O4;
+//bool An0, An1, An2, An3, An4;
+bool dugum = true, prl, next;
 
-void NC(int x1) {
-  if (dugum) {
-    if (digitalRead(x1) == LOW) {
-      dugum = true;
-      next = true;
-    }
-    else if (digitalRead(x1) == HIGH) {
-      dugum = false;
-    }
-  }
+
+void IO_Scan(){
+//reading and buffering IO
+I0 = PIND & 0b00000100;
+I1 = PIND & 0b00001000;
+I2 = PIND & 0b00010000;
+I3 = PINB & 0b00000001;
 }
 
-void NO(int x1) {
-  if (dugum) {
-    if (digitalRead(x1) == HIGH) {
-      dugum = true;
-      next = true;
-    }
-    else if (digitalRead(x1) == LOW) {
-      dugum = false;
-    }
-  }
+void IO_Write(){
+if(O0 == true) {PORTD |= 0b00100000;}
+else {PORTD &= ~(0b00100000);}
+if(O1 == true) {PORTD |= 0b01000000;}
+else {PORTD &= ~(0b01000000);}
+if(O2 == true) {PORTB |= 0b00000010;}
+else {PORTB &= ~(0b00000010);}
+if(O3 == true) {PORTB |= 0b00000100;}
+else {PORTB &= ~(0b00000100);}
+if(O4 == true) {PORTB |= 0b00001000;}
+else {PORTB &= ~(0b00001000);}
 }
 
-void Coil(int x1) {
-  if (dugum) {
-    digitalWrite(x1, HIGH);
-  }
-  else {
-    digitalWrite(x1, LOW);
-  }
-}
 
 void cON(int time, int &timer) {
   if (!dugum) {
@@ -80,16 +71,6 @@ void cOFF(int time, int &timer) {
   }
 }
 
-void Set(int x1) {
-  if (dugum) {
-    digitalWrite(x1, HIGH);
-  }
-}
-void Reset (int x1) {
-  if (dugum) {
-    digitalWrite(x1, LOW);
-  }
-}
 
 void Reset_O(int &contact) {
   if (dugum) {
@@ -165,7 +146,7 @@ void ZCMP(float first, float middle, float last, bool &MF, bool &MM, bool &ML)
   }
 }
 
-void ADC(int pin, int &destination)
+void ADC_Alt(int pin, int &destination)
 {
   if(dugum)
    {
@@ -173,7 +154,7 @@ void ADC(int pin, int &destination)
    }
 }
 
-void PWM (int pin, int Value)
+void PWM (int pin, int value)
 {
   if(dugum)
   {

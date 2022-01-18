@@ -56,6 +56,12 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Forms\BuildProgress.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\BuildProgress.Designer.cs">
+      <DependentUpon>BuildProgress.cs</DependentUpon>
+    </Compile>
     <Compile Include="Forms\ADCMenu.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -151,6 +157,9 @@
       <DependentUpon>ResetMenu.cs</DependentUpon>
     </Compile>
     <Compile Include="Classes\SaveLoad.cs" />
+    <EmbeddedResource Include="Forms\BuildProgress.resx">
+      <DependentUpon>BuildProgress.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Forms\ADCMenu.resx">
       <DependentUpon>ADCMenu.cs</DependentUpon>
     </EmbeddedResource>

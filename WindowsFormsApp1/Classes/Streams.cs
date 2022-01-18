@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Diagnostics;
 using System.Text;
 using System.Threading.Tasks;
 using System.IO;
@@ -16,37 +17,24 @@ namespace WindowsFormsApp1
         static string headerName;
         public static void Ard_Init()
         {
-            Init_Files();
+            Init_Files(); //creates the header file inside another folder for .ino
+
+            Debug.WriteLine("=====Header File Created=====");
+
             SavePath = Form1.path.Substring(0, Form1.path.Length-4) + "\\" + headerName + ".ino";
             writer = new StreamWriter(SavePath);
             writer.WriteLine("#include " + "\"" + headerName + ".h\"");
             writer.WriteLine("#include <Wire.h>");
 
-            /*
-            writer.WriteLine("bool dugum = true;");
-            writer.WriteLine("bool prl;");
-            writer.WriteLine("bool next;");
-            */
-
             foreach (string pins in Form1.Used_Pins)
             {
                 if (pins[0] == 'I')
                 {
-                    char newpin = '0';
-                    if (Convert.ToInt32(pins[1]) < 3) { newpin = Convert.ToChar(Convert.ToInt32(pins[1]) + 2); }
-                    else if (Convert.ToInt32(pins[1]) == 3) { newpin = '7'; }
-                    else if (Convert.ToInt32(pins[1]) == 4) { newpin = '8'; }
-                    writer.WriteLine("const int I{0} = {0};", newpin);
+                    break;
                 }
                 else if (pins[0] == 'O')
                 {
-                    string newpin = "0";
-                    if (Convert.ToInt32(pins[1]) == 0) { newpin = "5"; }
-                    else if (Convert.ToInt32(pins[1]) == 1) { newpin = "6"; }
-                    else if (Convert.ToInt32(pins[1]) == 2) { newpin = "9"; }
-                    else if (Convert.ToInt32(pins[1]) == 3) { newpin = "10"; }
-                    else if (Convert.ToInt32(pins[1]) == 3) { newpin = "11"; }
-                    writer.WriteLine("const int O{0} = {0};", newpin);
+                    break;
                 }
                 else if (pins[0] == 'M')
                 {
@@ -102,39 +90,29 @@ namespace WindowsFormsApp1
             writer.WriteLine("//End of Setup Func ------------------");
 
             writer.WriteLine("void loop() {");
+            writer.WriteLine("IO_Scan();");
+
+            Debug.WriteLine("=====Starting the logic cycle.=====");
+
         }
 
         public static void Ard_End()
         {
-            writer.WriteLine("}");
             writer.WriteLine("//end of script ---------------");
+            writer.WriteLine("IO_Write();");
+            writer.WriteLine("}");
             writer.Close();
         }
 
-        public static void Ard_NC(string Pin)
-        {
-
-            writer.WriteLine("NC({0});", Pin);
-        }
         public static void Ard_NC_M(string Pin)
         {
 
             writer.WriteLine("NC_M({0});", Pin);
         }
-        public static void Ard_NO(string Pin)
-        {
-
-            writer.WriteLine("NO({0});", Pin);
-        }
         public static void Ard_NO_M(string Pin)
         {
 
             writer.WriteLine("NO_M({0});", Pin);
-        }
-        public static void Ard_Coil(string Pin)
-        {
-
-            writer.WriteLine("Coil({0});", Pin);
         }
         public static void Ard_Coil_M(string Pin)
         {
@@ -167,17 +145,9 @@ namespace WindowsFormsApp1
         {
             writer.WriteLine("CNTD({0},{1},{2},{3});", preset, CNTR, CNTLAST, DONE);
         }
-        public static void Ard_Set(string pin)
-        {
-            writer.WriteLine("Set({0});", pin);
-        }
         public static void Ard_Set_M(string pin)
         {
             writer.WriteLine("Set_M({0});", pin);
-        }
-        public static void Ard_Reset(string pin)
-        {
-            writer.WriteLine("Reset({0});", pin);
         }
         public static void Ard_Reset_O(string pin)
         {
@@ -218,7 +188,6 @@ namespace WindowsFormsApp1
             writer.WriteLine("//New Network Start ---------------");
             writer.WriteLine("dugum = true;");
         }
-
 
 
         private static void Init_Files()

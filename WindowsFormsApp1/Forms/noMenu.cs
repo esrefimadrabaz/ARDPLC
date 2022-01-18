@@ -41,18 +41,26 @@ namespace WindowsFormsApp1
             if (Convert.ToString(comboBox2.SelectedItem) == "Input")
             {
                 Type = "I";
+                numericUpDown1.Maximum = 4;
+                numericUpDown1.Minimum = 0;
             }
             else if (Convert.ToString(comboBox2.SelectedItem) == "Output")
             {
                 Type = "O";
+                numericUpDown1.Maximum = 4;
+                numericUpDown1.Minimum = 0;
             }
             else if (Convert.ToString(comboBox2.SelectedItem) == "M")
             {
                 Type = "M";
+                numericUpDown1.Maximum = 100;
+                numericUpDown1.Minimum = 0;
             }
-            else if (Convert.ToString(comboBox2.SelectedItem) == "Counter")
+            else if (comboBox2.SelectedIndex == 3)
             {
                 Type = "CNTR";
+                numericUpDown1.Maximum = 100;
+                numericUpDown1.Minimum = 0;
             }
         }
     }

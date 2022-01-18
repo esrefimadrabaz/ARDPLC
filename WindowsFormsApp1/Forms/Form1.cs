@@ -17,6 +17,7 @@ namespace WindowsFormsApp1
 {
     public partial class Form1 : Form
     {
+
         private bool MadeChange;
         private string MainText = "PLC_.1";
         public static string path;
@@ -51,7 +52,6 @@ namespace WindowsFormsApp1
                 btn.Network = "Network_" + network_count;
                 all_list[network_count].Add(btn);
             }
-            
         }
 
 
@@ -539,16 +539,10 @@ namespace WindowsFormsApp1
                 Form Form_1 = Application.OpenForms["Form1"];
                 Form_1.Text = MainText + " - " + path.Split('\\').Last();
             }
+
             Used_Pins = Pre_Used_Pins.Distinct().ToList();
-            Listings.Compile();
-            foreach (int x in all_list.Keys)
-            {
-                Debug.WriteLine(x);
-            }
-            Debug.WriteLine(network_count);
-            Debug.WriteLine("---------------------");
-
-
+            Listings listings = new Listings();
+            listings.Compile();
         }
 
 

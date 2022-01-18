@@ -35,6 +35,7 @@
             this.textBox2 = new System.Windows.Forms.TextBox();
             this.textBox3 = new System.Windows.Forms.TextBox();
             this.panel1 = new System.Windows.Forms.Panel();
+            this.progressBar2 = new System.Windows.Forms.ProgressBar();
             this.richTextBox1 = new System.Windows.Forms.RichTextBox();
             this.button2 = new WindowsFormsApp1.NewButton();
             this.button9 = new WindowsFormsApp1.NewButton();
@@ -142,6 +143,7 @@
             // 
             resources.ApplyResources(this.panel1, "panel1");
             this.panel1.BackColor = System.Drawing.Color.Transparent;
+            this.panel1.Controls.Add(this.progressBar2);
             this.panel1.Controls.Add(this.richTextBox1);
             this.panel1.Controls.Add(this.button2);
             this.panel1.Controls.Add(this.button9);
@@ -156,6 +158,11 @@
             this.panel1.Name = "panel1";
             this.panel1.ControlAdded += new System.Windows.Forms.ControlEventHandler(this.ChangesMade);
             this.panel1.ControlRemoved += new System.Windows.Forms.ControlEventHandler(this.ChangesMade);
+            // 
+            // progressBar2
+            // 
+            resources.ApplyResources(this.progressBar2, "progressBar2");
+            this.progressBar2.Name = "progressBar2";
             // 
             // richTextBox1
             // 
@@ -737,6 +744,7 @@
         private System.Windows.Forms.ToolStripButton toolStripButton5;
         private System.Windows.Forms.RichTextBox richTextBox1;
         private System.Windows.Forms.ToolStripButton toolStripButton15;
+        private System.Windows.Forms.ProgressBar progressBar2;
     }
 }
 

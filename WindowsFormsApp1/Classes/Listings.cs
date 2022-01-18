@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -17,25 +18,79 @@ namespace WindowsFormsApp1
     */
 
     class Listings
-    {
-        public static void Compile()
+    { 
+        private BackgroundWorker compileWorker = new BackgroundWorker();
+        private BuildProgress prgrs;
+        public void Compile()
         {
+            compileWorker.DoWork += new System.ComponentModel.DoWorkEventHandler(compileWorker_DoWork);
+            compileWorker.ProgressChanged += new System.ComponentModel.ProgressChangedEventHandler(compileWorker_ProgressChanged);
+            compileWorker.RunWorkerCompleted += new System.ComponentModel.RunWorkerCompletedEventHandler(compileWorker_Complete);
+            compileWorker.WorkerReportsProgress= true;
+            compileWorker.RunWorkerAsync();
+
+            prgrs = new BuildProgress();
+            prgrs.ShowDialog();
+        }
+
+        private void compileWorker_DoWork(object sender, DoWorkEventArgs e)
+        {
+            BackgroundWorker tempWorker = sender as BackgroundWorker;
+
             Streams.Ard_Init();
+            tempWorker.ReportProgress(15);
             foreach (int nets in Form1.all_list.Keys)
             {
                 Streams.Ard_NetStart();
-                Debug.WriteLine(nets);
                 foreach (NewButton x in Form1.all_list[nets])
                 {
                     Sort(x);
-                   
                 }
+
+                Debug.WriteLine(("=====Network"+ nets + " is complete."));
             }
             Streams.Ard_End();
+            tempWorker.ReportProgress(50);
+            Build_Init();
+            tempWorker.ReportProgress(100);
         }
 
-        public static void Sort(NewButton btn)
-        {            
+        private void compileWorker_ProgressChanged(object sender, ProgressChangedEventArgs e)
+        {
+            ProgressBar tempBar = prgrs.Controls[1] as ProgressBar;
+            tempBar.Value = e.ProgressPercentage;
+        }
+        private void compileWorker_Complete(object sender, RunWorkerCompletedEventArgs e)
+        {
+            BackgroundWorker tempWorker = sender as BackgroundWorker;
+            if (!tempWorker.IsBusy)
+            {
+                Debug.WriteLine("=====Build done.=====");
+                prgrs.Close();
+                MessageBox.Show("Build Complete", "Build Complete", MessageBoxButtons.OK);
+            }
+        }
+        
+
+        public void Build_Init()
+        {
+            string strCmdText;
+            string strCmdText1;
+            string build;
+            string ino;
+            build = Form1.path.Substring(0, Form1.path.Length - 4); //C:/Users/Oguz/Desktop/portmanip/Ports
+            ino = build + "\\" + build.Split('\\').Last() + ".ino"; ////C:/Users/Oguz/Desktop/portmanip/Ports/Ports.ino
+
+            strCmdText =  "/C cd C:/Program Files (x86)/Arduino";
+            strCmdText1 = strCmdText + "&" + "arduino --pref build.path=" + build + "\\build --verify " + ino;
+
+            Process.Start("CMD.exe", strCmdText1);
+           
+            
+        }
+
+        public void Sort(NewButton btn)
+        {
             switch(btn.AccessibleDescription)
             {
                 case "0": //NO
@@ -44,9 +99,8 @@ namespace WindowsFormsApp1
 
                         Streams.writer.WriteLine("");
                         Streams.writer.WriteLine("if(dugum) {prl = true;}");
-                        if (btn.AccessibleName[0] == 'M') {Streams.Ard_NO_M(btn.AccessibleName);}
-                        else if (btn.AccessibleName[0] == 'C') { Streams.Ard_NO_M(btn.AccessibleName + "D"); }
-                        else {Streams.Ard_NO(btn.AccessibleName); }
+                        if (btn.AccessibleName[0] == 'C') { Streams.Ard_NO_M(btn.AccessibleName + "D"); }
+                        else {Streams.Ard_NO_M(btn.AccessibleName); }
                         Streams.writer.WriteLine("if (prl)  {dugum=true;}");
                         Sort(btn.PrlTo);
                         Streams.writer.WriteLine("if (next) { dugum = true; }");
@@ -55,9 +109,8 @@ namespace WindowsFormsApp1
                     }
                     else
                     {
-                        if (btn.AccessibleName[0] == 'M') { Streams.Ard_NO_M(btn.AccessibleName); }
-                        else if (btn.AccessibleName[0] == 'C') { Streams.Ard_NO_M(btn.AccessibleName + "D"); }
-                        else { Streams.Ard_NO(btn.AccessibleName); }
+                        if (btn.AccessibleName[0] == 'C') { Streams.Ard_NO_M(btn.AccessibleName + "D"); }
+                        else { Streams.Ard_NO_M(btn.AccessibleName); }
                     }
                     break;
                 case "1": //NC
@@ -65,9 +118,8 @@ namespace WindowsFormsApp1
                     {
                         Streams.writer.WriteLine("");
                         Streams.writer.WriteLine("if(dugum) {prl = true;}");
-                        if (btn.AccessibleName[0] == 'M') { Streams.Ard_NC_M(btn.AccessibleName); }
-                        else if (btn.AccessibleName[0] == 'C') { Streams.Ard_NC_M(btn.AccessibleName + "D"); }
-                        else { Streams.Ard_NC(btn.AccessibleName); }
+                        if (btn.AccessibleName[0] == 'C') { Streams.Ard_NC_M(btn.AccessibleName + "D"); }
+                        else { Streams.Ard_NC_M(btn.AccessibleName); }
                         Streams.writer.WriteLine("if (prl)  {dugum=true;}");
                         Sort(btn.PrlTo);
                         Streams.writer.WriteLine("if (next) { dugum = true; }");
@@ -75,9 +127,8 @@ namespace WindowsFormsApp1
                     }
                     else
                     {
-                        if (btn.AccessibleName[0] == 'M') { Streams.Ard_NC_M(btn.AccessibleName); }
-                        else if (btn.AccessibleName[0] == 'C') { Streams.Ard_NC_M(btn.AccessibleName + "D"); }
-                        else { Streams.Ard_NC(btn.AccessibleName); }
+                        if (btn.AccessibleName[0] == 'C') { Streams.Ard_NC_M(btn.AccessibleName + "D"); }
+                        else { Streams.Ard_NC_M(btn.AccessibleName); }
                     }
                     break;
                 case "2": //CLOCK ON
@@ -117,8 +168,7 @@ namespace WindowsFormsApp1
                     {
                         Streams.writer.WriteLine("");
                         Streams.writer.WriteLine("if(dugum) {prl = true;}");
-                        if (btn.AccessibleName[0] == 'M') { Streams.Ard_Coil_M(btn.AccessibleName); }
-                        else { Streams.Ard_Coil(btn.AccessibleName); }
+                        Streams.Ard_Coil_M(btn.AccessibleName);
                         Streams.writer.WriteLine("if (prl)  {dugum=true;}");
                         Sort(btn.PrlTo);
                         Streams.writer.WriteLine("if (next) { dugum = true; }");
@@ -126,8 +176,7 @@ namespace WindowsFormsApp1
                     }
                     else
                     {
-                        if (btn.AccessibleName[0] == 'M') { Streams.Ard_Coil_M(btn.AccessibleName); }
-                        else { Streams.Ard_Coil(btn.AccessibleName); }
+                        Streams.Ard_Coil_M(btn.AccessibleName);
                     }
                     break;
                 case "5": // MOV
@@ -189,8 +238,7 @@ namespace WindowsFormsApp1
                     {
                         Streams.writer.WriteLine("");
                         Streams.writer.WriteLine("if(dugum) {prl = true;}");
-                        if (btn.AccessibleName[0] == 'M') { Streams.Ard_Set_M(btn.AccessibleName); }
-                        else { Streams.Ard_Set(btn.AccessibleName); }
+                        Streams.Ard_Set_M(btn.AccessibleName);
                         Streams.writer.WriteLine("if (prl)  {dugum=true;}");
                         Sort(btn.PrlTo);
                         Streams.writer.WriteLine("if (next) { dugum = true; }");
@@ -198,8 +246,7 @@ namespace WindowsFormsApp1
                     }
                     else
                     {
-                        if (btn.AccessibleName[0] == 'M') { Streams.Ard_Set_M(btn.AccessibleName); }
-                        else { Streams.Ard_Set(btn.AccessibleName); }
+                        Streams.Ard_Set_M(btn.AccessibleName);
                     }
                     break;
                 case "9": //RESET
@@ -208,7 +255,8 @@ namespace WindowsFormsApp1
                         Streams.writer.WriteLine("");
                         Streams.writer.WriteLine("if(dugum) {prl = true;}");
                         if (btn.AccessibleName[0] == 'M') { Streams.Ard_Reset_M(btn.AccessibleName); }
-                        else if (btn.AccessibleName[0] == 'O') { Streams.Ard_Reset(btn.AccessibleName); }
+                        else if (btn.AccessibleName[0] == 'O') { Streams.Ard_Reset_M(btn.AccessibleName); }
+                        else if (btn.AccessibleName[0] == 'T') { Streams.Ard_Reset_T(btn.AccessibleName); }
                         else { Streams.Ard_Reset_O(btn.AccessibleName); }
                         Streams.writer.WriteLine("if (prl)  {dugum=true;}");
                         Sort(btn.PrlTo);
@@ -218,7 +266,7 @@ namespace WindowsFormsApp1
                     else
                     {
                         if (btn.AccessibleName[0] == 'M') { Streams.Ard_Reset_M(btn.AccessibleName); }
-                        else if (btn.AccessibleName[0] == 'O') { Streams.Ard_Reset(btn.AccessibleName); }
+                        else if (btn.AccessibleName[0] == 'O') { Streams.Ard_Reset_M(btn.AccessibleName); }
                         else if (btn.AccessibleName[0] == 'T') { Streams.Ard_Reset_T(btn.AccessibleName); }
                         else { Streams.Ard_Reset_O(btn.AccessibleName); }
                     }
