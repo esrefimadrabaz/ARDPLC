@@ -15,6 +15,7 @@ namespace WindowsFormsApp1
         static string SavePath;
         public static StreamWriter writer;
         static string headerName;
+        //public static Dictionary<string, StringBuilder> Sbuilders = new Dictionary<string, StringBuilder>();
         public static void Ard_Init()
         {
             Init_Files(); //creates the header file inside another folder for .ino
@@ -22,7 +23,10 @@ namespace WindowsFormsApp1
             Debug.WriteLine("=====Header File Created=====");
 
             SavePath = Form1.path.Substring(0, Form1.path.Length-4) + "\\" + headerName + ".ino";
+            //Sbuilders.Add("Main", new StringBuilder());
+
             writer = new StreamWriter(SavePath);
+            
             writer.WriteLine("#include " + "\"" + headerName + ".h\"");
             writer.WriteLine("#include <Wire.h>");
 
@@ -86,6 +90,7 @@ namespace WindowsFormsApp1
             writer.WriteLine("DDRD = DDRD | 0b01100000;"); 
             writer.WriteLine("DDRB = DDRB | 0b00001110;"); 
             writer.WriteLine("DDRC = DDRC | 0b00000000;"); //analog pins
+            Ard_EXTI_Init();
             writer.WriteLine("}");
             writer.WriteLine("//End of Setup Func ------------------");
 
@@ -188,8 +193,24 @@ namespace WindowsFormsApp1
             writer.WriteLine("//New Network Start ---------------");
             writer.WriteLine("dugum = true;");
         }
+        public static void Ard_EXTI_Init()
+        {
+            foreach(string Temp in Form1.Used_Pins)
+            {
+                if (Temp.Contains("EXTI"))
+                {
+                    string mode = null;
+                    if(Temp.Substring(5) == "R") { mode = "Rising"; }
+                    if (Temp.Substring(5) == "F") { mode = "Falling"; }
+                    if (Temp.Substring(5) == "C") { mode = "Change"; }
+                    writer.WriteLine(Temp.Substring(4) + "," + Temp.Substring(0,5) + "," + mode);
+                }
+            }
+        }
+        public static void Ard_EXTI_Def()
+        {
 
-
+        }
         private static void Init_Files()
         {
             headerName = Form1.path.Split('\\').Last();

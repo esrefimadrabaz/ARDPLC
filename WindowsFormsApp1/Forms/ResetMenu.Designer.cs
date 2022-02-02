@@ -56,7 +56,8 @@
             "M",
             "CNTR",
             "TON",
-            "TOFF"});
+            "TOFF",
+            "TRO"});
             this.comboBox2.Location = new System.Drawing.Point(31, 63);
             this.comboBox2.Name = "comboBox2";
             this.comboBox2.Size = new System.Drawing.Size(104, 21);

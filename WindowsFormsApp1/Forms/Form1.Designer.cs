@@ -32,10 +32,10 @@
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form1));
             this.splitContainer1 = new System.Windows.Forms.SplitContainer();
             this.leftPanel1 = new WindowsFormsApp1.LeftPanels();
+            this.SimButton = new System.Windows.Forms.Button();
             this.textBox2 = new System.Windows.Forms.TextBox();
             this.textBox3 = new System.Windows.Forms.TextBox();
             this.panel1 = new System.Windows.Forms.Panel();
-            this.progressBar2 = new System.Windows.Forms.ProgressBar();
             this.richTextBox1 = new System.Windows.Forms.RichTextBox();
             this.button2 = new WindowsFormsApp1.NewButton();
             this.button9 = new WindowsFormsApp1.NewButton();
@@ -63,6 +63,9 @@
             this.toolStripButton14 = new System.Windows.Forms.ToolStripButton();
             this.toolStripButton5 = new System.Windows.Forms.ToolStripButton();
             this.toolStripButton15 = new System.Windows.Forms.ToolStripButton();
+            this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.heyeheyToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.bumToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
             this.fileToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
             this.newToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -93,12 +96,14 @@
             this.toolStripSeparator7 = new System.Windows.Forms.ToolStripSeparator();
             this.aboutToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.bindingSource1 = new System.Windows.Forms.BindingSource(this.components);
+            this.toolStripButton16 = new System.Windows.Forms.ToolStripButton();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
             this.splitContainer1.Panel1.SuspendLayout();
             this.splitContainer1.Panel2.SuspendLayout();
             this.splitContainer1.SuspendLayout();
             this.panel1.SuspendLayout();
             this.toolStrip1.SuspendLayout();
+            this.contextMenuStrip1.SuspendLayout();
             this.menuStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.bindingSource1)).BeginInit();
             this.SuspendLayout();
@@ -118,6 +123,7 @@
             // splitContainer1.Panel2
             // 
             resources.ApplyResources(this.splitContainer1.Panel2, "splitContainer1.Panel2");
+            this.splitContainer1.Panel2.Controls.Add(this.SimButton);
             this.splitContainer1.Panel2.Controls.Add(this.textBox2);
             this.splitContainer1.Panel2.Controls.Add(this.textBox3);
             this.splitContainer1.Panel2.Controls.Add(this.panel1);
@@ -128,6 +134,14 @@
             // 
             resources.ApplyResources(this.leftPanel1, "leftPanel1");
             this.leftPanel1.Name = "leftPanel1";
+            // 
+            // SimButton
+            // 
+            this.SimButton.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
+            resources.ApplyResources(this.SimButton, "SimButton");
+            this.SimButton.Name = "SimButton";
+            this.SimButton.UseVisualStyleBackColor = true;
+            this.SimButton.Click += new System.EventHandler(this.SimButton_Click);
             // 
             // textBox2
             // 
@@ -143,7 +157,6 @@
             // 
             resources.ApplyResources(this.panel1, "panel1");
             this.panel1.BackColor = System.Drawing.Color.Transparent;
-            this.panel1.Controls.Add(this.progressBar2);
             this.panel1.Controls.Add(this.richTextBox1);
             this.panel1.Controls.Add(this.button2);
             this.panel1.Controls.Add(this.button9);
@@ -159,11 +172,6 @@
             this.panel1.ControlAdded += new System.Windows.Forms.ControlEventHandler(this.ChangesMade);
             this.panel1.ControlRemoved += new System.Windows.Forms.ControlEventHandler(this.ChangesMade);
             // 
-            // progressBar2
-            // 
-            resources.ApplyResources(this.progressBar2, "progressBar2");
-            this.progressBar2.Name = "progressBar2";
-            // 
             // richTextBox1
             // 
             resources.ApplyResources(this.richTextBox1, "richTextBox1");
@@ -177,11 +185,15 @@
             this.button2.FlatAppearance.BorderSize = 0;
             this.button2.ForeColor = System.Drawing.Color.Black;
             this.button2.HasPrl = false;
+            this.button2.Last = false;
             this.button2.Name = "button2";
             this.button2.Network = null;
             this.button2.Parallels = null;
             this.button2.PrlTo = null;
+            this.button2.Status = false;
+            this.button2.timer = null;
             this.button2.UseVisualStyleBackColor = false;
+            this.button2.Value = 0;
             this.button2.BackgroundImageChanged += new System.EventHandler(this.ChangesMadeEvent);
             this.button2.Click += new System.EventHandler(this.Button2_Click);
             this.button2.MouseEnter += new System.EventHandler(this.Button2_MouseEnter);
@@ -195,11 +207,15 @@
             this.button9.FlatAppearance.BorderSize = 0;
             this.button9.ForeColor = System.Drawing.Color.Black;
             this.button9.HasPrl = false;
+            this.button9.Last = false;
             this.button9.Name = "button9";
             this.button9.Network = null;
             this.button9.Parallels = null;
             this.button9.PrlTo = null;
+            this.button9.Status = false;
+            this.button9.timer = null;
             this.button9.UseVisualStyleBackColor = false;
+            this.button9.Value = 0;
             this.button9.BackgroundImageChanged += new System.EventHandler(this.ChangesMadeEvent);
             this.button9.Click += new System.EventHandler(this.Button2_Click);
             this.button9.MouseEnter += new System.EventHandler(this.Button2_MouseEnter);
@@ -213,11 +229,15 @@
             this.button8.FlatAppearance.BorderSize = 0;
             this.button8.ForeColor = System.Drawing.Color.Black;
             this.button8.HasPrl = false;
+            this.button8.Last = false;
             this.button8.Name = "button8";
             this.button8.Network = null;
             this.button8.Parallels = null;
             this.button8.PrlTo = null;
+            this.button8.Status = false;
+            this.button8.timer = null;
             this.button8.UseVisualStyleBackColor = false;
+            this.button8.Value = 0;
             this.button8.BackgroundImageChanged += new System.EventHandler(this.ChangesMadeEvent);
             this.button8.Click += new System.EventHandler(this.Button2_Click);
             this.button8.MouseEnter += new System.EventHandler(this.Button2_MouseEnter);
@@ -231,11 +251,15 @@
             this.button7.FlatAppearance.BorderSize = 0;
             this.button7.ForeColor = System.Drawing.Color.Black;
             this.button7.HasPrl = false;
+            this.button7.Last = false;
             this.button7.Name = "button7";
             this.button7.Network = null;
             this.button7.Parallels = null;
             this.button7.PrlTo = null;
+            this.button7.Status = false;
+            this.button7.timer = null;
             this.button7.UseVisualStyleBackColor = false;
+            this.button7.Value = 0;
             this.button7.BackgroundImageChanged += new System.EventHandler(this.ChangesMadeEvent);
             this.button7.Click += new System.EventHandler(this.Button2_Click);
             this.button7.MouseEnter += new System.EventHandler(this.Button2_MouseEnter);
@@ -249,11 +273,15 @@
             this.button6.FlatAppearance.BorderSize = 0;
             this.button6.ForeColor = System.Drawing.Color.Black;
             this.button6.HasPrl = false;
+            this.button6.Last = false;
             this.button6.Name = "button6";
             this.button6.Network = null;
             this.button6.Parallels = null;
             this.button6.PrlTo = null;
+            this.button6.Status = false;
+            this.button6.timer = null;
             this.button6.UseVisualStyleBackColor = false;
+            this.button6.Value = 0;
             this.button6.BackgroundImageChanged += new System.EventHandler(this.ChangesMadeEvent);
             this.button6.Click += new System.EventHandler(this.Button2_Click);
             this.button6.MouseEnter += new System.EventHandler(this.Button2_MouseEnter);
@@ -267,11 +295,15 @@
             this.button5.FlatAppearance.BorderSize = 0;
             this.button5.ForeColor = System.Drawing.Color.Black;
             this.button5.HasPrl = false;
+            this.button5.Last = false;
             this.button5.Name = "button5";
             this.button5.Network = null;
             this.button5.Parallels = null;
             this.button5.PrlTo = null;
+            this.button5.Status = false;
+            this.button5.timer = null;
             this.button5.UseVisualStyleBackColor = false;
+            this.button5.Value = 0;
             this.button5.BackgroundImageChanged += new System.EventHandler(this.ChangesMadeEvent);
             this.button5.Click += new System.EventHandler(this.Button2_Click);
             this.button5.MouseEnter += new System.EventHandler(this.Button2_MouseEnter);
@@ -285,11 +317,15 @@
             this.button4.FlatAppearance.BorderSize = 0;
             this.button4.ForeColor = System.Drawing.Color.Black;
             this.button4.HasPrl = false;
+            this.button4.Last = false;
             this.button4.Name = "button4";
             this.button4.Network = null;
             this.button4.Parallels = null;
             this.button4.PrlTo = null;
+            this.button4.Status = false;
+            this.button4.timer = null;
             this.button4.UseVisualStyleBackColor = false;
+            this.button4.Value = 0;
             this.button4.BackgroundImageChanged += new System.EventHandler(this.ChangesMadeEvent);
             this.button4.Click += new System.EventHandler(this.Button2_Click);
             this.button4.MouseEnter += new System.EventHandler(this.Button2_MouseEnter);
@@ -303,11 +339,15 @@
             this.button3.FlatAppearance.BorderSize = 0;
             this.button3.ForeColor = System.Drawing.Color.Black;
             this.button3.HasPrl = false;
+            this.button3.Last = false;
             this.button3.Name = "button3";
             this.button3.Network = null;
             this.button3.Parallels = null;
             this.button3.PrlTo = null;
+            this.button3.Status = false;
+            this.button3.timer = null;
             this.button3.UseVisualStyleBackColor = false;
+            this.button3.Value = 0;
             this.button3.BackgroundImageChanged += new System.EventHandler(this.ChangesMadeEvent);
             this.button3.Click += new System.EventHandler(this.Button2_Click);
             this.button3.MouseEnter += new System.EventHandler(this.Button2_MouseEnter);
@@ -321,11 +361,15 @@
             this.button1.FlatAppearance.BorderSize = 0;
             this.button1.ForeColor = System.Drawing.Color.Black;
             this.button1.HasPrl = false;
+            this.button1.Last = false;
             this.button1.Name = "button1";
             this.button1.Network = null;
             this.button1.Parallels = null;
             this.button1.PrlTo = null;
+            this.button1.Status = false;
+            this.button1.timer = null;
             this.button1.UseVisualStyleBackColor = false;
+            this.button1.Value = 0;
             this.button1.BackgroundImageChanged += new System.EventHandler(this.ChangesMadeEvent);
             this.button1.Click += new System.EventHandler(this.Button2_Click);
             this.button1.MouseEnter += new System.EventHandler(this.Button2_MouseEnter);
@@ -360,9 +404,10 @@
             this.toolStripButton13,
             this.toolStripButton14,
             this.toolStripButton5,
-            this.toolStripButton15});
+            this.toolStripButton15,
+            this.toolStripButton16});
+            this.toolStrip1.LayoutStyle = System.Windows.Forms.ToolStripLayoutStyle.HorizontalStackWithOverflow;
             this.toolStrip1.Name = "toolStrip1";
-            this.toolStrip1.Stretch = true;
             // 
             // toolStripButton4
             // 
@@ -471,6 +516,26 @@
             this.toolStripButton15.Image = global::WindowsFormsApp1.Properties.Resources.clock_n;
             this.toolStripButton15.Name = "toolStripButton15";
             this.toolStripButton15.Click += new System.EventHandler(this.ToolStripButton15_Click);
+            // 
+            // contextMenuStrip1
+            // 
+            this.contextMenuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.heyeheyToolStripMenuItem,
+            this.bumToolStripMenuItem});
+            this.contextMenuStrip1.Name = "contextMenuStrip1";
+            resources.ApplyResources(this.contextMenuStrip1, "contextMenuStrip1");
+            // 
+            // heyeheyToolStripMenuItem
+            // 
+            this.heyeheyToolStripMenuItem.Name = "heyeheyToolStripMenuItem";
+            resources.ApplyResources(this.heyeheyToolStripMenuItem, "heyeheyToolStripMenuItem");
+            this.heyeheyToolStripMenuItem.Click += new System.EventHandler(this.HeyeheyToolStripMenuItem_Click);
+            // 
+            // bumToolStripMenuItem
+            // 
+            this.bumToolStripMenuItem.Name = "bumToolStripMenuItem";
+            resources.ApplyResources(this.bumToolStripMenuItem, "bumToolStripMenuItem");
+            this.bumToolStripMenuItem.Click += new System.EventHandler(this.HeyeheyToolStripMenuItem_Click1);
             // 
             // menuStrip1
             // 
@@ -653,6 +718,14 @@
             this.aboutToolStripMenuItem.Name = "aboutToolStripMenuItem";
             resources.ApplyResources(this.aboutToolStripMenuItem, "aboutToolStripMenuItem");
             // 
+            // toolStripButton16
+            // 
+            resources.ApplyResources(this.toolStripButton16, "toolStripButton16");
+            this.toolStripButton16.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
+            this.toolStripButton16.Image = global::WindowsFormsApp1.Properties.Resources.clock_n;
+            this.toolStripButton16.Name = "toolStripButton16";
+            this.toolStripButton16.Click += new System.EventHandler(this.ISRButton_Click);
+            // 
             // Form1
             // 
             resources.ApplyResources(this, "$this");
@@ -673,6 +746,7 @@
             this.panel1.ResumeLayout(false);
             this.toolStrip1.ResumeLayout(false);
             this.toolStrip1.PerformLayout();
+            this.contextMenuStrip1.ResumeLayout(false);
             this.menuStrip1.ResumeLayout(false);
             this.menuStrip1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.bindingSource1)).EndInit();
@@ -744,7 +818,11 @@
         private System.Windows.Forms.ToolStripButton toolStripButton5;
         private System.Windows.Forms.RichTextBox richTextBox1;
         private System.Windows.Forms.ToolStripButton toolStripButton15;
-        private System.Windows.Forms.ProgressBar progressBar2;
+        private System.Windows.Forms.Button SimButton;
+        private System.Windows.Forms.ContextMenuStrip contextMenuStrip1;
+        private System.Windows.Forms.ToolStripMenuItem heyeheyToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem bumToolStripMenuItem;
+        private System.Windows.Forms.ToolStripButton toolStripButton16;
     }
 }
 

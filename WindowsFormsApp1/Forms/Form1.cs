@@ -17,25 +17,34 @@ namespace WindowsFormsApp1
 {
     public partial class Form1 : Form
     {
+        public delegate void SimulationUpdate(NewButton newButton);
+        public SimulationUpdate mySimulationUpdate;
+        private SimulationA sim;
+        public static bool SimMode;
 
+        private bool buton_checked = false;
         private bool MadeChange;
+        private bool ISR;
+
         private string MainText = "PLC_.1";
         public static string path;
         string buton;
-        private bool buton_checked = false;
+        
         private List<NewButton> network_1;
         private NewButton yaratilan;
         private NewButton previous;
         private NewButton secili;
         private NewButton prl_to;
+
         public static int network_count = 1;
         int x = 10;
         int y = 150;
         int x_loc = 0;
+
         public static SortedDictionary<int, List<NewButton>> all_list;
         public static List<string> Pre_Used_Pins;
         public static List<string> Used_Pins;
-        private StreamReader reader;
+        
 
 
         public Form1()
@@ -48,10 +57,11 @@ namespace WindowsFormsApp1
             all_list = new SortedDictionary<int, List<NewButton>>();
             all_list.Add(network_count, new List<NewButton>());
             foreach (NewButton btn in network_1)
-            {                
+            {
                 btn.Network = "Network_" + network_count;
                 all_list[network_count].Add(btn);
             }
+            mySimulationUpdate = new SimulationUpdate(delgtSimulationUpdate);
         }
 
 
@@ -78,9 +88,6 @@ namespace WindowsFormsApp1
             {
                 all_list[network_count].Add(btn);
             }
-            Debug.WriteLine("hey");
-
-
         }
         private void ToolStripButton3_Click(object sender, EventArgs e) // link button
         {
@@ -110,6 +117,7 @@ namespace WindowsFormsApp1
                 if (menuu.ShowDialog() == DialogResult.OK)
                 {
                     secili.AccessibleName = menuu.Type + Convert.ToString(menuu.Pin); // I-M-O-CNTR + PİN
+                    secili.Text = secili.AccessibleName;
                     addtoUsed(secili.AccessibleName);
                     secili.BackgroundImage = toolStripButton1.BackgroundImage;
                     secili.AccessibleDescription = "0";
@@ -126,6 +134,7 @@ namespace WindowsFormsApp1
                 if (menuu.ShowDialog() == DialogResult.OK)
                 {
                     secili.AccessibleName = menuu.Type + Convert.ToString(menuu.Pin); // I-M-O-CNTR + PİN
+                    secili.Text = secili.AccessibleName;
                     addtoUsed(secili.AccessibleName);
                     secili.BackgroundImage = toolStripButton2.BackgroundImage;
                     secili.AccessibleDescription = "1";
@@ -188,7 +197,7 @@ namespace WindowsFormsApp1
                     if (clock.Type.Substring(0, 3) == "TON") //timeron
                     {
                         secili.AccessibleName = "TON" + clock.Timer;
-                        addtoUsed(secili.AccessibleName); 
+                        addtoUsed(secili.AccessibleName);
                         if (clock.Interval_Def == "K") { secili.Text = "TON=" + clock.Interval; }
                         else { secili.Text = "TON=" + clock.Interval_Def + clock.Interval; }
 
@@ -227,6 +236,7 @@ namespace WindowsFormsApp1
                     if (menuu.ShowDialog() == DialogResult.OK)
                     {
                         secili.AccessibleName = menuu.Type + Convert.ToString(menuu.Pin);
+                        secili.Text = secili.AccessibleName;
                         addtoUsed(secili.AccessibleName); // O-M + PİN
                         secili.BackgroundImage = toolStripButton8.BackgroundImage;
                         secili.AccessibleDescription = "4";
@@ -275,7 +285,7 @@ namespace WindowsFormsApp1
                 if (counter.ShowDialog() == DialogResult.OK)
                 {
                     secili.AccessibleName = "CNTR" + counter.Counter;
-                    addtoUsed(secili.AccessibleName); 
+                    addtoUsed(secili.AccessibleName);
                     if (counter.Type == "CounterUp")
                     {
                         secili.AccessibleDescription = "6";
@@ -363,9 +373,10 @@ namespace WindowsFormsApp1
                         string dispName = "D" + Convert.ToString(Arithmetic.PostValue);
                         foreach (string pin in Pre_Used_Pins.ToList())
                         {
-                            if (pin[0] + pin.Substring(2) == dispName) {
-                                addtoUsed("D" + pin[1] + Convert.ToString(Arithmetic.ResultValue));  
-                            } 
+                            if (pin[0] + pin.Substring(2) == dispName)
+                            {
+                                addtoUsed("D" + pin[1] + Convert.ToString(Arithmetic.ResultValue));
+                            }
                         }
                     }
                     if (Arithmetic.PreDef == "D")
@@ -424,7 +435,7 @@ namespace WindowsFormsApp1
         }
         private void ToolStripButton5_Click(object sender, EventArgs e) // ADC Button
         {
-            if (!buton_checked) {return;}
+            if (!buton_checked) { return; }
 
             secili.BackgroundImage = Properties.Resources.clock_n;
             deletefromUsed(secili.AccessibleName);
@@ -462,6 +473,40 @@ namespace WindowsFormsApp1
                 {
                     secili.BackgroundImage = Properties.Resources.link;
                 }
+            }
+        }
+        private void ISRButton_Click(object sender, EventArgs e)
+        {
+            if (!buton_checked) { return; }
+            int tempNet = Convert.ToInt32(secili.Network.Split('_')[1]);
+            if ((all_list[tempNet][1] == secili) && ISR == false)
+            {
+                using (EXTIMenu EXTI = new EXTIMenu())
+                {
+                    if(EXTI.ShowDialog() == DialogResult.OK)
+                    {
+                        secili.BackgroundImage = Properties.Resources.clock_n;
+                        secili.AccessibleDescription = "18";
+                        deletefromUsed(secili.AccessibleName);
+                        ISR = true;
+                        secili.Text = "EXTI-" + EXTI.Pin + "-" + EXTI.Mode;
+                        secili.AccessibleName = "EXTI" + EXTI.Pin;
+                        addtoUsed("I" + EXTI.Pin);
+                        addtoUsed("EXTI" + EXTI.Pin + EXTI.Mode[0]);
+                    }
+                    else
+                    {
+                        return;
+                    }
+                }
+            }
+            else if ((all_list[tempNet].Last() == secili) && ISR == true)
+            {
+                secili.BackgroundImage = Properties.Resources.clock_n;
+                secili.AccessibleDescription = "18";
+                deletefromUsed(secili.AccessibleName);
+                ISR = false;
+                secili.Text = "EXTI END";
             }
         }
 
@@ -544,7 +589,37 @@ namespace WindowsFormsApp1
             Listings listings = new Listings();
             listings.Compile();
         }
+        private void SimButton_Click(object sender, EventArgs e)
+        {
+            if (buton_checked) { return; }
+            DialogResult result = MessageBox.Show("Simulation mode only works with integers.", "Warning", MessageBoxButtons.OKCancel);
+            if (result == DialogResult.Cancel)
+            {
+                return;
+            }
+            else if (result == DialogResult.OK)
+            {
+                SimMode = true;
+                Debug.WriteLine("=====Enter simulation mode.=====");
+                foreach (int key in all_list.Keys)
+                {
+                    foreach (NewButton tempButton in all_list[key])
+                    {
+                        try
+                        {
+                            if (tempButton.AccessibleName[0] == 'I')
+                            {
+                                tempButton.ContextMenuStrip = contextMenuStrip1;
+                            }
+                        }
+                        catch { continue; }
+                    }
+                } //add right click menu to Input buttons
 
+                sim = new SimulationA();
+                sim.SimulationStart(this);
+            }
+        } //simulation button
 
 
         private void Buton_yarat(int pos_x, int pos_y, Image img, int size_x, int size_y, bool down)
@@ -584,7 +659,7 @@ namespace WindowsFormsApp1
             {
                 foreach (string temp in Pre_Used_Pins)
                 {
-                    if ((temp[0] + temp.Substring(2) == foo[0]+foo.Substring(2)) && (temp[1] != foo[1]))
+                    if ((temp[0] + temp.Substring(2) == foo[0] + foo.Substring(2)) && (temp[1] != foo[1]))
                     {
                         MessageBox.Show("This adress is already declared.", "Error", MessageBoxButtons.OK);
 
@@ -594,7 +669,7 @@ namespace WindowsFormsApp1
                     }
                 }
             }
-            Pre_Used_Pins.Add(foo);           
+            Pre_Used_Pins.Add(foo);
         }
         private void deletefromUsed(string foo)
         {
@@ -612,6 +687,10 @@ namespace WindowsFormsApp1
                 }
                 else if (foo.Contains(tmp))
                 {
+                    if(foo[0] == 'E')
+                    {
+                        Pre_Used_Pins.Remove(foo);
+                    }
                     Pre_Used_Pins.Remove(tmp);
                     return;
                 }
@@ -622,7 +701,7 @@ namespace WindowsFormsApp1
         }
         private void DeleteParallel(NewButton foo)
         {
-            if (foo.AccessibleName == "down" && (foo.AccessibleDescription =="99" || foo.AccessibleDescription =="98"))
+            if (foo.AccessibleName == "down" && (foo.AccessibleDescription == "99" || foo.AccessibleDescription == "98"))
             {
                 NewButton foo1;
                 NewButton foo2;
@@ -657,7 +736,7 @@ namespace WindowsFormsApp1
                     foo3.Dispose();
                     this.Controls.Remove(foo3);
                 }
-                
+
                 fooToFix = secili.PrlTo;
                 if (fooToFix != null)
                 {
@@ -668,7 +747,6 @@ namespace WindowsFormsApp1
         }
         private void DeleteNetwork(NewButton foo)
         {
-            Debug.WriteLine(all_list.Count);
             bool checking;
             int newKey = Convert.ToInt32(foo.Network.Split('_')[1]);
             List<NewButton> Net_Buttons = all_list[newKey];
@@ -687,27 +765,28 @@ namespace WindowsFormsApp1
                 x.Dispose();
                 this.Controls.Remove(x);
             }
-            if (newKey != all_list.Keys.Last()) {checking = true; }
-            else {checking = false; }
+            if (newKey != all_list.Keys.Last()) { checking = true; }
+            else { checking = false; }
             all_list.Remove(newKey);
 
             if (checking)
             {
-                for (int x = newKey + 1; x<= all_list.Keys.Last(); x++)
+                for (int x = newKey + 1; x <= all_list.Keys.Last(); x++)
                 {
                     List<NewButton> disposable = all_list[x];
-                    foreach(NewButton dispBtn in disposable)
+                    foreach (NewButton dispBtn in disposable)
                     {
                         dispBtn.Network = "Network_" + Convert.ToString(x - 1);
                         dispBtn.Location = new Point(dispBtn.Location.X, dispBtn.Location.Y - 150);
-                        if (dispBtn.HasPrl) {
+                        if (dispBtn.HasPrl)
+                        {
                             dispBtn.PrlTo.Location = new Point(dispBtn.PrlTo.Location.X, dispBtn.PrlTo.Location.Y - 150);
 
                             dispBtn.PrlTo.Parallels[0].Location = new Point(dispBtn.PrlTo.Parallels[0].Location.X, dispBtn.PrlTo.Parallels[0].Location.Y - 150);
 
                             dispBtn.PrlTo.Parallels[1].Location = new Point(dispBtn.PrlTo.Parallels[1].Location.X, dispBtn.PrlTo.Parallels[1].Location.Y - 150);
                         }
-                        
+
                     }
                     all_list.Remove(x);
                     all_list.Add(x - 1, disposable);
@@ -715,31 +794,24 @@ namespace WindowsFormsApp1
                 }
             }
             network_count -= 1;
-        }      
+        }
         private void Load_Main(object sender, EventArgs e)
         {
-            
+
             SaveLoad.Pre_Load();
             int cnt = network_count;
             network_count = 1;
-            for (int i = 1; i< cnt ; i++)
+            for (int i = 1; i < cnt; i++)
             {
                 ToolStripButton4_Click(sender, e);
             }
             Load(sender, e);
-            foreach(int x in all_list.Keys)
-            {
-                Debug.WriteLine("");
-                foreach(NewButton btn in all_list[x])
-                {
-                    Debug.Write(btn.Name);
-                }
-            }
         }
         private void Load(object sender, EventArgs e)
         {
             path = SaveLoad.Init_Load();
             if (path == "x") { return; }
+            StreamReader reader;
             reader = new StreamReader(path);
 
             int foo = Convert.ToInt32(reader.ReadLine());
@@ -763,16 +835,17 @@ namespace WindowsFormsApp1
                         prl.AccessibleDescription = reader.ReadLine();
                         prl.AccessibleName = reader.ReadLine();
                         prl.Text = reader.ReadLine();
-                        
+
                         ImageLoad(prl);
                     }
                     else if (PrlCheck == "False") { btn.HasPrl = false; }
-                    
+
                     ImageLoad(btn);
                 }
             }
             buton_checked = false;
             reader.Close();
+            reader.Dispose();
             MadeChange = false;
         }
         private void ImageLoad(NewButton foo)
@@ -903,7 +976,7 @@ namespace WindowsFormsApp1
                 textBox2.Text = buton;
                 buton_checked = true;
                 previous = secili;
-                textBox3.Text = Convert.ToString(secili.HasPrl);
+                textBox3.Text = btn.AccessibleName;
             }
             else if (buton_checked == true & btn.BackColor == Color.Transparent)
             {
@@ -949,7 +1022,6 @@ namespace WindowsFormsApp1
                 this.Text = this.Text + "*";
             }
             leftPanel1.PopulateTreeviewPins();
-
         }
         private void ChangesMadeEvent(object sender, EventArgs e)
         {
@@ -973,7 +1045,50 @@ namespace WindowsFormsApp1
             else if (e.KeyCode == Keys.Delete) { ToolStripButton3_Click(sender, e); } // link
             else if (e.KeyCode == Keys.D) { ToolStripButton6_Click(sender, e); } // down
             else if (e.KeyCode == Keys.M) { ToolStripButton9_Click(sender, e); } // mov
-            else if (e.KeyCode == Keys.C) { ToolStripButton10_Click(sender, e); } // COUNTER     
+            else if (e.KeyCode == Keys.C) { ToolStripButton10_Click(sender, e); } // COUNTER
+            else if (e.KeyCode == Keys.Escape) { SimulationClose(); }
+        }
+
+
+        private void HeyeheyToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            var foo = sender as ToolStripItem;
+            var bar = foo.Owner as ContextMenuStrip;
+            NewButton tempButton = bar.SourceControl as NewButton;
+            tempButton.Status = true;
+            sim.change(tempButton);
+        }
+        private void HeyeheyToolStripMenuItem_Click1(object sender, EventArgs e)
+        {
+            var foo = sender as ToolStripItem;
+            var bar = foo.Owner as ContextMenuStrip;
+            NewButton tempButton = bar.SourceControl as NewButton;
+            tempButton.Status = false;
+            sim.change(tempButton);
+        }
+        public void delgtSimulationUpdate(NewButton contact)
+        {
+            if (contact.Status) { contact.BackColor = Color.Green; }
+            else { contact.BackColor = Color.White; }
+        }
+        private void SimulationClose()
+        {
+            //sim.Cancel();
+            foreach (int key in all_list.Keys)
+            {
+                foreach (NewButton tempButton in all_list[key])
+                {
+                    try
+                    {
+                        if (tempButton.AccessibleName[0] == 'I')
+                        {
+                            tempButton.ContextMenuStrip = null;
+                        }
+                    }
+                    catch { continue; }
+                }
+            }
         }
     }
+       
 }

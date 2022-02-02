@@ -13,7 +13,7 @@ namespace WindowsFormsApp1
 {
     /* Contact & Coil Codes 
      0 = NO     1 = NC      2 = CLOCK_ON       3 = CLOCK_OFF        4 = COIL    5 = MOV     6 = COUNTER_UP      7 = COUNTER_DOWN        8 = SET     9 = RESET    
-     10 = LINK       11 = NETWORK_START    12 = ARITHMETICS    13 = CLOCK_RETENTIVE     14 = CMP        15 = ZCMP       16 = ADC        17 = PWM
+     10 = LINK       11 = NETWORK_START    12 = ARITHMETICS    13 = CLOCK_RETENTIVE     14 = CMP        15 = ZCMP       16 = ADC        17 = PWM    18 = EXTI
      99 = down       98 = up
     */
 
@@ -54,7 +54,6 @@ namespace WindowsFormsApp1
             Build_Init();
             tempWorker.ReportProgress(100);
         }
-
         private void compileWorker_ProgressChanged(object sender, ProgressChangedEventArgs e)
         {
             ProgressBar tempBar = prgrs.Controls[1] as ProgressBar;
@@ -481,6 +480,9 @@ namespace WindowsFormsApp1
                         if (type == 'K') { Streams.Ard_PWM(pin, value); }
                         else { Streams.Ard_PWM(pin, "D" + value); }
                     }
+                    break;
+                case "18": // EXTI
+                    
                     break;
                 default:
                     Debug.WriteLine("Empty");

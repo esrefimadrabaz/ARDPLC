@@ -28,7 +28,8 @@ C:\Users\Oguz\Desktop\pl\WindowsFormsApp1\WindowsFormsApp1\obj\Debug\WindowsForm
 C:\Users\Oguz\Desktop\pl\WindowsFormsApp1\WindowsFormsApp1\obj\Debug\WindowsFormsApp1.ArithmeticMenu.resources
 C:\Users\Oguz\Desktop\pl\WindowsFormsApp1\WindowsFormsApp1\obj\Debug\WindowsFormsApp1.LeftPanels.resources
 C:\Users\Oguz\Desktop\pl\WindowsFormsApp1\WindowsFormsApp1\obj\Debug\WindowsFormsApp1.CMPMenu.resources
-C:\Users\Oguz\Desktop\pl\WindowsFormsApp1\WindowsFormsApp1\obj\Debug\WindowsFormsApp1.csprojAssemblyReference.cache
 C:\Users\Oguz\Desktop\pl\WindowsFormsApp1\WindowsFormsApp1\obj\Debug\WindowsFormsApp1.ADCMenu.resources
 C:\Users\Oguz\Desktop\pl\WindowsFormsApp1\WindowsFormsApp1\obj\Debug\WindowsFormsApp1.PWMMenu.resources
 C:\Users\Oguz\Desktop\pl\WindowsFormsApp1\WindowsFormsApp1\obj\Debug\WindowsFormsApp1.BuildProgress.resources
+C:\Users\Oguz\Desktop\pl\WindowsFormsApp1\WindowsFormsApp1\obj\Debug\WindowsFormsApp1.csprojAssemblyReference.cache
+C:\Users\Oguz\Desktop\pl\WindowsFormsApp1\WindowsFormsApp1\obj\Debug\WindowsFormsApp1.EXTIMenu.resources
