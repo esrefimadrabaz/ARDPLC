@@ -49,6 +49,9 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Antlr4.Runtime.Standard, Version=4.9.3.0, Culture=neutral, PublicKeyToken=e78b2c5abd1fcb3f, processorArchitecture=MSIL">
+      <HintPath>..\packages\Antlr4.Runtime.Standard.4.9.3\lib\net45\Antlr4.Runtime.Standard.dll</HintPath>
+    </Reference>
     <Reference Include="Microsoft.WindowsAPICodePack, Version=1.1.0.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.WindowsAPICodePack-Core.1.1.0.0\lib\Microsoft.WindowsAPICodePack.dll</HintPath>
     </Reference>
@@ -71,10 +74,10 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="EXTIMenu.cs">
+    <Compile Include="Forms\EXTIMenu.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="EXTIMenu.Designer.cs">
+    <Compile Include="Forms\EXTIMenu.Designer.cs">
       <DependentUpon>EXTIMenu.cs</DependentUpon>
     </Compile>
     <Compile Include="Forms\BuildProgress.cs">
@@ -159,6 +162,19 @@
     </Compile>
     <Compile Include="Classes\SimulationA.cs" />
     <Compile Include="Interface\ISimulation.cs" />
+    <Compile Include="Forms\STEditor.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\STEditor.Designer.cs">
+      <DependentUpon>STEditor.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\STEditorInit.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\STEditorInit.Designer.cs">
+      <DependentUpon>STEditorInit.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Classes\STFCompiler.cs" />
     <Compile Include="UserControls\LeftPanels.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -180,7 +196,12 @@
       <DependentUpon>ResetMenu.cs</DependentUpon>
     </Compile>
     <Compile Include="Classes\SaveLoad.cs" />
-    <EmbeddedResource Include="EXTIMenu.resx">
+    <Compile Include="Utils\GrammarBaseListener.cs" />
+    <Compile Include="Utils\GrammarLexer.cs" />
+    <Compile Include="Utils\GrammarListener.cs" />
+    <Compile Include="Utils\GrammarParser.cs" />
+    <Compile Include="Utils\KeyPrinter.cs" />
+    <EmbeddedResource Include="Forms\EXTIMenu.resx">
       <DependentUpon>EXTIMenu.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\BuildProgress.resx">
@@ -219,6 +240,12 @@
     <EmbeddedResource Include="Forms\PWMMenu.resx">
       <DependentUpon>PWMMenu.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Forms\STEditor.resx">
+      <DependentUpon>STEditor.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\STEditorInit.resx">
+      <DependentUpon>STEditorInit.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="UserControls\LeftPanels.resx">
       <DependentUpon>LeftPanels.cs</DependentUpon>
     </EmbeddedResource>
@@ -248,6 +275,11 @@
       <DependentUpon>Settings.settings</DependentUpon>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
+    <None Include="Utils\Grammar.g4" />
+    <None Include="Utils\Grammar.interp" />
+    <None Include="Utils\Grammar.tokens" />
+    <None Include="Utils\GrammarLexer.interp" />
+    <None Include="Utils\GrammarLexer.tokens" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
@@ -333,6 +365,14 @@
       <Install>false</Install>
     </BootstrapperPackage>
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <None Include="Resources\build.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\run.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\down_final.png" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

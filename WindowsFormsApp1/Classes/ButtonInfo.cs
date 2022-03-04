@@ -15,8 +15,7 @@ namespace WindowsFormsApp1
         public NewButton PrlTo { get; set; }
         public NewButton[] Parallels { get; set; }
         public bool Status { get; set; }
-        public int? Value { get; set; }
         public bool Last { get; set; }
-        public System.Timers.Timer timer { get; set; }
+
     }
 }

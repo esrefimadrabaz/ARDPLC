@@ -31,5 +31,9 @@ C:\Users\Oguz\Desktop\pl\WindowsFormsApp1\WindowsFormsApp1\obj\Debug\WindowsForm
 C:\Users\Oguz\Desktop\pl\WindowsFormsApp1\WindowsFormsApp1\obj\Debug\WindowsFormsApp1.ADCMenu.resources
 C:\Users\Oguz\Desktop\pl\WindowsFormsApp1\WindowsFormsApp1\obj\Debug\WindowsFormsApp1.PWMMenu.resources
 C:\Users\Oguz\Desktop\pl\WindowsFormsApp1\WindowsFormsApp1\obj\Debug\WindowsFormsApp1.BuildProgress.resources
-C:\Users\Oguz\Desktop\pl\WindowsFormsApp1\WindowsFormsApp1\obj\Debug\WindowsFormsApp1.csprojAssemblyReference.cache
 C:\Users\Oguz\Desktop\pl\WindowsFormsApp1\WindowsFormsApp1\obj\Debug\WindowsFormsApp1.EXTIMenu.resources
+C:\Users\Oguz\Desktop\pl\WindowsFormsApp1\WindowsFormsApp1\obj\Debug\WindowsFormsApp1.STEditor.resources
+C:\Users\Oguz\Desktop\pl\WindowsFormsApp1\WindowsFormsApp1\obj\Debug\WindowsFormsApp1.STEditorInit.resources
+C:\Users\Oguz\Desktop\pl\WindowsFormsApp1\WindowsFormsApp1\obj\Debug\WindowsFormsApp1.csproj.AssemblyReference.cache
+C:\Users\Oguz\Desktop\pl\WindowsFormsApp1\WindowsFormsApp1\bin\Debug\Antlr4.Runtime.Standard.dll
+C:\Users\Oguz\Desktop\pl\WindowsFormsApp1\WindowsFormsApp1\bin\Debug\Antlr4.Runtime.Standard.xml

@@ -374,5 +374,10 @@ namespace WindowsFormsApp1
         {
             MainWorker.CancelAsync();
         }
+
+        internal void Dispose()
+        {
+            throw new NotImplementedException();
+        }
     }
 }

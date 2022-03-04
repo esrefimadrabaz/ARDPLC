@@ -1,17 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
 using System.Drawing;
 using System.Linq;
 using System.IO;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
-using System.Windows.Forms.Design;
 using System.Diagnostics;
-using System.Reflection;
-
 
 namespace WindowsFormsApp1
 {
@@ -46,7 +39,6 @@ namespace WindowsFormsApp1
         public static List<string> Used_Pins;
         
 
-
         public Form1()
         {
             InitializeComponent();
@@ -66,7 +58,7 @@ namespace WindowsFormsApp1
 
 
 
-        private void ToolStripButton4_Click(object sender, EventArgs e) // network button
+        private void NetworkButton_Click(object sender, EventArgs e) // network button
         {
             y = all_list[all_list.Keys.Last()][0].Location.Y + 150;
             //y = network_1[0].Location.Y + 150;
@@ -89,7 +81,7 @@ namespace WindowsFormsApp1
                 all_list[network_count].Add(btn);
             }
         }
-        private void ToolStripButton3_Click(object sender, EventArgs e) // link button
+        private void LinkButton_Click(object sender, EventArgs e) // link button
         {
             if (!buton_checked) { return; }
 
@@ -98,6 +90,10 @@ namespace WindowsFormsApp1
             if (secili.AccessibleName == "down")
             {
                 DeleteParallel(secili);
+            }
+            else if (secili.AccessibleDescription == "10")
+            {
+                if(secili.Parallels != null) { DeleteParallel(secili.Parallels[0]); }
             }
             else
             {
@@ -108,7 +104,7 @@ namespace WindowsFormsApp1
             }
 
         }
-        private void ToolStripButton1_Click_1(object sender, EventArgs e) // no button
+        private void NOButton_Click(object sender, EventArgs e) // no button
         {
             if (!buton_checked) { return; }
 
@@ -125,7 +121,7 @@ namespace WindowsFormsApp1
 
 
         }
-        private void ToolStripButton2_Click_1(object sender, EventArgs e) // nc button
+        private void NCButton_Click(object sender, EventArgs e) // nc button
         {
             if (!buton_checked) { return; }
 
@@ -141,24 +137,23 @@ namespace WindowsFormsApp1
                 }
 
         }
-        private void ToolStripButton6_Click(object sender, EventArgs e) //down button
+        private void DownButton_Click(object sender, EventArgs e) //down button
         {
-
-
+            if (!buton_checked) { return; }
+            if (secili.AccessibleDescription == "18") { return; } 
             if (buton_checked && (secili.AccessibleName != "down") && (!secili.HasPrl))
             {
-
                 //creating down button
-                int new_x = secili.Location.X - (132 / 7 * 2);
+                int new_x = secili.Location.X - 2;
                 int new_y = secili.Location.Y + 23;
-                Buton_yarat(new_x, new_y, Properties.Resources.down_n, 56, 43, true);
+                Buton_yarat(new_x, new_y, Properties.Resources.down_final, 4, 43, true);
                 yaratilan.AccessibleDescription = "99";
                 NewButton dispButton = yaratilan;
                 yaratilan.PrlTo = secili;
                 prl_to = secili;
 
                 //creating link to down
-                new_x = yaratilan.Location.X + 39;
+                new_x = yaratilan.Location.X + 3;
                 new_y = yaratilan.Location.Y + 20;
                 Buton_yarat(new_x, new_y, Properties.Resources.link, 132, 44, true);
                 yaratilan.AccessibleDescription = "10";
@@ -172,19 +167,18 @@ namespace WindowsFormsApp1
                 //end
 
                 //creating up to link
-                new_x = yaratilan.Location.X + 114;
+                new_x = yaratilan.Location.X + 132;
                 new_y = yaratilan.Location.Y - 20;
-                Buton_yarat(new_x, new_y, Properties.Resources.up, 56, 43, true);
+                Buton_yarat(new_x, new_y, Properties.Resources.down_final, 4, 43, true);
                 yaratilan.AccessibleDescription = "98";
                 yaratilan.PrlTo = secili;
 
                 secili.PrlTo.Parallels[1] = yaratilan;
                 //end
-
             }
 
         }
-        private void ToolStripButton7_Click(object sender, EventArgs e) // clock button
+        private void ClockButton_Click(object sender, EventArgs e) // clock button
         {
             if (!buton_checked) { return; }
 
@@ -224,7 +218,7 @@ namespace WindowsFormsApp1
             }
 
         }
-        private void ToolStripButton8_Click(object sender, EventArgs e)  // coil button
+        private void CoilButton_Click(object sender, EventArgs e)  // coil button
         {
             if (!buton_checked) { return; }
 
@@ -244,7 +238,7 @@ namespace WindowsFormsApp1
             }
 
         }
-        private void ToolStripButton9_Click(object sender, EventArgs e) // MOV button
+        private void MOVButton_Click(object sender, EventArgs e) // MOV button
         {
             if (!buton_checked) { return; }
             secili.BackgroundImage = Properties.Resources.clock_n;
@@ -274,7 +268,7 @@ namespace WindowsFormsApp1
             }
 
         }
-        private void ToolStripButton10_Click(object sender, EventArgs e) // CNTR button
+        private void CNTRButton_Click(object sender, EventArgs e) // CNTR button
         {
             if (!buton_checked) { return; }
 
@@ -303,7 +297,7 @@ namespace WindowsFormsApp1
             }
 
         }
-        private void ToolStripButton11_Click(object sender, EventArgs e) // SET BUTTON
+        private void SETButton_Click(object sender, EventArgs e) // SET BUTTON
         {
             if (!buton_checked) { return; }
 
@@ -325,7 +319,7 @@ namespace WindowsFormsApp1
             }
 
         }
-        private void ToolStripButton12_Click(object sender, EventArgs e) // RESET button
+        private void RESETButton_Click(object sender, EventArgs e) // RESET button
         {
             if (!buton_checked) { return; }
 
@@ -345,7 +339,7 @@ namespace WindowsFormsApp1
                     else { secili.BackgroundImage = Properties.Resources.link; }
             }
         }
-        private void ToolStripButton13_Click(object sender, EventArgs e) //ARITHMETIC button
+        private void ARITHButton_Click(object sender, EventArgs e) //ARITHMETIC button
         {
             if (!buton_checked) { return; }
 
@@ -394,7 +388,7 @@ namespace WindowsFormsApp1
                 else { secili.BackgroundImage = Properties.Resources.link; }
             }
         }
-        private void ToolStripButton14_Click(object sender, EventArgs e) // CMP button
+        private void CMPButton_Click(object sender, EventArgs e) // CMP button
         {
             if (!buton_checked) { return; }
 
@@ -433,7 +427,7 @@ namespace WindowsFormsApp1
             }
 
         }
-        private void ToolStripButton5_Click(object sender, EventArgs e) // ADC Button
+        private void ADCButton_Click(object sender, EventArgs e) // ADC Button
         {
             if (!buton_checked) { return; }
 
@@ -454,7 +448,7 @@ namespace WindowsFormsApp1
             }
 
         }
-        private void ToolStripButton15_Click(object sender, EventArgs e) // PWM Button
+        private void PWMButton_Click(object sender, EventArgs e) // PWM Button
         {
             if (!buton_checked) { return; }
             secili.BackgroundImage = Properties.Resources.clock_n;
@@ -475,7 +469,7 @@ namespace WindowsFormsApp1
                 }
             }
         }
-        private void ISRButton_Click(object sender, EventArgs e)
+        private void ISRButton_Click(object sender, EventArgs e)// ISR Button
         {
             if (!buton_checked) { return; }
             int tempNet = Convert.ToInt32(secili.Network.Split('_')[1]);
@@ -507,6 +501,56 @@ namespace WindowsFormsApp1
                 deletefromUsed(secili.AccessibleName);
                 ISR = false;
                 secili.Text = "EXTI END";
+            }
+        } 
+        private void STFEditClick(object sender, EventArgs e) // Editor Edit Click
+        {
+            if (!buton_checked) { return; }
+            using (STEditor Editor = new STEditor())
+            {
+                string fName = secili.Text.Substring(4, secili.Text.Length - 4);
+                Editor.First = fName;
+                string localName = this.Text.Substring(9, this.Text.Length - 9);
+                string LocalPath = MadeChange ?
+                    path.Substring(0, path.Length - localName.Length + 1)
+                    : path.Substring(0, path.Length - localName.Length);
+
+                if(File.Exists(LocalPath + "STF_" + fName + ".st"))
+                {
+                    using (StreamReader STFReader = new StreamReader(LocalPath + "STF_" + fName + ".st"))
+                    {
+                        string Lines = STFReader.ReadToEnd();
+                        Editor.FText = Lines;
+                    }
+                }
+                if (Editor.ShowDialog() == DialogResult.OK)
+                {
+                    File.Create(LocalPath + "STF_" + fName + ".st").Dispose();
+
+                    using (StreamWriter STFWriter = new StreamWriter(LocalPath + "STF_" + fName + ".st"))
+                    {
+                        STFWriter.WriteLine(Editor.FText);
+                        STFWriter.Close();
+                    }
+                }
+            }
+        }
+        private void STFButton_Click(object sender, EventArgs e) // Editor Button 
+        {
+            if (!buton_checked) { return; }
+            if (path == null) { MessageBox.Show("Need to initialize a working directory before STF use.", "Path Error", MessageBoxButtons.OK); return; }
+            using (STEditorInit EditorInit = new STEditorInit())
+            {
+                if (EditorInit.ShowDialog() == DialogResult.OK)
+                {
+                    deletefromUsed(secili.AccessibleName);
+                    secili.BackgroundImage = Properties.Resources.clock_n;
+                    secili.AccessibleDescription = "19";
+                    secili.Text = "STF_" + EditorInit.FName;
+                    secili.AccessibleName = secili.Text;
+                    addtoUsed(secili.AccessibleName);
+                    secili.ContextMenuStrip = STEditStrip;
+                }
             }
         }
 
@@ -569,7 +613,7 @@ namespace WindowsFormsApp1
             leftPanel1.PopulateTreeViewDirectories();
 
         }
-        private void Button13_Click(object sender, EventArgs e)  //compile button-toolstrip
+        private void CompileButton_Click(object sender, EventArgs e)  //compile button-toolstrip
         {
 
             if (path == null || MadeChange == true)
@@ -642,6 +686,7 @@ namespace WindowsFormsApp1
             name.BackgroundImageChanged += ChangesMadeEvent;
             name.ImageAlign = ContentAlignment.MiddleCenter;
             name.BackColor = Color.White;
+            name.Margin = new Padding(all: 0);
             //name.Anchor = (AnchorStyles.Bottom | AnchorStyles.Right | AnchorStyles.Left | AnchorStyles.Top);
             name.MaximumSize = new Size(size_x * 2, size_y * 2);
             if (down) { name.AccessibleName = "down"; }
@@ -664,7 +709,7 @@ namespace WindowsFormsApp1
                         MessageBox.Show("This adress is already declared.", "Error", MessageBoxButtons.OK);
 
                         secili.AccessibleName = null;
-                        ToolStripButton3_Click(new object(), new EventArgs());
+                        LinkButton_Click(new object(), new EventArgs());
                         return;
                     }
                 }
@@ -674,7 +719,10 @@ namespace WindowsFormsApp1
         private void deletefromUsed(string foo)
         {
             if (foo == null) return;
-
+            if (foo.StartsWith("STF"))
+            {
+                secili.ContextMenuStrip = null;
+            }
             foreach (string tmp in Pre_Used_Pins)
             {
                 if (tmp[0] == 'D')
@@ -803,7 +851,7 @@ namespace WindowsFormsApp1
             network_count = 1;
             for (int i = 1; i < cnt; i++)
             {
-                ToolStripButton4_Click(sender, e);
+                NetworkButton_Click(sender, e);
             }
             Load(sender, e);
         }
@@ -822,6 +870,7 @@ namespace WindowsFormsApp1
                 {
                     btn.AccessibleDescription = reader.ReadLine();
                     btn.AccessibleName = reader.ReadLine();
+                    if (btn.AccessibleName.StartsWith("STF")){ btn.ContextMenuStrip = STEditStrip; }
                     btn.Text = reader.ReadLine();
                     string PrlCheck = reader.ReadLine();
 
@@ -829,7 +878,7 @@ namespace WindowsFormsApp1
                     {
                         secili = btn;
                         buton_checked = true;
-                        ToolStripButton6_Click(sender, e);
+                        DownButton_Click(sender, e);
 
                         NewButton prl = yaratilan.PrlTo.PrlTo;
                         prl.AccessibleDescription = reader.ReadLine();
@@ -900,6 +949,12 @@ namespace WindowsFormsApp1
                 case "17":
                     foo.BackgroundImage = Properties.Resources.clock_n;
                     break;
+                case "18":
+                    foo.BackgroundImage = Properties.Resources.clock_n;
+                    break;
+                case "19":
+                    foo.BackgroundImage = Properties.Resources.clock_n;
+                    break;
                 default:
                     break;
             }
@@ -955,12 +1010,6 @@ namespace WindowsFormsApp1
         {
             Checker(sender);
             leftPanel1.CurrentPinPopulate(secili);
-            string tmper = "";
-            foreach (string foo in Pre_Used_Pins)
-            {
-                tmper = tmper + foo;
-            }
-            richTextBox1.Text = tmper;
         }
         private void Checker(object sender)
         {
@@ -1037,20 +1086,20 @@ namespace WindowsFormsApp1
 
         private void Form1_KeyDown(object sender, KeyEventArgs e) //shortcuts
         {
-            if (e.KeyCode == Keys.O) { ToolStripButton1_Click_1(sender, e); } // normally open
-            else if (e.KeyCode == Keys.K) { ToolStripButton2_Click_1(sender, e); } // normally close
-            else if (e.KeyCode == Keys.T) { ToolStripButton7_Click(sender, e); } // clock on
-            else if (e.KeyCode == Keys.N) { ToolStripButton4_Click(sender, e); } // network
-            else if (e.KeyCode == Keys.Y) { ToolStripButton8_Click(sender, e); } // coil
-            else if (e.KeyCode == Keys.Delete) { ToolStripButton3_Click(sender, e); } // link
-            else if (e.KeyCode == Keys.D) { ToolStripButton6_Click(sender, e); } // down
-            else if (e.KeyCode == Keys.M) { ToolStripButton9_Click(sender, e); } // mov
-            else if (e.KeyCode == Keys.C) { ToolStripButton10_Click(sender, e); } // COUNTER
+            if (e.KeyCode == Keys.O) { NOButton_Click(sender, e); } // normally open
+            else if (e.KeyCode == Keys.K) { NCButton_Click(sender, e); } // normally close
+            else if (e.KeyCode == Keys.T) { ClockButton_Click(sender, e); } // clock on
+            else if (e.KeyCode == Keys.N) { NetworkButton_Click(sender, e); } // network
+            else if (e.KeyCode == Keys.Y) { CoilButton_Click(sender, e); } // coil
+            else if (e.KeyCode == Keys.Delete) { LinkButton_Click(sender, e); } // link
+            else if (e.KeyCode == Keys.D) { DownButton_Click(sender, e); } // down
+            else if (e.KeyCode == Keys.M) { MOVButton_Click(sender, e); } // mov
+            else if (e.KeyCode == Keys.C) { CNTRButton_Click(sender, e); } // COUNTER
             else if (e.KeyCode == Keys.Escape) { SimulationClose(); }
         }
 
 
-        private void HeyeheyToolStripMenuItem_Click(object sender, EventArgs e)
+        private void IActivate_Click(object sender, EventArgs e)
         {
             var foo = sender as ToolStripItem;
             var bar = foo.Owner as ContextMenuStrip;
@@ -1058,7 +1107,7 @@ namespace WindowsFormsApp1
             tempButton.Status = true;
             sim.change(tempButton);
         }
-        private void HeyeheyToolStripMenuItem_Click1(object sender, EventArgs e)
+        private void IDeactivate_Click1(object sender, EventArgs e)
         {
             var foo = sender as ToolStripItem;
             var bar = foo.Owner as ContextMenuStrip;
@@ -1073,7 +1122,8 @@ namespace WindowsFormsApp1
         }
         private void SimulationClose()
         {
-            //sim.Cancel();
+            if (!SimMode) { return; }
+            sim.Cancel();
             foreach (int key in all_list.Keys)
             {
                 foreach (NewButton tempButton in all_list[key])
@@ -1089,6 +1139,6 @@ namespace WindowsFormsApp1
                 }
             }
         }
+
     }
-       
 }

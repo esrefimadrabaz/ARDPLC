@@ -14,6 +14,7 @@ namespace WindowsFormsApp1
     /* Contact & Coil Codes 
      0 = NO     1 = NC      2 = CLOCK_ON       3 = CLOCK_OFF        4 = COIL    5 = MOV     6 = COUNTER_UP      7 = COUNTER_DOWN        8 = SET     9 = RESET    
      10 = LINK       11 = NETWORK_START    12 = ARITHMETICS    13 = CLOCK_RETENTIVE     14 = CMP        15 = ZCMP       16 = ADC        17 = PWM    18 = EXTI
+     19 = STF
      99 = down       98 = up
     */
 
@@ -81,7 +82,7 @@ namespace WindowsFormsApp1
             ino = build + "\\" + build.Split('\\').Last() + ".ino"; ////C:/Users/Oguz/Desktop/portmanip/Ports/Ports.ino
 
             strCmdText =  "/C cd C:/Program Files (x86)/Arduino";
-            strCmdText1 = strCmdText + "&" + "arduino --pref build.path=" + build + "\\build --verify " + ino;
+            strCmdText1 = strCmdText + "&" + "arduino -build.path=" + build + "\\build --verify " + ino;
 
             Process.Start("CMD.exe", strCmdText1);
            
@@ -96,14 +97,14 @@ namespace WindowsFormsApp1
                     if (btn.HasPrl)
                     {
 
-                        Streams.writer.WriteLine("");
-                        Streams.writer.WriteLine("if(dugum) {prl = true;}");
+                        Streams.Sbuilders[Streams.builder].AppendLine("");
+                        Streams.Sbuilders[Streams.builder].AppendLine("if(dugum) {prl = true;}");
                         if (btn.AccessibleName[0] == 'C') { Streams.Ard_NO_M(btn.AccessibleName + "D"); }
                         else {Streams.Ard_NO_M(btn.AccessibleName); }
-                        Streams.writer.WriteLine("if (prl)  {dugum=true;}");
+                        Streams.Sbuilders[Streams.builder].AppendLine("if (prl)  {dugum=true;}");
                         Sort(btn.PrlTo);
-                        Streams.writer.WriteLine("if (next) { dugum = true; }");
-                        Streams.writer.WriteLine("prl,next = false;");
+                        Streams.Sbuilders[Streams.builder].AppendLine("if (next) { dugum = true; }");
+                        Streams.Sbuilders[Streams.builder].AppendLine("prl,next = false;");
 
                     }
                     else
@@ -115,14 +116,14 @@ namespace WindowsFormsApp1
                 case "1": //NC
                     if (btn.HasPrl)
                     {
-                        Streams.writer.WriteLine("");
-                        Streams.writer.WriteLine("if(dugum) {prl = true;}");
+                        Streams.Sbuilders[Streams.builder].AppendLine("");
+                        Streams.Sbuilders[Streams.builder].AppendLine("if(dugum) {prl = true;}");
                         if (btn.AccessibleName[0] == 'C') { Streams.Ard_NC_M(btn.AccessibleName + "D"); }
                         else { Streams.Ard_NC_M(btn.AccessibleName); }
-                        Streams.writer.WriteLine("if (prl)  {dugum=true;}");
+                        Streams.Sbuilders[Streams.builder].AppendLine("if (prl)  {dugum=true;}");
                         Sort(btn.PrlTo);
-                        Streams.writer.WriteLine("if (next) { dugum = true; }");
-                        Streams.writer.WriteLine("prl,next = false;");
+                        Streams.Sbuilders[Streams.builder].AppendLine("if (next) { dugum = true; }");
+                        Streams.Sbuilders[Streams.builder].AppendLine("prl,next = false;");
                     }
                     else
                     {
@@ -133,13 +134,13 @@ namespace WindowsFormsApp1
                 case "2": //CLOCK ON
                     if (btn.HasPrl)
                     {
-                        Streams.writer.WriteLine("");
-                        Streams.writer.WriteLine("if(dugum) {prl = true;}");
+                        Streams.Sbuilders[Streams.builder].AppendLine("");
+                        Streams.Sbuilders[Streams.builder].AppendLine("if(dugum) {prl = true;}");
                         Streams.Ard_CON(btn.Text.Substring(4), btn.AccessibleName);
-                        Streams.writer.WriteLine("if (prl)  {dugum=true;}");
+                        Streams.Sbuilders[Streams.builder].AppendLine("if (prl)  {dugum=true;}");
                         Sort(btn.PrlTo);
-                        Streams.writer.WriteLine("if (next) { dugum = true; }");
-                        Streams.writer.WriteLine("prl,next = false;");
+                        Streams.Sbuilders[Streams.builder].AppendLine("if (next) { dugum = true; }");
+                        Streams.Sbuilders[Streams.builder].AppendLine("prl,next = false;");
                     }
                     else
                     {
@@ -149,13 +150,13 @@ namespace WindowsFormsApp1
                 case "3": //CLOCK OFF
                     if (btn.HasPrl)
                     {
-                        Streams.writer.WriteLine("");
-                        Streams.writer.WriteLine("if(dugum) {prl = true;}");
+                        Streams.Sbuilders[Streams.builder].AppendLine("");
+                        Streams.Sbuilders[Streams.builder].AppendLine("if(dugum) {prl = true;}");
                         Streams.Ard_COFF(btn.Text.Substring(5), btn.AccessibleName);
-                        Streams.writer.WriteLine("if (prl)  {dugum=true;}");
+                        Streams.Sbuilders[Streams.builder].AppendLine("if (prl)  {dugum=true;}");
                         Sort(btn.PrlTo);
-                        Streams.writer.WriteLine("if (next) { dugum = true; }");
-                        Streams.writer.WriteLine("prl,next = false;");
+                        Streams.Sbuilders[Streams.builder].AppendLine("if (next) { dugum = true; }");
+                        Streams.Sbuilders[Streams.builder].AppendLine("prl,next = false;");
                     }
                     else
                     {
@@ -165,13 +166,13 @@ namespace WindowsFormsApp1
                 case "4": //Coil
                     if (btn.HasPrl)
                     {
-                        Streams.writer.WriteLine("");
-                        Streams.writer.WriteLine("if(dugum) {prl = true;}");
+                        Streams.Sbuilders[Streams.builder].AppendLine("");
+                        Streams.Sbuilders[Streams.builder].AppendLine("if(dugum) {prl = true;}");
                         Streams.Ard_Coil_M(btn.AccessibleName);
-                        Streams.writer.WriteLine("if (prl)  {dugum=true;}");
+                        Streams.Sbuilders[Streams.builder].AppendLine("if (prl)  {dugum=true;}");
                         Sort(btn.PrlTo);
-                        Streams.writer.WriteLine("if (next) { dugum = true; }");
-                        Streams.writer.WriteLine("prl,next = false;");
+                        Streams.Sbuilders[Streams.builder].AppendLine("if (next) { dugum = true; }");
+                        Streams.Sbuilders[Streams.builder].AppendLine("prl,next = false;");
                     }
                     else
                     {
@@ -182,15 +183,15 @@ namespace WindowsFormsApp1
                     if(btn.HasPrl)
                     {
                         string[] vals = btn.AccessibleName.Split('=');
-                        Streams.writer.WriteLine("");
-                        Streams.writer.WriteLine("if(dugum) {prl = true;}");
+                        Streams.Sbuilders[Streams.builder].AppendLine("");
+                        Streams.Sbuilders[Streams.builder].AppendLine("if(dugum) {prl = true;}");
                         if (vals[0][0] == 'K' || vals[0][0] == 'F') { Streams.Ard_MOV(vals[0].Substring(1), vals[1]); }
                         else if (vals[0][0] == 'L') { Streams.Ard_MOV(vals[0].Substring(1) + "L", vals[1]);}
                         else { Streams.Ard_MOV(vals[0], vals[1]); }
-                        Streams.writer.WriteLine("if (prl)  {dugum=true;}");
+                        Streams.Sbuilders[Streams.builder].AppendLine("if (prl)  {dugum=true;}");
                         Sort(btn.PrlTo);
-                        Streams.writer.WriteLine("if (next) { dugum = true; }");
-                        Streams.writer.WriteLine("prl,next = false;");
+                        Streams.Sbuilders[Streams.builder].AppendLine("if (next) { dugum = true; }");
+                        Streams.Sbuilders[Streams.builder].AppendLine("prl,next = false;");
                     }
                     else
                     {
@@ -203,13 +204,13 @@ namespace WindowsFormsApp1
                 case "6": // CNTR_U
                     if (btn.HasPrl)
                     {
-                        Streams.writer.WriteLine("");
-                        Streams.writer.WriteLine("if(dugum) {prl = true;}");
+                        Streams.Sbuilders[Streams.builder].AppendLine("");
+                        Streams.Sbuilders[Streams.builder].AppendLine("if(dugum) {prl = true;}");
                         Streams.Ard_CNTUP(btn.Text.Split('=')[1], btn.AccessibleName, btn.AccessibleName+"L", btn.AccessibleName + "D");
-                        Streams.writer.WriteLine("if (prl)  {dugum=true;}");
+                        Streams.Sbuilders[Streams.builder].AppendLine("if (prl)  {dugum=true;}");
                         Sort(btn.PrlTo);
-                        Streams.writer.WriteLine("if (next) { dugum = true; }");
-                        Streams.writer.WriteLine("prl,next = false;");
+                        Streams.Sbuilders[Streams.builder].AppendLine("if (next) { dugum = true; }");
+                        Streams.Sbuilders[Streams.builder].AppendLine("prl,next = false;");
                     }
                     else
                     {
@@ -219,13 +220,13 @@ namespace WindowsFormsApp1
                 case "7": //CNTR_D
                     if (btn.HasPrl)
                     {
-                        Streams.writer.WriteLine("");
-                        Streams.writer.WriteLine("if(dugum) {prl = true;}");
+                        Streams.Sbuilders[Streams.builder].AppendLine("");
+                        Streams.Sbuilders[Streams.builder].AppendLine("if(dugum) {prl = true;}");
                         Streams.Ard_CNTD(btn.Text.Split('=')[1], btn.AccessibleName, btn.AccessibleName + "L", btn.AccessibleName + "D");
-                        Streams.writer.WriteLine("if (prl)  {dugum=true;}");
+                        Streams.Sbuilders[Streams.builder].AppendLine("if (prl)  {dugum=true;}");
                         Sort(btn.PrlTo);
-                        Streams.writer.WriteLine("if (next) { dugum = true; }");
-                        Streams.writer.WriteLine("prl,next = false;");
+                        Streams.Sbuilders[Streams.builder].AppendLine("if (next) { dugum = true; }");
+                        Streams.Sbuilders[Streams.builder].AppendLine("prl,next = false;");
                     }
                     else
                     {
@@ -235,13 +236,13 @@ namespace WindowsFormsApp1
                 case "8": //SET
                     if (btn.HasPrl)
                     {
-                        Streams.writer.WriteLine("");
-                        Streams.writer.WriteLine("if(dugum) {prl = true;}");
+                        Streams.Sbuilders[Streams.builder].AppendLine("");
+                        Streams.Sbuilders[Streams.builder].AppendLine("if(dugum) {prl = true;}");
                         Streams.Ard_Set_M(btn.AccessibleName);
-                        Streams.writer.WriteLine("if (prl)  {dugum=true;}");
+                        Streams.Sbuilders[Streams.builder].AppendLine("if (prl)  {dugum=true;}");
                         Sort(btn.PrlTo);
-                        Streams.writer.WriteLine("if (next) { dugum = true; }");
-                        Streams.writer.WriteLine("prl,next = false;");
+                        Streams.Sbuilders[Streams.builder].AppendLine("if (next) { dugum = true; }");
+                        Streams.Sbuilders[Streams.builder].AppendLine("prl,next = false;");
                     }
                     else
                     {
@@ -251,16 +252,16 @@ namespace WindowsFormsApp1
                 case "9": //RESET
                     if (btn.HasPrl)
                     {
-                        Streams.writer.WriteLine("");
-                        Streams.writer.WriteLine("if(dugum) {prl = true;}");
+                        Streams.Sbuilders[Streams.builder].AppendLine("");
+                        Streams.Sbuilders[Streams.builder].AppendLine("if(dugum) {prl = true;}");
                         if (btn.AccessibleName[0] == 'M') { Streams.Ard_Reset_M(btn.AccessibleName); }
                         else if (btn.AccessibleName[0] == 'O') { Streams.Ard_Reset_M(btn.AccessibleName); }
                         else if (btn.AccessibleName[0] == 'T') { Streams.Ard_Reset_T(btn.AccessibleName); }
                         else { Streams.Ard_Reset_O(btn.AccessibleName); }
-                        Streams.writer.WriteLine("if (prl)  {dugum=true;}");
+                        Streams.Sbuilders[Streams.builder].AppendLine("if (prl)  {dugum=true;}");
                         Sort(btn.PrlTo);
-                        Streams.writer.WriteLine("if (next) { dugum = true; }");
-                        Streams.writer.WriteLine("prl,next = false;");
+                        Streams.Sbuilders[Streams.builder].AppendLine("if (next) { dugum = true; }");
+                        Streams.Sbuilders[Streams.builder].AppendLine("prl,next = false;");
                     }
                     else
                     {
@@ -290,13 +291,13 @@ namespace WindowsFormsApp1
                         else if (dispVals[0].Contains('*')) {  op = "*"; }
                         else if (dispVals[0].Contains('/')) {  op = "/"; }
 
-                        Streams.writer.WriteLine("");
-                        Streams.writer.WriteLine("if(dugum) {prl = true;}");
+                        Streams.Sbuilders[Streams.builder].AppendLine("");
+                        Streams.Sbuilders[Streams.builder].AppendLine("if(dugum) {prl = true;}");
                         Streams.Ard_Arithmetic(dispPreVal, op, dispPostVal, dispVals[1]);
-                        Streams.writer.WriteLine("if (prl)  {dugum=true;}");
+                        Streams.Sbuilders[Streams.builder].AppendLine("if (prl)  {dugum=true;}");
                         Sort(btn.PrlTo);
-                        Streams.writer.WriteLine("if (next) { dugum = true; }");
-                        Streams.writer.WriteLine("prl,next = false;");
+                        Streams.Sbuilders[Streams.builder].AppendLine("if (next) { dugum = true; }");
+                        Streams.Sbuilders[Streams.builder].AppendLine("prl,next = false;");
                     }
                     else
                     {
@@ -319,13 +320,13 @@ namespace WindowsFormsApp1
                 case "13": //CLOCK RETENTIVE
                     if (btn.HasPrl)
                     {
-                        Streams.writer.WriteLine("");
-                        Streams.writer.WriteLine("if(dugum) {prl = true;}");
+                        Streams.Sbuilders[Streams.builder].AppendLine("");
+                        Streams.Sbuilders[Streams.builder].AppendLine("if(dugum) {prl = true;}");
                         Streams.Ard_CRTO(btn.Text.Substring(4), btn.AccessibleName, "TRB" + btn.AccessibleName.Substring(3));
-                        Streams.writer.WriteLine("if (prl)  {dugum=true;}");
+                        Streams.Sbuilders[Streams.builder].AppendLine("if (prl)  {dugum=true;}");
                         Sort(btn.PrlTo);
-                        Streams.writer.WriteLine("if (next) { dugum = true; }");
-                        Streams.writer.WriteLine("prl,next = false;");
+                        Streams.Sbuilders[Streams.builder].AppendLine("if (next) { dugum = true; }");
+                        Streams.Sbuilders[Streams.builder].AppendLine("prl,next = false;");
                     }
                     else
                     {
@@ -347,13 +348,13 @@ namespace WindowsFormsApp1
                         else if (Vals[2][0] == 'D') { First = Vals[2]; }
                         else { Last =  Vals[2].Substring(1); }
 
-                        Streams.writer.WriteLine("");
-                        Streams.writer.WriteLine("if(dugum) {prl = true;}");
+                        Streams.Sbuilders[Streams.builder].AppendLine("");
+                        Streams.Sbuilders[Streams.builder].AppendLine("if(dugum) {prl = true;}");
                         Streams.Ard_CMP(First,Last, ("M" + M.ToString()), ("M" + (M+1).ToString()),("M" + (M+2).ToString()));
-                        Streams.writer.WriteLine("if (prl)  {dugum=true;}");
+                        Streams.Sbuilders[Streams.builder].AppendLine("if (prl)  {dugum=true;}");
                         Sort(btn.PrlTo);
-                        Streams.writer.WriteLine("if (next) { dugum = true; }");
-                        Streams.writer.WriteLine("prl,next = false;");
+                        Streams.Sbuilders[Streams.builder].AppendLine("if (next) { dugum = true; }");
+                        Streams.Sbuilders[Streams.builder].AppendLine("prl,next = false;");
                     }
                     else
                     {
@@ -393,13 +394,13 @@ namespace WindowsFormsApp1
                         else if (Vals[3][0] == 'D') { Last = Vals[3]; }
                         else { Last = Vals[3].Substring(1); }
 
-                        Streams.writer.WriteLine("");
-                        Streams.writer.WriteLine("if(dugum) {prl = true;}");
+                        Streams.Sbuilders[Streams.builder].AppendLine("");
+                        Streams.Sbuilders[Streams.builder].AppendLine("if(dugum) {prl = true;}");
                         Streams.Ard_ZCMP(First, Middle, Last, ("M" + M.ToString()), ("M" + (M + 1).ToString()), ("M" + (M + 2).ToString()));
-                        Streams.writer.WriteLine("if (prl)  {dugum=true;}");
+                        Streams.Sbuilders[Streams.builder].AppendLine("if (prl)  {dugum=true;}");
                         Sort(btn.PrlTo);
-                        Streams.writer.WriteLine("if (next) { dugum = true; }");
-                        Streams.writer.WriteLine("prl,next = false;");
+                        Streams.Sbuilders[Streams.builder].AppendLine("if (next) { dugum = true; }");
+                        Streams.Sbuilders[Streams.builder].AppendLine("prl,next = false;");
                     }
                     else
                     {
@@ -432,13 +433,13 @@ namespace WindowsFormsApp1
                         pin = btn.AccessibleName.Split('-')[1];
                         destination = btn.AccessibleName.Split('-')[2];
 
-                        Streams.writer.WriteLine("");
-                        Streams.writer.WriteLine("if(dugum) {prl = true;}");
+                        Streams.Sbuilders[Streams.builder].AppendLine("");
+                        Streams.Sbuilders[Streams.builder].AppendLine("if(dugum) {prl = true;}");
                         Streams.Ard_ADC(pin, destination);
-                        Streams.writer.WriteLine("if (prl)  {dugum=true;}");
+                        Streams.Sbuilders[Streams.builder].AppendLine("if (prl)  {dugum=true;}");
                         Sort(btn.PrlTo);
-                        Streams.writer.WriteLine("if (next) { dugum = true; }");
-                        Streams.writer.WriteLine("prl,next = false;");
+                        Streams.Sbuilders[Streams.builder].AppendLine("if (next) { dugum = true; }");
+                        Streams.Sbuilders[Streams.builder].AppendLine("prl,next = false;");
                     }
                     else
                     {
@@ -459,14 +460,14 @@ namespace WindowsFormsApp1
                         type = btn.AccessibleName.Split('-')[1][0];
                         value = btn.AccessibleName.Split('-')[1].Substring(1);
 
-                        Streams.writer.WriteLine("");
-                        Streams.writer.WriteLine("if(dugum) {prl = true;}");
+                        Streams.Sbuilders[Streams.builder].AppendLine("");
+                        Streams.Sbuilders[Streams.builder].AppendLine("if(dugum) {prl = true;}");
                         if (type == 'K') { Streams.Ard_PWM(pin, value); }
                         else { Streams.Ard_PWM(pin, "D" + value); }
-                        Streams.writer.WriteLine("if (prl)  {dugum=true;}");
+                        Streams.Sbuilders[Streams.builder].AppendLine("if (prl)  {dugum=true;}");
                         Sort(btn.PrlTo);
-                        Streams.writer.WriteLine("if (next) { dugum = true; }");
-                        Streams.writer.WriteLine("prl,next = false;");
+                        Streams.Sbuilders[Streams.builder].AppendLine("if (next) { dugum = true; }");
+                        Streams.Sbuilders[Streams.builder].AppendLine("prl,next = false;");
                     }
                     else
                     {
@@ -482,7 +483,30 @@ namespace WindowsFormsApp1
                     }
                     break;
                 case "18": // EXTI
-                    
+                    if (!btn.Text.Contains("END"))
+                    {
+                        Streams.builder = btn.AccessibleName;
+                    }
+                    else
+                    {
+                        Streams.builder = "Main";
+                    }
+                    break;
+                case "19": // STF
+                    if (btn.HasPrl)
+                    {
+                        Streams.Sbuilders[Streams.builder].AppendLine("");
+                        Streams.Sbuilders[Streams.builder].AppendLine("if(dugum) {prl = true;}");
+                        Streams.Ard_STFUse(btn.AccessibleName);
+                        Streams.Sbuilders[Streams.builder].AppendLine("if (prl)  {dugum=true;}");
+                        Sort(btn.PrlTo);
+                        Streams.Sbuilders[Streams.builder].AppendLine("if (next) { dugum = true; }");
+                        Streams.Sbuilders[Streams.builder].AppendLine("prl,next = false;");
+                    }
+                    else
+                    {
+                        Streams.Ard_STFUse(btn.AccessibleName);
+                    }
                     break;
                 default:
                     Debug.WriteLine("Empty");

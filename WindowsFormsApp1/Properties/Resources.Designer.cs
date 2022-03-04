@@ -112,6 +112,16 @@ namespace WindowsFormsApp1.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        public static System.Drawing.Bitmap build {
+            get {
+                object obj = ResourceManager.GetObject("build", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         public static System.Drawing.Bitmap checks2 {
             get {
                 object obj = ResourceManager.GetObject("checks2", resourceCulture);
@@ -162,6 +172,16 @@ namespace WindowsFormsApp1.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        public static System.Drawing.Bitmap down_final {
+            get {
+                object obj = ResourceManager.GetObject("down_final", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         public static System.Drawing.Bitmap down_n {
             get {
                 object obj = ResourceManager.GetObject("down_n", resourceCulture);
@@ -180,38 +200,27 @@ namespace WindowsFormsApp1.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to extern bool dugum;
-        ///extern bool next;
+        ///   Looks up a localized string similar to bool I0, I1, I2, I3, I4, O0, O1, O2, O3, O4;
+        /////bool An0, An1, An2, An3, An4;
+        ///bool dugum = true, prl, next;
         ///
-        ///void NC(int x1) {
-        ///  if (dugum) {
-        ///    if (digitalRead(x1) == LOW) {
-        ///      dugum = true;
-        ///      next = true;
-        ///    }
-        ///    else if (digitalRead(x1) == HIGH) {
-        ///      dugum = false;
-        ///    }
-        ///  }
+        ///
+        ///void IO_Scan(){
+        /////reading and buffering IO
+        ///I0 = PIND &amp; 0b00000100;
+        ///I1 = PIND &amp; 0b00001000;
+        ///I2 = PIND &amp; 0b00010000;
+        ///I3 = PINB &amp; 0b00000001;
         ///}
         ///
-        ///void NO(int x1) {
-        ///  if (dugum) {
-        ///    if (digitalRead(x1) == HIGH) {
-        ///      dugum = true;
-        ///      next = true;
-        ///    }
-        ///    else if (digitalRead(x1) == LOW) {
-        ///      dugum = false;
-        ///    }
-        ///  }
-        ///}
-        ///
-        ///void Coil(int x1) {
-        ///  if (dugum) {
-        ///    digitalWrite(x1, HIGH);
-        ///  }
-        ///  el [rest of string was truncated]&quot;;.
+        ///void IO_Write(){
+        ///if(O0 == true) {PORTD |= 0b00100000;}
+        ///else {PORTD &amp;= ~(0b00100000);}
+        ///if(O1 == true) {PORTD |= 0b01000000;}
+        ///else {PORTD &amp;= ~(0b01000000);}
+        ///if(O2 == true) {PORTB |= 0b00000010;}
+        ///else {PORTB &amp;= ~(0b00000010);}
+        ///if(O3 == true) {P [rest of string was truncated]&quot;;.
         /// </summary>
         public static string Funcs {
             get {
@@ -335,6 +344,16 @@ namespace WindowsFormsApp1.Properties {
         public static System.Drawing.Bitmap reset1 {
             get {
                 object obj = ResourceManager.GetObject("reset1", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        public static System.Drawing.Bitmap run {
+            get {
+                object obj = ResourceManager.GetObject("run", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
