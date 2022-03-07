@@ -210,7 +210,8 @@ namespace WindowsFormsApp1.Properties {
         ///I0 = PIND &amp; 0b00000100;
         ///I1 = PIND &amp; 0b00001000;
         ///I2 = PIND &amp; 0b00010000;
-        ///I3 = PINB &amp; 0b00000001;
+        ///I3 = PIND &amp; 0b10000000;
+        ///I4 = PINB &amp; 0b00000001;
         ///}
         ///
         ///void IO_Write(){
@@ -219,8 +220,7 @@ namespace WindowsFormsApp1.Properties {
         ///if(O1 == true) {PORTD |= 0b01000000;}
         ///else {PORTD &amp;= ~(0b01000000);}
         ///if(O2 == true) {PORTB |= 0b00000010;}
-        ///else {PORTB &amp;= ~(0b00000010);}
-        ///if(O3 == true) {P [rest of string was truncated]&quot;;.
+        ///else {PORTB &amp;= ~(0b00000 [rest of string was truncated]&quot;;.
         /// </summary>
         public static string Funcs {
             get {

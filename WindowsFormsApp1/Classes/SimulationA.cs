@@ -75,7 +75,7 @@ namespace WindowsFormsApp1
                     {
                         IntegerList.Add(Contact.AccessibleName, Convert.ToInt32(Contact.Text.Split('=')[1]));
                     }
-                    if (!IntegerList.ContainsKey(Contact.AccessibleName + "V")) { IntegerList.Add(Contact.AccessibleName + "V", null); }
+                    if (!IntegerList.ContainsKey(Contact.AccessibleName + "V")) { IntegerList.Add(Contact.AccessibleName + "V", 0); }
                     break;
                 case "3": // ->TOFF
                     if (Contact.Text.Split('=')[1].StartsWith("D")) // TOFF=Dx
@@ -85,7 +85,7 @@ namespace WindowsFormsApp1
                     {
                         IntegerList.Add(Contact.AccessibleName, Convert.ToInt32(Contact.Text.Split('=')[1]));
                     }
-                    if (!IntegerList.ContainsKey(Contact.AccessibleName + "V")) { IntegerList.Add(Contact.AccessibleName + "V", null); }
+                    if (!IntegerList.ContainsKey(Contact.AccessibleName + "V")) { IntegerList.Add(Contact.AccessibleName + "V", 0); }
                     break;
                 case "4": // -> Coil
                     if (!BoolList.ContainsKey(Contact.AccessibleName))
@@ -280,6 +280,8 @@ namespace WindowsFormsApp1
                 case "0": // -> NO
                     if (Contact.HasPrl)
                     {
+                        prl = false;
+                        MSimulation.next = false;
                         if (MSimulation.dugum) { prl = true; }
                         MSimulation.NO_SimMain(Contact, ref BoolList);
                         if (prl) { MSimulation.dugum = true; }
@@ -296,6 +298,8 @@ namespace WindowsFormsApp1
                 case "1": // -> NC
                     if (Contact.HasPrl)
                     {
+                        prl = false;
+                        MSimulation.next = false;
                         if (MSimulation.dugum) { prl = true; }
                         MSimulation.NC_SimMain(Contact, ref BoolList);
                         if (prl) { MSimulation.dugum = true; }

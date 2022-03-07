@@ -651,10 +651,12 @@ namespace WindowsFormsApp1
                     {
                         try
                         {
+                            if (tempButton.AccessibleName is null) { continue; }
                             if (tempButton.AccessibleName[0] == 'I')
                             {
                                 tempButton.ContextMenuStrip = contextMenuStrip1;
                             }
+                            
                         }
                         catch { continue; }
                     }
@@ -999,6 +1001,7 @@ namespace WindowsFormsApp1
                     x.BackgroundImage = toolStripButton3.BackgroundImage;
                     x.AccessibleDescription = "10";
                     x.AccessibleName = null;
+                    x.Text = null;
                 }
             }
 
@@ -1128,6 +1131,7 @@ namespace WindowsFormsApp1
             {
                 foreach (NewButton tempButton in all_list[key])
                 {
+                    if (tempButton.AccessibleName is null) { continue; }
                     try
                     {
                         if (tempButton.AccessibleName[0] == 'I')

@@ -40,8 +40,8 @@ namespace WindowsFormsApp1
         {
             if (dugum)
             {
-                if (!BoolList[Contact.AccessibleName]) { dugum = true; next = true; Contact.Status = false; }
-                else { dugum = false; Contact.Status = true; }
+                if (!BoolList[Contact.AccessibleName]) { dugum = true; next = true; Contact.Status = true; }
+                else { dugum = false; Contact.Status = false; }
             }
         }
         public void tON_SimMain(NewButton Contact, ref Dictionary<string, int?> IntegerList, int millis)
@@ -100,7 +100,6 @@ namespace WindowsFormsApp1
                 }
                 else { dugum = true; Contact.Status = true; }
             }
-            
         }
         public void tRTO_SimMain(NewButton Contact, ref Dictionary<string, int?> IntegerList, ref Dictionary<string, bool> BoolList, int millis)
         {
@@ -147,6 +146,10 @@ namespace WindowsFormsApp1
                 if (vals[0][0] == 'D')
                 {
                     IntegerList[vals[1]] = IntegerList[vals[0]];
+                }
+                else if (vals[0][0] == 'C')
+                {
+                    IntegerList[vals[1]] = IntegerList[vals[0] + "V"];
                 }
                 else
                 {

@@ -8,7 +8,8 @@ void IO_Scan(){
 I0 = PIND & 0b00000100;
 I1 = PIND & 0b00001000;
 I2 = PIND & 0b00010000;
-I3 = PINB & 0b00000001;
+I3 = PIND & 0b10000000;
+I4 = PINB & 0b00000001;
 }
 
 void IO_Write(){
@@ -85,6 +86,7 @@ void Reset_T(int &timer){
 }
 
 void CNTU(int Preset, int &CNTR, bool &CNT_Last, bool &CNT_Done) {
+  if(Preset == 0){return;} // may remove
   if (dugum) {
     if (!CNT_Last) {
       CNTR = 1 + CNTR;
@@ -106,6 +108,7 @@ void CNTU(int Preset, int &CNTR, bool &CNT_Last, bool &CNT_Done) {
 }
 
 void CNTD(int Preset, int &CNTR, bool &CNT_Last, bool &CNT_Done) {
+  if(Preset == 0){return;} // may remove
   if (dugum) {
     if (!CNT_Last) {
       CNTR = CNTR - 1;
@@ -156,9 +159,15 @@ void ADC_Alt(int pin, int &destination)
 
 void PWM (int pin, int value)
 {
+  int real_pin;
   if(dugum)
   {
-    analogWrite(pin, value);
+    if(pin == 0) {real_pin = 5;}
+    else if (pin == 1){real_pin = 6;}
+    else if (pin == 2){real_pin = 9;}
+    else if (pin == 3){real_pin = 10;}
+    else if (pin == 4){real_pin = 11;}
+    analogWrite(real_pin, value);
   }
 }
 

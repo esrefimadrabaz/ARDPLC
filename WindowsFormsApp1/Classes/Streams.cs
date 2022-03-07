@@ -64,20 +64,20 @@ namespace WindowsFormsApp1
                 }
                 else if (pins.Substring(0, 3) == "TON")
                 {
-                    Sbuilders[builder].AppendFormat("unsigned int TON{0};", pins.Substring(3)).AppendLine();
+                    Sbuilders[builder].AppendFormat("int TON{0};", pins.Substring(3)).AppendLine();
                 }
                 else if (pins.Substring(0, 4) == "TOFF")
                 {
-                    Sbuilders[builder].AppendFormat("unsigned int TOFF{0};", pins.Substring(4)).AppendLine();
+                    Sbuilders[builder].AppendFormat("int TOFF{0};", pins.Substring(4)).AppendLine();
                 }
                 else if (pins.Substring(0, 3) == "TRO")
                 {
-                    Sbuilders[builder].AppendFormat("unsigned int TRO{0};", pins.Substring(3)).AppendLine();
+                    Sbuilders[builder].AppendFormat("int TRO{0};", pins.Substring(3)).AppendLine();
                     Sbuilders[builder].AppendFormat("bool TRB{0};", pins.Substring(3)).AppendLine();
                 }
                 else if (pins.Substring(0, 4) == "CNTR")
                 {
-                    Sbuilders[builder].AppendFormat("unsigned int CNTR{0};", pins.Substring(4)).AppendLine();
+                    Sbuilders[builder].AppendFormat("int CNTR{0};", pins.Substring(4)).AppendLine();
                     Sbuilders[builder].AppendFormat("bool CNTR{0}L;", pins.Substring(4)).AppendLine();
                     Sbuilders[builder].AppendFormat("bool CNTR{0}D;", pins.Substring(4)).AppendLine();
                 }
@@ -208,11 +208,11 @@ namespace WindowsFormsApp1
         }
         public static void Ard_ADC(string pin, string destination)
         {
-            Sbuilders[builder].AppendFormat("ADC({0},{1});", pin, destination).AppendLine();
+            Sbuilders[builder].AppendFormat("ADC_Alt({0},{1});", pin, destination).AppendLine();
         }
         public static void Ard_PWM(string pin, string value)
         {
-            Sbuilders[builder].AppendFormat("PWM({0},{1});", pin, value).AppendLine();
+            Sbuilders[builder].AppendFormat("PWM({0},{1});", pin[1], value).AppendLine();
         }
         public static void Ard_NetStart()
         {

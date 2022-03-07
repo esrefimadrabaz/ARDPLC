@@ -2932,13 +2932,13 @@
     <value>&amp;Edit</value>
   </data>
   <data name="toolStripMenuItem1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>125, 22</value>
+    <value>180, 22</value>
   </data>
   <data name="toolStripMenuItem1.Text" xml:space="preserve">
     <value>Build</value>
   </data>
   <data name="toolStripMenuItem2.Size" type="System.Drawing.Size, System.Drawing">
-    <value>125, 22</value>
+    <value>180, 22</value>
   </data>
   <data name="toolStripMenuItem2.Text" xml:space="preserve">
     <value>Simulate</value>
@@ -3018,7 +3018,7 @@
   <data name="&gt;&gt;STEditStrip.Type" xml:space="preserve">
     <value>System.Windows.Forms.ContextMenuStrip, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <metadata name="toolStrip2.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+  <metadata name="iconStrip.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
     <value>745, 17</value>
   </metadata>
   <data name="toolStripSeparator24.Size" type="System.Drawing.Size, System.Drawing">
@@ -3166,31 +3166,31 @@
   <data name="helpToolStripButton.Text" xml:space="preserve">
     <value>He&amp;lp</value>
   </data>
-  <data name="toolStrip2.Location" type="System.Drawing.Point, System.Drawing">
+  <data name="iconStrip.Location" type="System.Drawing.Point, System.Drawing">
     <value>0, 24</value>
   </data>
-  <data name="toolStrip2.Padding" type="System.Windows.Forms.Padding, System.Windows.Forms">
+  <data name="iconStrip.Padding" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>0, 0, 0, 0</value>
   </data>
-  <data name="toolStrip2.Size" type="System.Drawing.Size, System.Drawing">
+  <data name="iconStrip.Size" type="System.Drawing.Size, System.Drawing">
     <value>1453, 25</value>
   </data>
-  <data name="toolStrip2.TabIndex" type="System.Int32, mscorlib">
+  <data name="iconStrip.TabIndex" type="System.Int32, mscorlib">
     <value>3</value>
   </data>
-  <data name="toolStrip2.Text" xml:space="preserve">
+  <data name="iconStrip.Text" xml:space="preserve">
     <value>toolStrip2</value>
   </data>
-  <data name="&gt;&gt;toolStrip2.Name" xml:space="preserve">
-    <value>toolStrip2</value>
+  <data name="&gt;&gt;iconStrip.Name" xml:space="preserve">
+    <value>iconStrip</value>
   </data>
-  <data name="&gt;&gt;toolStrip2.Type" xml:space="preserve">
+  <data name="&gt;&gt;iconStrip.Type" xml:space="preserve">
     <value>System.Windows.Forms.ToolStrip, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;toolStrip2.Parent" xml:space="preserve">
+  <data name="&gt;&gt;iconStrip.Parent" xml:space="preserve">
     <value>$this</value>
   </data>
-  <data name="&gt;&gt;toolStrip2.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;iconStrip.ZOrder" xml:space="preserve">
     <value>3</value>
   </data>
   <metadata name="$this.Localizable" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">

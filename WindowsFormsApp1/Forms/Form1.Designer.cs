@@ -110,7 +110,7 @@
             this.bindingSource1 = new System.Windows.Forms.BindingSource(this.components);
             this.STEditStrip = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.editToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
-            this.toolStrip2 = new System.Windows.Forms.ToolStrip();
+            this.iconStrip = new System.Windows.Forms.ToolStrip();
             this.toolStripSeparator24 = new System.Windows.Forms.ToolStripSeparator();
             this.newToolStripButton = new System.Windows.Forms.ToolStripButton();
             this.openToolStripButton = new System.Windows.Forms.ToolStripButton();
@@ -131,7 +131,7 @@
             this.menuStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.bindingSource1)).BeginInit();
             this.STEditStrip.SuspendLayout();
-            this.toolStrip2.SuspendLayout();
+            this.iconStrip.SuspendLayout();
             this.SuspendLayout();
             // 
             // splitContainer1
@@ -814,12 +814,12 @@
             resources.ApplyResources(this.editToolStripMenuItem1, "editToolStripMenuItem1");
             this.editToolStripMenuItem1.Click += new System.EventHandler(this.STFEditClick);
             // 
-            // toolStrip2
+            // iconStrip
             // 
-            this.toolStrip2.GripMargin = new System.Windows.Forms.Padding(0);
-            this.toolStrip2.GripStyle = System.Windows.Forms.ToolStripGripStyle.Hidden;
-            this.toolStrip2.ImageScalingSize = new System.Drawing.Size(17, 17);
-            this.toolStrip2.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.iconStrip.GripMargin = new System.Windows.Forms.Padding(0);
+            this.iconStrip.GripStyle = System.Windows.Forms.ToolStripGripStyle.Hidden;
+            this.iconStrip.ImageScalingSize = new System.Drawing.Size(17, 17);
+            this.iconStrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.toolStripSeparator24,
             this.newToolStripButton,
             this.openToolStripButton,
@@ -830,8 +830,8 @@
             this.buildToolStripButton,
             this.toolStripSeparator23,
             this.helpToolStripButton});
-            resources.ApplyResources(this.toolStrip2, "toolStrip2");
-            this.toolStrip2.Name = "toolStrip2";
+            resources.ApplyResources(this.iconStrip, "iconStrip");
+            this.iconStrip.Name = "iconStrip";
             // 
             // toolStripSeparator24
             // 
@@ -904,7 +904,7 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.ButtonShadow;
             this.Controls.Add(this.splitContainer1);
-            this.Controls.Add(this.toolStrip2);
+            this.Controls.Add(this.iconStrip);
             this.Controls.Add(this.menuStrip1);
             this.KeyPreview = true;
             this.MainMenuStrip = this.menuStrip1;
@@ -924,8 +924,8 @@
             this.menuStrip1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.bindingSource1)).EndInit();
             this.STEditStrip.ResumeLayout(false);
-            this.toolStrip2.ResumeLayout(false);
-            this.toolStrip2.PerformLayout();
+            this.iconStrip.ResumeLayout(false);
+            this.iconStrip.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -1012,7 +1012,7 @@
         private System.Windows.Forms.ToolStripButton toolStripButton17;
         private System.Windows.Forms.ContextMenuStrip STEditStrip;
         private System.Windows.Forms.ToolStripMenuItem editToolStripMenuItem1;
-        private System.Windows.Forms.ToolStrip toolStrip2;
+        private System.Windows.Forms.ToolStrip iconStrip;
         private System.Windows.Forms.ToolStripButton newToolStripButton;
         private System.Windows.Forms.ToolStripButton openToolStripButton;
         private System.Windows.Forms.ToolStripButton saveToolStripButton;
