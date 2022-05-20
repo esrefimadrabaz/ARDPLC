@@ -11,14 +11,14 @@ void loop() {
 IO_Scan();
 //New Network Start ---------------
 dugum = true;
-
 prl,next = false;
+
 if(dugum) {prl = true;}
 NO_M(I0);
 if (prl)  {dugum=true;}
 NO_M(O0);
 if (next) { dugum = true; }
-
+prl,next = false;
 NC_M(I1);
 Coil_M(O0);
 //New Network Start ---------------
@@ -28,3 +28,4 @@ Coil_M(O1);
 //end of loop ---------------
 IO_Write();
 }
+

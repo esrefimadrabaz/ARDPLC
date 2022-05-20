@@ -109,10 +109,10 @@ namespace WindowsFormsApp1
             if (!buton_checked) { return; }
 
             deletefromUsed(secili.AccessibleName);
-            using (noMenu menuu = new noMenu())
-                if (menuu.ShowDialog() == DialogResult.OK)
+            using (noMenu nomenu = new noMenu())
+                if (nomenu.ShowDialog() == DialogResult.OK)
                 {
-                    secili.AccessibleName = menuu.Type + Convert.ToString(menuu.Pin); // I-M-O-CNTR + PİN
+                    secili.AccessibleName = nomenu.Type + Convert.ToString(nomenu.Pin); // I-M-O-CNTR + PİN
                     secili.Text = secili.AccessibleName;
                     addtoUsed(secili.AccessibleName);
                     secili.BackgroundImage = toolStripButton1.BackgroundImage;
@@ -503,6 +503,31 @@ namespace WindowsFormsApp1
                 secili.Text = "EXTI END";
             }
         } 
+        private void SRLButton_Click(object sender, EventArgs e) // Serial Button 
+        {
+            if (!buton_checked) { return; }
+            secili.BackgroundImage = Properties.Resources.clock_n;
+            deletefromUsed(secili.AccessibleName);
+
+            using (SerialMenu Serial = new SerialMenu())
+            {
+                if(Serial.ShowDialog() == DialogResult.OK)
+                {
+                    secili.AccessibleDescription = "20";
+                    secili.AccessibleName = "serial." + Serial.Function;
+                    secili.Text = secili.AccessibleName; //serial.begin
+                    if (Serial.Function == "print")
+                    {
+                        secili.Text = secili.Text + "-D" + Serial.Value.ToString() + "," + Serial.Format; //serial.begin-D0,DEC
+                    }
+                    addtoUsed(secili.AccessibleName);
+                }
+                else
+                {
+                    secili.BackgroundImage = Properties.Resources.link;
+                }
+            }
+        }
         private void STFEditClick(object sender, EventArgs e) // Editor Edit Click
         {
             if (!buton_checked) { return; }
@@ -689,6 +714,7 @@ namespace WindowsFormsApp1
             name.ImageAlign = ContentAlignment.MiddleCenter;
             name.BackColor = Color.White;
             name.Margin = new Padding(all: 0);
+            name.Cursor = Cursors.Hand;
             //name.Anchor = (AnchorStyles.Bottom | AnchorStyles.Right | AnchorStyles.Left | AnchorStyles.Top);
             name.MaximumSize = new Size(size_x * 2, size_y * 2);
             if (down) { name.AccessibleName = "down"; }
@@ -955,6 +981,9 @@ namespace WindowsFormsApp1
                     foo.BackgroundImage = Properties.Resources.clock_n;
                     break;
                 case "19":
+                    foo.BackgroundImage = Properties.Resources.clock_n;
+                    break;
+                case "20":
                     foo.BackgroundImage = Properties.Resources.clock_n;
                     break;
                 default:

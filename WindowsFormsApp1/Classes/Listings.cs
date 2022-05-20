@@ -14,7 +14,7 @@ namespace WindowsFormsApp1
     /* Contact & Coil Codes 
      0 = NO     1 = NC      2 = CLOCK_ON       3 = CLOCK_OFF        4 = COIL    5 = MOV     6 = COUNTER_UP      7 = COUNTER_DOWN        8 = SET     9 = RESET    
      10 = LINK       11 = NETWORK_START    12 = ARITHMETICS    13 = CLOCK_RETENTIVE     14 = CMP        15 = ZCMP       16 = ADC        17 = PWM    18 = EXTI
-     19 = STF
+     19 = STF       20 = SERIAL
      99 = down       98 = up
     */
 
@@ -468,17 +468,17 @@ namespace WindowsFormsApp1
                     if (btn.HasPrl)
                     {
                         string pin;
-                        string value;
+                        string pwmvalue;
                         char type;
                         pin = btn.AccessibleName.Split('-')[2];
                         type = btn.AccessibleName.Split('-')[1][0];
-                        value = btn.AccessibleName.Split('-')[1].Substring(1);
+                        pwmvalue = btn.AccessibleName.Split('-')[1].Substring(1);
 
                         Streams.Sbuilders[Streams.builder].AppendLine("prl,next = false;");
                         Streams.Sbuilders[Streams.builder].AppendLine("");
                         Streams.Sbuilders[Streams.builder].AppendLine("if(dugum) {prl = true;}");
-                        if (type == 'K') { Streams.Ard_PWM(pin, value); }
-                        else { Streams.Ard_PWM(pin, "D" + value); }
+                        if (type == 'K') { Streams.Ard_PWM(pin, pwmvalue); }
+                        else { Streams.Ard_PWM(pin, "D" + pwmvalue); }
                         Streams.Sbuilders[Streams.builder].AppendLine("if (prl)  {dugum=true;}");
                         Sort(btn.PrlTo);
                         Streams.Sbuilders[Streams.builder].AppendLine("if (next) { dugum = true; }");
@@ -487,14 +487,14 @@ namespace WindowsFormsApp1
                     else
                     {
                         string pin;
-                        string value;
+                        string pwmvalue;
                         char type;
                         pin = btn.AccessibleName.Split('-')[2];
                         type = btn.AccessibleName.Split('-')[1][0];
-                        value = btn.AccessibleName.Split('-')[1].Substring(1);
+                        pwmvalue = btn.AccessibleName.Split('-')[1].Substring(1);
 
-                        if (type == 'K') { Streams.Ard_PWM(pin, value); }
-                        else { Streams.Ard_PWM(pin, "D" + value); }
+                        if (type == 'K') { Streams.Ard_PWM(pin, pwmvalue); }
+                        else { Streams.Ard_PWM(pin, "D" + pwmvalue); }
                     }
                     break;
                 case "18": // EXTI
@@ -522,6 +522,39 @@ namespace WindowsFormsApp1
                     else
                     {
                         Streams.Ard_STFUse(btn.AccessibleName);
+                    }
+                    break;
+                case "20": // SERIAL
+                    string func;
+                    int serialvalue;
+                    string format;
+                    if (btn.Text.Split('.')[1][0] == 'p') // serial.begin-D0,DEC
+                    {
+                        func = "print";
+                        serialvalue = Convert.ToInt32(btn.Text.Split('-')[1].Split(',')[0].Substring(1));
+                        format = btn.Text.Split('-')[1].Split(',')[1];
+                    }
+                    else
+                    {
+                        func = btn.Text.Split('.')[1].Split('-')[0];
+                        serialvalue = 0;
+                        format = "DEC";
+                    }
+                    if (btn.HasPrl)
+                    {
+                        Streams.Sbuilders[Streams.builder].AppendLine("prl,next = false;");
+                        Streams.Sbuilders[Streams.builder].AppendLine("");
+                        Streams.Sbuilders[Streams.builder].AppendLine("if(dugum) {prl = true;}");
+                        Streams.Ard_Serial(func, serialvalue, format);
+                        Streams.Sbuilders[Streams.builder].AppendLine("if (prl)  {dugum=true;}");
+                        Sort(btn.PrlTo);
+                        Streams.Sbuilders[Streams.builder].AppendLine("if (next) { dugum = true; }");
+                        Streams.Sbuilders[Streams.builder].AppendLine("prl,next = false;");
+                    }
+                    else
+                    {
+
+                        Streams.Ard_Serial(func, serialvalue, format);
                     }
                     break;
                 default:

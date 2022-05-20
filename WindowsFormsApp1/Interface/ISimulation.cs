@@ -23,6 +23,7 @@ namespace WindowsFormsApp1
         void ADC_SimMain(NewButton Contact, ref Dictionary<string, int?> IntegerList);
         void PWM_SimMain(NewButton Contact, ref Dictionary<string, int?> IntegerList, ref Dictionary<string, bool> BoolList);
         void CMP_SimMain(NewButton Contact, ref Dictionary<string, int?> IntegerList, ref Dictionary<string, bool> BoolList);
+        void Default(NewButton Contact);
     }
     public class MSimulation : ISimulation
     {
@@ -65,6 +66,7 @@ namespace WindowsFormsApp1
                 if (millis - IntegerList[Contact.AccessibleName + "V"] >= intervalON)
                 {
                     dugum = true;
+                    next = true;
                     Contact.Status = true;
                 }
                 else
@@ -89,6 +91,7 @@ namespace WindowsFormsApp1
             {
                 IntegerList[Contact.AccessibleName + "V"] = millis;
                 dugum = true;
+                next = true;
                 Contact.Status = true;
             }
             if ((!dugum) && (IntegerList[Contact.AccessibleName + "V"] != 0))
@@ -122,6 +125,7 @@ namespace WindowsFormsApp1
                 if (millis - IntegerList[Contact.AccessibleName + "V"] >= intervalRTO)
                 {
                     dugum = true;
+                    next = true;
                     Contact.Status = true;
                 }
                 else { dugum = false; Contact.Status = false; }
@@ -135,7 +139,7 @@ namespace WindowsFormsApp1
         }
         public void Coil_SimMain(NewButton Contact, ref Dictionary<string, bool> BoolList)
         {
-            if (dugum) { Contact.Status = true; BoolList[Contact.AccessibleName] = true; }
+            if (dugum) { Contact.Status = true; BoolList[Contact.AccessibleName] = true; next = true; }
             else { Contact.Status = false; BoolList[Contact.AccessibleName] = false; }
         }
         public void Mov_SimMain(NewButton Contact, ref Dictionary<string, int?> IntegerList)
@@ -156,6 +160,7 @@ namespace WindowsFormsApp1
                     IntegerList[vals[1]] = Convert.ToInt32(vals[0].Substring(1));
                 }
                 Contact.Status = true;
+                next = true;
             }
             else { Contact.Status = false; }
         }
@@ -183,6 +188,7 @@ namespace WindowsFormsApp1
             if ((IntegerList[Contact.AccessibleName + "V"] >= preset))
             {
                 dugum = true;
+                next = true;
                 Contact.Status = true;
                 BoolList[Contact.AccessibleName] = true;
             }
@@ -213,6 +219,7 @@ namespace WindowsFormsApp1
             if ((IntegerList[Contact.AccessibleName + "V"] >= presetd))
             {
                 dugum = true;
+                next = true;
                 Contact.Status = true;
                 BoolList[Contact.AccessibleName] = true;
             }
@@ -223,8 +230,9 @@ namespace WindowsFormsApp1
         {
             if (dugum)
             {
-                Contact.Status = true;
+                Contact.Status = true;     
                 BoolList[Contact.AccessibleName] = true;
+                next = true;
             }
             else
             {
@@ -253,6 +261,7 @@ namespace WindowsFormsApp1
                     }
                 }
                 Contact.Status = true;
+                next = true;
             }
             else { Contact.Status = false; }
         }
@@ -280,6 +289,7 @@ namespace WindowsFormsApp1
                 else if (Contact.AccessibleName.Contains("/")) { IntegerList[ArithData] = ArithValues[0] / ArithValues[1]; }
                 else if (Contact.AccessibleName.Contains("*")) { IntegerList[ArithData] = ArithValues[0] * ArithValues[1]; }
                 Contact.Status = true;
+                next = true;
             }
             else
             {
@@ -291,6 +301,7 @@ namespace WindowsFormsApp1
             if (dugum)
             {
                 Contact.Status = true;
+                next = true;
                 IntegerList[Contact.AccessibleName.Split('-')[2]] = IntegerList[Contact.AccessibleName.Split('-')[1]];
             }
             else
@@ -316,6 +327,7 @@ namespace WindowsFormsApp1
                 IntegerList[Contact.AccessibleName.Split('-')[2] + "V"] = PWMVal;
                 BoolList[Contact.AccessibleName.Split('-')[2]] = true;
                 Contact.Status = true;
+                next = true;
             }
             else
             {
@@ -373,6 +385,7 @@ namespace WindowsFormsApp1
                     BoolList["M" + (MNmbr + 2)] = true;
                 }
                 Contact.Status = true;
+                next = true;
             }
             else
             {
@@ -439,10 +452,24 @@ namespace WindowsFormsApp1
                     BoolList[("M" + ZMNumber + 2)] = true;
                 }
                 Contact.Status = true;
+                next = true;
             }
             else
             {
                 Contact.Status = false;
+            }
+        }
+        public void Default(NewButton Contact)
+        {
+            if (dugum)
+            {
+                Contact.Status = true;
+                next = true;
+            }
+            else
+            {
+                Contact.Status = false;
+                dugum = false;
             }
         }
     }

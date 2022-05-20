@@ -214,6 +214,22 @@ namespace WindowsFormsApp1
         {
             Sbuilders[builder].AppendFormat("PWM({0},{1});", pin[1], value).AppendLine();
         }
+        public static void Ard_Serial(string function, int value, string format)
+        {
+            if (function == "begin")
+            {
+                Sbuilders[builder].AppendFormat("Serial.{0}(9600);", function).AppendLine();
+            }
+            else if (function != "print")
+            {
+                Sbuilders[builder].AppendFormat("Serial.{0}();", function).AppendLine();
+            }
+            else
+            {
+                Sbuilders[builder].AppendFormat("Serial.{0}(D{1}, {2});", function, value.ToString(), format).AppendLine();
+            }
+
+        }
         public static void Ard_NetStart()
         {
             Sbuilders[builder].AppendLine("//New Network Start ---------------");

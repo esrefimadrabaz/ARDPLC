@@ -7,11 +7,12 @@
     <ProjectGuid>{D1284FA3-D05C-472F-AF32-E815EA09BA17}</ProjectGuid>
     <OutputType>WinExe</OutputType>
     <RootNamespace>WindowsFormsApp1</RootNamespace>
-    <AssemblyName>WindowsFormsApp1</AssemblyName>
+    <AssemblyName>ARDPLC</AssemblyName>
     <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
     <Deterministic>true</Deterministic>
+    <IsWebBootstrapper>false</IsWebBootstrapper>
     <PublishUrl>publish\</PublishUrl>
     <Install>true</Install>
     <InstallFrom>Disk</InstallFrom>
@@ -22,10 +23,10 @@
     <UpdatePeriodically>false</UpdatePeriodically>
     <UpdateRequired>false</UpdateRequired>
     <MapFileExtensions>true</MapFileExtensions>
-    <ApplicationRevision>0</ApplicationRevision>
+    <ApplicationRevision>2</ApplicationRevision>
     <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
-    <IsWebBootstrapper>false</IsWebBootstrapper>
     <UseApplicationTrust>false</UseApplicationTrust>
+    <PublishWizardCompleted>true</PublishWizardCompleted>
     <BootstrapperEnabled>true</BootstrapperEnabled>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
@@ -47,6 +48,18 @@
     <DefineConstants>TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup>
+    <ManifestCertificateThumbprint>F1D40D3FF4273CCA06E25B15FB237860A3BFA7FD</ManifestCertificateThumbprint>
+  </PropertyGroup>
+  <PropertyGroup>
+    <ManifestKeyFile>WindowsFormsApp1_TemporaryKey.pfx</ManifestKeyFile>
+  </PropertyGroup>
+  <PropertyGroup>
+    <GenerateManifests>true</GenerateManifests>
+  </PropertyGroup>
+  <PropertyGroup>
+    <SignManifests>false</SignManifests>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="Antlr4.Runtime.Standard, Version=4.9.3.0, Culture=neutral, PublicKeyToken=e78b2c5abd1fcb3f, processorArchitecture=MSIL">
@@ -175,6 +188,12 @@
       <DependentUpon>STEditorInit.cs</DependentUpon>
     </Compile>
     <Compile Include="Classes\STFCompiler.cs" />
+    <Compile Include="SerialMenu.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="SerialMenu.Designer.cs">
+      <DependentUpon>SerialMenu.cs</DependentUpon>
+    </Compile>
     <Compile Include="UserControls\LeftPanels.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -246,6 +265,9 @@
     <EmbeddedResource Include="Forms\STEditorInit.resx">
       <DependentUpon>STEditorInit.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="SerialMenu.resx">
+      <DependentUpon>SerialMenu.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="UserControls\LeftPanels.resx">
       <DependentUpon>LeftPanels.cs</DependentUpon>
     </EmbeddedResource>
@@ -280,6 +302,7 @@
     <None Include="Utils\Grammar.tokens" />
     <None Include="Utils\GrammarLexer.interp" />
     <None Include="Utils\GrammarLexer.tokens" />
+    <None Include="WindowsFormsApp1_TemporaryKey.pfx" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
@@ -351,9 +374,6 @@
     <None Include="Resources\set-rest1.png" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Resources\Funcs.txt" />
-  </ItemGroup>
-  <ItemGroup>
     <BootstrapperPackage Include=".NETFramework,Version=v4.7.2">
       <Visible>False</Visible>
       <ProductName>Microsoft .NET Framework 4.7.2 %28x86 and x64%29</ProductName>
@@ -373,6 +393,9 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\down_final.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Funcs.txt" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

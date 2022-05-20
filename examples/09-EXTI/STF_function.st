@@ -1,0 +1,5 @@
+FUNCTION function
+WHILE(M0 = false) DO
+
+END_WHILE;
+END_FUNCTION;

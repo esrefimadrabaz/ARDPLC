@@ -142,7 +142,7 @@
     <value>leftPanel1</value>
   </data>
   <data name="&gt;&gt;leftPanel1.Type" xml:space="preserve">
-    <value>WindowsFormsApp1.LeftPanels, WindowsFormsApp1, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+    <value>WindowsFormsApp1.LeftPanels, ARDPLC, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="&gt;&gt;leftPanel1.Parent" xml:space="preserve">
     <value>splitContainer1.Panel1</value>
@@ -173,6 +173,9 @@
   </data>
   <data name="textBox3.TabIndex" type="System.Int32, mscorlib">
     <value>12</value>
+  </data>
+  <data name="textBox3.Visible" type="System.Boolean, mscorlib">
+    <value>False</value>
   </data>
   <data name="&gt;&gt;textBox3.Name" xml:space="preserve">
     <value>textBox3</value>
@@ -234,7 +237,7 @@
     <value>button2</value>
   </data>
   <data name="&gt;&gt;button2.Type" xml:space="preserve">
-    <value>WindowsFormsApp1.NewButton, WindowsFormsApp1, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+    <value>WindowsFormsApp1.NewButton, ARDPLC, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="&gt;&gt;button2.Parent" xml:space="preserve">
     <value>panel1</value>
@@ -281,7 +284,7 @@
     <value>button9</value>
   </data>
   <data name="&gt;&gt;button9.Type" xml:space="preserve">
-    <value>WindowsFormsApp1.NewButton, WindowsFormsApp1, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+    <value>WindowsFormsApp1.NewButton, ARDPLC, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="&gt;&gt;button9.Parent" xml:space="preserve">
     <value>panel1</value>
@@ -328,7 +331,7 @@
     <value>button8</value>
   </data>
   <data name="&gt;&gt;button8.Type" xml:space="preserve">
-    <value>WindowsFormsApp1.NewButton, WindowsFormsApp1, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+    <value>WindowsFormsApp1.NewButton, ARDPLC, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="&gt;&gt;button8.Parent" xml:space="preserve">
     <value>panel1</value>
@@ -375,7 +378,7 @@
     <value>button7</value>
   </data>
   <data name="&gt;&gt;button7.Type" xml:space="preserve">
-    <value>WindowsFormsApp1.NewButton, WindowsFormsApp1, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+    <value>WindowsFormsApp1.NewButton, ARDPLC, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="&gt;&gt;button7.Parent" xml:space="preserve">
     <value>panel1</value>
@@ -422,7 +425,7 @@
     <value>button6</value>
   </data>
   <data name="&gt;&gt;button6.Type" xml:space="preserve">
-    <value>WindowsFormsApp1.NewButton, WindowsFormsApp1, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+    <value>WindowsFormsApp1.NewButton, ARDPLC, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="&gt;&gt;button6.Parent" xml:space="preserve">
     <value>panel1</value>
@@ -469,7 +472,7 @@
     <value>button5</value>
   </data>
   <data name="&gt;&gt;button5.Type" xml:space="preserve">
-    <value>WindowsFormsApp1.NewButton, WindowsFormsApp1, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+    <value>WindowsFormsApp1.NewButton, ARDPLC, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="&gt;&gt;button5.Parent" xml:space="preserve">
     <value>panel1</value>
@@ -516,7 +519,7 @@
     <value>button4</value>
   </data>
   <data name="&gt;&gt;button4.Type" xml:space="preserve">
-    <value>WindowsFormsApp1.NewButton, WindowsFormsApp1, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+    <value>WindowsFormsApp1.NewButton, ARDPLC, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="&gt;&gt;button4.Parent" xml:space="preserve">
     <value>panel1</value>
@@ -563,7 +566,7 @@
     <value>button3</value>
   </data>
   <data name="&gt;&gt;button3.Type" xml:space="preserve">
-    <value>WindowsFormsApp1.NewButton, WindowsFormsApp1, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+    <value>WindowsFormsApp1.NewButton, ARDPLC, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="&gt;&gt;button3.Parent" xml:space="preserve">
     <value>panel1</value>
@@ -631,7 +634,7 @@
     <value>button1</value>
   </data>
   <data name="&gt;&gt;button1.Type" xml:space="preserve">
-    <value>WindowsFormsApp1.NewButton, WindowsFormsApp1, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+    <value>WindowsFormsApp1.NewButton, ARDPLC, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="&gt;&gt;button1.Parent" xml:space="preserve">
     <value>panel1</value>
@@ -671,6 +674,9 @@
   </data>
   <data name="textBox2.TabIndex" type="System.Int32, mscorlib">
     <value>11</value>
+  </data>
+  <data name="textBox2.Visible" type="System.Boolean, mscorlib">
+    <value>False</value>
   </data>
   <data name="&gt;&gt;textBox2.Name" xml:space="preserve">
     <value>textBox2</value>
@@ -2570,7 +2576,7 @@
   <data name="toolStripButton16.TextImageRelation" type="System.Windows.Forms.TextImageRelation, System.Windows.Forms">
     <value>ImageAboveText</value>
   </data>
-  <data name="toolStripSeparator22.Size" type="System.Drawing.Size, System.Drawing">
+  <data name="toolStripSeparator25.Size" type="System.Drawing.Size, System.Drawing">
     <value>6, 35</value>
   </data>
   <data name="toolStripButton17.BackgroundImage" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
@@ -2597,6 +2603,35 @@
     <value>STF</value>
   </data>
   <data name="toolStripButton17.TextImageRelation" type="System.Windows.Forms.TextImageRelation, System.Windows.Forms">
+    <value>ImageAboveText</value>
+  </data>
+  <data name="toolStripSeparator22.Size" type="System.Drawing.Size, System.Drawing">
+    <value>6, 35</value>
+  </data>
+  <data name="toolStripButton18.BackgroundImage" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+    <value>
+        iVBORw0KGgoAAAANSUhEUgAAAkQAAACwCAYAAADufHF8AAAABGdBTUEAALGPC/xhBQAAAAlwSFlzAAAO
+        wwAADsMBx2+oZAAAAdpJREFUeF7t1gENACAMwLCLOf4lgg6yNpmHDQAAAAAAAAAAAAAAAAAAAAAAAAAA
+        AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+        AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+        AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA/OrtXkiSpnCGSJEn5DJEkScpniCRJUj5D
+        JEmS8hkiSZKUzxBJkqR8hkiSJOUzRJIkKZ8hkiRJ+QyRJEnKZ4gkSVI+QyRJkvIZIkmSlM8QSZKkfAMA
+        AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+        AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+        AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+        AAAAAAA/mXmy3FUhUUCISAAAAABJRU5ErkJggg==
+</value>
+  </data>
+  <data name="toolStripButton18.ImageTransparentColor" type="System.Drawing.Color, System.Drawing">
+    <value>Magenta</value>
+  </data>
+  <data name="toolStripButton18.Size" type="System.Drawing.Size, System.Drawing">
+    <value>28, 32</value>
+  </data>
+  <data name="toolStripButton18.Text" xml:space="preserve">
+    <value>SRL</value>
+  </data>
+  <data name="toolStripButton18.TextImageRelation" type="System.Windows.Forms.TextImageRelation, System.Windows.Forms">
     <value>ImageAboveText</value>
   </data>
   <data name="toolStrip1.Location" type="System.Drawing.Point, System.Drawing">
@@ -2932,13 +2967,13 @@
     <value>&amp;Edit</value>
   </data>
   <data name="toolStripMenuItem1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>180, 22</value>
+    <value>125, 22</value>
   </data>
   <data name="toolStripMenuItem1.Text" xml:space="preserve">
     <value>Build</value>
   </data>
   <data name="toolStripMenuItem2.Size" type="System.Drawing.Size, System.Drawing">
-    <value>180, 22</value>
+    <value>125, 22</value>
   </data>
   <data name="toolStripMenuItem2.Text" xml:space="preserve">
     <value>Simulate</value>
@@ -2950,16 +2985,16 @@
     <value>&amp;Tools</value>
   </data>
   <data name="searchToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>120, 22</value>
+    <value>180, 22</value>
   </data>
   <data name="searchToolStripMenuItem.Text" xml:space="preserve">
     <value>Help</value>
   </data>
   <data name="toolStripSeparator7.Size" type="System.Drawing.Size, System.Drawing">
-    <value>117, 6</value>
+    <value>177, 6</value>
   </data>
   <data name="aboutToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>120, 22</value>
+    <value>180, 22</value>
   </data>
   <data name="aboutToolStripMenuItem.Text" xml:space="preserve">
     <value>&amp;About...</value>
@@ -3193,6 +3228,9 @@
   <data name="&gt;&gt;iconStrip.ZOrder" xml:space="preserve">
     <value>3</value>
   </data>
+  <metadata name="helpProvider1.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+    <value>845, 17</value>
+  </metadata>
   <metadata name="$this.Localizable" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>True</value>
   </metadata>
@@ -5084,16 +5122,28 @@
   <data name="&gt;&gt;toolStripButton16.Type" xml:space="preserve">
     <value>System.Windows.Forms.ToolStripButton, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;toolStripSeparator22.Name" xml:space="preserve">
-    <value>toolStripSeparator22</value>
+  <data name="&gt;&gt;toolStripSeparator25.Name" xml:space="preserve">
+    <value>toolStripSeparator25</value>
   </data>
-  <data name="&gt;&gt;toolStripSeparator22.Type" xml:space="preserve">
+  <data name="&gt;&gt;toolStripSeparator25.Type" xml:space="preserve">
     <value>System.Windows.Forms.ToolStripSeparator, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;toolStripButton17.Name" xml:space="preserve">
     <value>toolStripButton17</value>
   </data>
   <data name="&gt;&gt;toolStripButton17.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripButton, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;toolStripSeparator22.Name" xml:space="preserve">
+    <value>toolStripSeparator22</value>
+  </data>
+  <data name="&gt;&gt;toolStripSeparator22.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripSeparator, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;toolStripButton18.Name" xml:space="preserve">
+    <value>toolStripButton18</value>
+  </data>
+  <data name="&gt;&gt;toolStripButton18.Type" xml:space="preserve">
     <value>System.Windows.Forms.ToolStripButton, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;heyeheyToolStripMenuItem.Name" xml:space="preserve">
@@ -5329,6 +5379,12 @@
   </data>
   <data name="&gt;&gt;helpToolStripButton.Type" xml:space="preserve">
     <value>System.Windows.Forms.ToolStripButton, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;helpProvider1.Name" xml:space="preserve">
+    <value>helpProvider1</value>
+  </data>
+  <data name="&gt;&gt;helpProvider1.Type" xml:space="preserve">
+    <value>System.Windows.Forms.HelpProvider, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;$this.Name" xml:space="preserve">
     <value>Form1</value>

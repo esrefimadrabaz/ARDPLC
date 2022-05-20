@@ -76,8 +76,10 @@
             this.toolStripButton15 = new System.Windows.Forms.ToolStripButton();
             this.toolStripSeparator21 = new System.Windows.Forms.ToolStripSeparator();
             this.toolStripButton16 = new System.Windows.Forms.ToolStripButton();
-            this.toolStripSeparator22 = new System.Windows.Forms.ToolStripSeparator();
+            this.toolStripSeparator25 = new System.Windows.Forms.ToolStripSeparator();
             this.toolStripButton17 = new System.Windows.Forms.ToolStripButton();
+            this.toolStripSeparator22 = new System.Windows.Forms.ToolStripSeparator();
+            this.toolStripButton18 = new System.Windows.Forms.ToolStripButton();
             this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.heyeheyToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.bumToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -121,6 +123,7 @@
             this.buildToolStripButton = new System.Windows.Forms.ToolStripButton();
             this.toolStripSeparator23 = new System.Windows.Forms.ToolStripSeparator();
             this.helpToolStripButton = new System.Windows.Forms.ToolStripButton();
+            this.helpProvider1 = new System.Windows.Forms.HelpProvider();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
             this.splitContainer1.Panel1.SuspendLayout();
             this.splitContainer1.Panel2.SuspendLayout();
@@ -186,6 +189,7 @@
             // 
             resources.ApplyResources(this.button2, "button2");
             this.button2.BackColor = System.Drawing.Color.White;
+            this.button2.Cursor = System.Windows.Forms.Cursors.Hand;
             this.button2.FlatAppearance.BorderColor = System.Drawing.Color.White;
             this.button2.FlatAppearance.BorderSize = 0;
             this.button2.ForeColor = System.Drawing.Color.Black;
@@ -206,6 +210,7 @@
             // 
             resources.ApplyResources(this.button9, "button9");
             this.button9.BackColor = System.Drawing.Color.White;
+            this.button9.Cursor = System.Windows.Forms.Cursors.Hand;
             this.button9.FlatAppearance.BorderColor = System.Drawing.Color.White;
             this.button9.FlatAppearance.BorderSize = 0;
             this.button9.ForeColor = System.Drawing.Color.Black;
@@ -226,6 +231,7 @@
             // 
             resources.ApplyResources(this.button8, "button8");
             this.button8.BackColor = System.Drawing.Color.White;
+            this.button8.Cursor = System.Windows.Forms.Cursors.Hand;
             this.button8.FlatAppearance.BorderColor = System.Drawing.Color.White;
             this.button8.FlatAppearance.BorderSize = 0;
             this.button8.ForeColor = System.Drawing.Color.Black;
@@ -246,6 +252,7 @@
             // 
             resources.ApplyResources(this.button7, "button7");
             this.button7.BackColor = System.Drawing.Color.White;
+            this.button7.Cursor = System.Windows.Forms.Cursors.Hand;
             this.button7.FlatAppearance.BorderColor = System.Drawing.Color.White;
             this.button7.FlatAppearance.BorderSize = 0;
             this.button7.ForeColor = System.Drawing.Color.Black;
@@ -266,6 +273,7 @@
             // 
             resources.ApplyResources(this.button6, "button6");
             this.button6.BackColor = System.Drawing.Color.White;
+            this.button6.Cursor = System.Windows.Forms.Cursors.Hand;
             this.button6.FlatAppearance.BorderColor = System.Drawing.Color.White;
             this.button6.FlatAppearance.BorderSize = 0;
             this.button6.ForeColor = System.Drawing.Color.Black;
@@ -286,6 +294,7 @@
             // 
             resources.ApplyResources(this.button5, "button5");
             this.button5.BackColor = System.Drawing.Color.White;
+            this.button5.Cursor = System.Windows.Forms.Cursors.Hand;
             this.button5.FlatAppearance.BorderColor = System.Drawing.Color.White;
             this.button5.FlatAppearance.BorderSize = 0;
             this.button5.ForeColor = System.Drawing.Color.Black;
@@ -306,6 +315,7 @@
             // 
             resources.ApplyResources(this.button4, "button4");
             this.button4.BackColor = System.Drawing.Color.White;
+            this.button4.Cursor = System.Windows.Forms.Cursors.Hand;
             this.button4.FlatAppearance.BorderColor = System.Drawing.Color.White;
             this.button4.FlatAppearance.BorderSize = 0;
             this.button4.ForeColor = System.Drawing.Color.Black;
@@ -326,6 +336,7 @@
             // 
             resources.ApplyResources(this.button3, "button3");
             this.button3.BackColor = System.Drawing.Color.White;
+            this.button3.Cursor = System.Windows.Forms.Cursors.Hand;
             this.button3.FlatAppearance.BorderColor = System.Drawing.Color.White;
             this.button3.FlatAppearance.BorderSize = 0;
             this.button3.ForeColor = System.Drawing.Color.Black;
@@ -405,8 +416,10 @@
             this.toolStripButton15,
             this.toolStripSeparator21,
             this.toolStripButton16,
+            this.toolStripSeparator25,
+            this.toolStripButton17,
             this.toolStripSeparator22,
-            this.toolStripButton17});
+            this.toolStripButton18});
             this.toolStrip1.Name = "toolStrip1";
             this.toolStrip1.RenderMode = System.Windows.Forms.ToolStripRenderMode.Professional;
             // 
@@ -601,10 +614,10 @@
             this.toolStripButton16.Name = "toolStripButton16";
             this.toolStripButton16.Click += new System.EventHandler(this.ISRButton_Click);
             // 
-            // toolStripSeparator22
+            // toolStripSeparator25
             // 
-            this.toolStripSeparator22.Name = "toolStripSeparator22";
-            resources.ApplyResources(this.toolStripSeparator22, "toolStripSeparator22");
+            this.toolStripSeparator25.Name = "toolStripSeparator25";
+            resources.ApplyResources(this.toolStripSeparator25, "toolStripSeparator25");
             // 
             // toolStripButton17
             // 
@@ -613,6 +626,19 @@
             this.toolStripButton17.Image = global::WindowsFormsApp1.Properties.Resources.clock_n;
             this.toolStripButton17.Name = "toolStripButton17";
             this.toolStripButton17.Click += new System.EventHandler(this.STFButton_Click);
+            // 
+            // toolStripSeparator22
+            // 
+            this.toolStripSeparator22.Name = "toolStripSeparator22";
+            resources.ApplyResources(this.toolStripSeparator22, "toolStripSeparator22");
+            // 
+            // toolStripButton18
+            // 
+            resources.ApplyResources(this.toolStripButton18, "toolStripButton18");
+            this.toolStripButton18.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
+            this.toolStripButton18.Image = global::WindowsFormsApp1.Properties.Resources.clock_n;
+            this.toolStripButton18.Name = "toolStripButton18";
+            this.toolStripButton18.Click += new System.EventHandler(this.SRLButton_Click);
             // 
             // contextMenuStrip1
             // 
@@ -1023,6 +1049,9 @@
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator23;
         private System.Windows.Forms.ToolStripButton helpToolStripButton;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator24;
+        private System.Windows.Forms.ToolStripSeparator toolStripSeparator25;
+        private System.Windows.Forms.ToolStripButton toolStripButton18;
+        private System.Windows.Forms.HelpProvider helpProvider1;
     }
 }
 

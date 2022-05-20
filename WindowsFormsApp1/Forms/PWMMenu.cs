@@ -22,6 +22,7 @@ namespace WindowsFormsApp1
             InitializeComponent();
             Value = 0;
             ValueType = "K";
+            comboBox1.SelectedIndex = 0;
             Pin = 0;
         }
 

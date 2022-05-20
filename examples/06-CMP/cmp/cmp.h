@@ -159,9 +159,15 @@ void ADC_Alt(int pin, int &destination)
 
 void PWM (int pin, int value)
 {
+  int real_pin;
   if(dugum)
   {
-    analogWrite(pin, value);
+    if(pin == 0) {real_pin = 5;}
+    else if (pin == 1){real_pin = 6;}
+    else if (pin == 2){real_pin = 9;}
+    else if (pin == 3){real_pin = 10;}
+    else if (pin == 4){real_pin = 11;}
+    analogWrite(real_pin, value);
   }
 }
 

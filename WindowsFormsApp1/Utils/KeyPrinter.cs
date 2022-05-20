@@ -21,7 +21,7 @@ namespace WindowsFormsApp1
         #region init-variable_declaration
         public override void EnterFunctionHeading([NotNull] GrammarParser.FunctionHeadingContext context)
         {
-            _text.Append("void " + context.identifier().GetText() + "{\n");
+            _text.Append("void " + context.identifier().GetText() + "(){\n");
             _text.Append('\t', Tabs);
         }
         public override void ExitFunction([NotNull] GrammarParser.FunctionContext context)
@@ -31,7 +31,23 @@ namespace WindowsFormsApp1
 
         public override void EnterVariableDeclaration([NotNull] GrammarParser.VariableDeclarationContext context)
         {
-            _text.Append(context.type_().GetText() + " ");
+            if (context.type_().GetText().ToLower() == "integer")
+            {
+                _text.Append("int ");
+            }
+            else if (context.type_().GetText().ToLower() == "real")
+            {
+                _text.Append("float ");
+            }
+            else if (context.type_().GetText().ToLower() == "boolean")
+            {
+                _text.Append("bool ");
+            }
+            else
+            {
+                _text.Append(context.type_().GetText() + " ");
+            }
+
             _text.Append(context.identifierList().identifier()[0].GetText());
             var x = context.factor()?.GetText() ?? "NotDeclared_";
             if (!(x == "NotDeclared_"))

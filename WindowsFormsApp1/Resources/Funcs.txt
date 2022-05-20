@@ -134,18 +134,18 @@ void CMP(float first, float last, bool &MF, bool &MM, bool &ML)
 {
   if(dugum)
   {
-    if(first > last){MF = true;}
-    else if (first == last) {MM = true;}
-    else if ( first < last) {ML = true;}
+    if(first > last){MF = true; MM=false; ML=false;}
+    else if (first == last) {MM = true; MF = false; ML=false;}
+    else if ( first < last) {ML = true; MM=false; MF=false;}
   }
 }
 void ZCMP(float first, float middle, float last, bool &MF, bool &MM, bool &ML)
 {
   if(dugum)
   {
-    if(first > last){MF = true;}
-    else if ((first <= last) && (last <= middle)) {MM = true;}
-    else if ( last > middle) {ML = true;}
+    if(first > last){MF = true; MM=false; ML=false;}
+    else if ((first <= last) && (last <= middle)) {MM = true; MF = false; ML=false;}
+    else if ( last > middle) {ML = true; MM=false; MF=false;}
   }
 }
 

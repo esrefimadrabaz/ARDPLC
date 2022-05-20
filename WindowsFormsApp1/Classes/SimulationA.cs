@@ -314,48 +314,259 @@ namespace WindowsFormsApp1
                     }
                     break;
                 case "2": // -> clockON
-                    MSimulation.tON_SimMain(Contact, ref IntegerList, millis());
+                    if (Contact.HasPrl)
+                    {
+                        prl = false;
+                        MSimulation.next = false;
+                        if (MSimulation.dugum) { prl = true; }
+                        MSimulation.tON_SimMain(Contact, ref IntegerList, millis());
+                        if (prl) { MSimulation.dugum = true; }
+                        MainSort(Contact.PrlTo);
+                        if (MSimulation.next) { MSimulation.dugum = true; }
+                        prl = false;
+                        MSimulation.next = false;
+                    }
+                    else
+                    {
+                        MSimulation.tON_SimMain(Contact, ref IntegerList, millis());
+                    }         
                     break;
                 case "3": // -> clockOFF
-                    MSimulation.tOFF_SimMain(Contact, ref IntegerList,millis());
+                    if (Contact.HasPrl)
+                    {
+                        prl = false;
+                        MSimulation.next = false;
+                        if (MSimulation.dugum) { prl = true; }
+                        MSimulation.tOFF_SimMain(Contact, ref IntegerList, millis());
+                        if (prl) { MSimulation.dugum = true; }
+                        MainSort(Contact.PrlTo);
+                        if (MSimulation.next) { MSimulation.dugum = true; }
+                        prl = false;
+                        MSimulation.next = false;
+                    }
+                    else
+                    {
+                        MSimulation.tOFF_SimMain(Contact, ref IntegerList, millis());
+                    }
                     break;
                 case "4": // -> coil
-                    MSimulation.Coil_SimMain(Contact, ref BoolList);
+                    if (Contact.HasPrl)
+                    {
+                        prl = false;
+                        MSimulation.next = false;
+                        if (MSimulation.dugum) { prl = true; }
+                        MSimulation.Coil_SimMain(Contact, ref BoolList);
+                        if (prl) { MSimulation.dugum = true; }
+                        MainSort(Contact.PrlTo);
+                        if (MSimulation.next) { MSimulation.dugum = true; }
+                        prl = false;
+                        MSimulation.next = false;
+                    }
+                    else
+                    {
+                        MSimulation.Coil_SimMain(Contact, ref BoolList);
+                    }
                     break;
                 case "5": // -> MOV
-                    MSimulation.Mov_SimMain(Contact, ref IntegerList);
+                    if (Contact.HasPrl)
+                    {
+                        prl = false;
+                        MSimulation.next = false;
+                        if (MSimulation.dugum) { prl = true; }
+                        MSimulation.Mov_SimMain(Contact, ref IntegerList);
+                        if (prl) { MSimulation.dugum = true; }
+                        MainSort(Contact.PrlTo);
+                        if (MSimulation.next) { MSimulation.dugum = true; }
+                        prl = false;
+                        MSimulation.next = false;
+                    }
+                    else
+                    {
+                        MSimulation.Mov_SimMain(Contact, ref IntegerList);
+                    }
                     break;
                 case "6": // -> CNTRUP
-                    MSimulation.CntrUP_SimMain(Contact, ref IntegerList, ref BoolList);
+                    if (Contact.HasPrl)
+                    {
+                        prl = false;
+                        MSimulation.next = false;
+                        if (MSimulation.dugum) { prl = true; }
+                        MSimulation.CntrUP_SimMain(Contact, ref IntegerList, ref BoolList);
+                        if (prl) { MSimulation.dugum = true; }
+                        MainSort(Contact.PrlTo);
+                        if (MSimulation.next) { MSimulation.dugum = true; }
+                        prl = false;
+                        MSimulation.next = false;
+                    }
+                    else
+                    {
+                        MSimulation.CntrUP_SimMain(Contact, ref IntegerList, ref BoolList);
+                    }
                     break;
                 case "7": // -> CNTRDWN
-                    MSimulation.CntrDwn_SimMain(Contact, ref IntegerList, ref BoolList);
+                    if (Contact.HasPrl)
+                    {
+                        prl = false;
+                        MSimulation.next = false;
+                        if (MSimulation.dugum) { prl = true; }
+                        MSimulation.CntrDwn_SimMain(Contact, ref IntegerList, ref BoolList);
+                        if (prl) { MSimulation.dugum = true; }
+                        MainSort(Contact.PrlTo);
+                        if (MSimulation.next) { MSimulation.dugum = true; }
+                        prl = false;
+                        MSimulation.next = false;
+                    }
+                    else
+                    {
+                        MSimulation.CntrDwn_SimMain(Contact, ref IntegerList, ref BoolList);
+                    }
                     break;
                 case "8": // -> SET
-                    MSimulation.Set_SimMain(Contact, ref BoolList);
+                    if (Contact.HasPrl)
+                    {
+                        prl = false;
+                        MSimulation.next = false;
+                        if (MSimulation.dugum) { prl = true; }
+                        MSimulation.Set_SimMain(Contact, ref BoolList);
+                        if (prl) { MSimulation.dugum = true; }
+                        MainSort(Contact.PrlTo);
+                        if (MSimulation.next) { MSimulation.dugum = true; }
+                        prl = false;
+                        MSimulation.next = false;
+                    }
+                    else
+                    {
+                        MSimulation.Set_SimMain(Contact, ref BoolList);
+                    }
                     break;
                 case "9": // -> RESET
-                    MSimulation.Reset_SimMain(Contact, ref IntegerList, ref BoolList, millis());
+                    if (Contact.HasPrl)
+                    {
+                        prl = false;
+                        MSimulation.next = false;
+                        if (MSimulation.dugum) { prl = true; }
+                        MSimulation.Reset_SimMain(Contact, ref IntegerList, ref BoolList, millis());
+                        if (prl) { MSimulation.dugum = true; }
+                        MainSort(Contact.PrlTo);
+                        if (MSimulation.next) { MSimulation.dugum = true; }
+                        prl = false;
+                        MSimulation.next = false;
+                    }
+                    else
+                    {
+                        MSimulation.Reset_SimMain(Contact, ref IntegerList, ref BoolList, millis());
+                    }
                     break;
                 case "12": // -> Arith
-                    MSimulation.Arith_SimMain(Contact, ref IntegerList);
+                    if (Contact.HasPrl)
+                    {
+                        prl = false;
+                        MSimulation.next = false;
+                        if (MSimulation.dugum) { prl = true; }
+                        MSimulation.Arith_SimMain(Contact, ref IntegerList);
+                        if (prl) { MSimulation.dugum = true; }
+                        MainSort(Contact.PrlTo);
+                        if (MSimulation.next) { MSimulation.dugum = true; }
+                        prl = false;
+                        MSimulation.next = false;
+                    }
+                    else
+                    {
+                        MSimulation.Arith_SimMain(Contact, ref IntegerList);
+                    }
                     break;
                 case "13": // -> TRTO
-                    MSimulation.tRTO_SimMain(Contact, ref IntegerList, ref BoolList, millis());
+                    if (Contact.HasPrl)
+                    {
+                        prl = false;
+                        MSimulation.next = false;
+                        if (MSimulation.dugum) { prl = true; }
+                        MSimulation.tRTO_SimMain(Contact, ref IntegerList, ref BoolList, millis());
+                        if (prl) { MSimulation.dugum = true; }
+                        MainSort(Contact.PrlTo);
+                        if (MSimulation.next) { MSimulation.dugum = true; }
+                        prl = false;
+                        MSimulation.next = false;
+                    }
+                    else
+                    {
+                        MSimulation.tRTO_SimMain(Contact, ref IntegerList, ref BoolList, millis());
+                    }
                     break;
                 case "14": // -> CMP
-                    MSimulation.CMP_SimMain(Contact, ref IntegerList, ref BoolList);
+                    if (Contact.HasPrl)
+                    {
+                        prl = false;
+                        MSimulation.next = false;
+                        if (MSimulation.dugum) { prl = true; }
+                        MSimulation.CMP_SimMain(Contact, ref IntegerList, ref BoolList);
+                        if (prl) { MSimulation.dugum = true; }
+                        MainSort(Contact.PrlTo);
+                        if (MSimulation.next) { MSimulation.dugum = true; }
+                        prl = false;
+                        MSimulation.next = false;
+                    }
+                    else
+                    {
+                        MSimulation.CMP_SimMain(Contact, ref IntegerList, ref BoolList);
+                    }
                     break;
                 case "15": // -> ZCMP
-                    MSimulation.ZCMP_SimMain(Contact, ref IntegerList, ref BoolList);
+                    if (Contact.HasPrl)
+                    {
+                        prl = false;
+                        MSimulation.next = false;
+                        if (MSimulation.dugum) { prl = true; }
+                        MSimulation.ZCMP_SimMain(Contact, ref IntegerList, ref BoolList);
+                        if (prl) { MSimulation.dugum = true; }
+                        MainSort(Contact.PrlTo);
+                        if (MSimulation.next) { MSimulation.dugum = true; }
+                        prl = false;
+                        MSimulation.next = false;
+                    }
+                    else
+                    {
+                        MSimulation.ZCMP_SimMain(Contact, ref IntegerList, ref BoolList);
+                    }
                     break;
                 case "16": // -> ADC
-                    MSimulation.ADC_SimMain(Contact, ref IntegerList);
+                    if (Contact.HasPrl)
+                    {
+                        prl = false;
+                        MSimulation.next = false;
+                        if (MSimulation.dugum) { prl = true; }
+                        MSimulation.ADC_SimMain(Contact, ref IntegerList);
+                        if (prl) { MSimulation.dugum = true; }
+                        MainSort(Contact.PrlTo);
+                        if (MSimulation.next) { MSimulation.dugum = true; }
+                        prl = false;
+                        MSimulation.next = false;
+                    }
+                    else
+                    {
+                        MSimulation.ADC_SimMain(Contact, ref IntegerList);
+                    }
                     break;
                 case "17": // -> PWM
-                    MSimulation.PWM_SimMain(Contact, ref IntegerList, ref BoolList);
+                    if (Contact.HasPrl)
+                    {
+                        prl = false;
+                        MSimulation.next = false;
+                        if (MSimulation.dugum) { prl = true; }
+                        MSimulation.PWM_SimMain(Contact, ref IntegerList, ref BoolList);
+                        if (prl) { MSimulation.dugum = true; }
+                        MainSort(Contact.PrlTo);
+                        if (MSimulation.next) { MSimulation.dugum = true; }
+                        prl = false;
+                        MSimulation.next = false;
+                    }
+                    else
+                    {
+                        MSimulation.PWM_SimMain(Contact, ref IntegerList, ref BoolList);
+                    }
                     break;
                 default:
+                    MSimulation.Default(Contact);
                     break;
             }
             Contact.Invoke(Main.mySimulationUpdate, Contact);
